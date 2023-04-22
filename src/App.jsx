@@ -5,33 +5,34 @@ function App() {
   return (
     <>
     {/* header */}
+    {/* XSM */}
 
-    <div className="flex justify-center items-center h-28">
+    <div className="flex justify-center items-center h-28 xsm:hidden">
       <div className="flex w-4/5 justify-between">
           <div className="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke-width="1.5" stroke="#F9A8D4" class="w-8 h-8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
           </div>
           <div>
-            <img className="sm:w-8 md:w-12 lg:w-16" src="./src/assets/images/logo2.png" alt="" />
+            <img className="sm:w-12 md:w-16 lg:w-20" src="./src/assets/images/logo2.png" alt="" />
           </div>
         </div>
     </div>
     
     {/* carrousel */}
 
-    <div className="flex justify-center mb-8">
-      <div className="bg-cover bg-gradient-to-b from-[#F9A8D4] to-[#F472B6] flex sm:w-4/5 md:h-48 justify-around rounded-lg">
+    <div className="flex justify-center mb-8 xsm:hidden">
+      <div className="bg-cover bg-gradient-to-b from-[#F9A8D4] to-[#F472B6] flex xsm:hidden sm:w-4/5 sm:h-48 justify-around rounded-lg gap-1">
         <div className="w-10 self-center">
           <svg xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF80" viewBox="0 0 24 24" stroke-width=".5" stroke="currentColor" class="w-10 h-10">
             <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </div>
-        <img className="self-center mb-4 md:h-52 md:w-48 md:mb-8 lg:h-64 lg:w-60" src="./src/assets/images/8b8e139c764c05a681947b2d6855bd331.png" alt="asdd" />
-        <img className="self-center lg:mb-14 md:h-48 md:mb-10 lg:h-60 lg:w-44" src="./src/assets/images/image3.png" alt="asd" />
+        <img className="self-center mb-4 sm:h-48 sm:w-32 sm:mb-12 md:h-52 md:w-48 md:mb-8 lg:h-64 lg:w-60" src="./src/assets/images/8b8e139c764c05a681947b2d6855bd331.png" alt="asdd" />
+        <img className="self-center sm:h-48 sm:w-30 sm:mb-8 lg:mb-14 md:h-48 md:mb-10 lg:h-60 lg:w-44" src="./src/assets/images/image3.png" alt="asd" />
         <div className="flex-col lg:mt-16 md:w-40  lg:w-80">
-          <h4 className="text-white text-2xl">Shonen</h4>
-          <p className="text-white text-xs">Is the manga that is aimed at adolescent boys. They are series with large amounts of action, in which humorous situations often occur. The camaraderie between members of a collective or a combat team stands out.</p>
+          <h4 className="text-white sm:text-lg text-2xl">Shonen</h4>
+          <p className="text-white sm:w-40 xl:w-80 text-xs">Is the manga that is aimed at adolescent boys. They are series with large amounts of action, in which humorous situations often occur. The camaraderie between members of a collective or a combat team stands out.</p>
         </div>
         <div className="w-10 self-center">
           <svg xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF80" viewBox="0 0 24 24" stroke-width=".5" stroke="currentColor" class="w-10 h-10">
@@ -43,7 +44,7 @@ function App() {
 
     {/* narutobi sensei */}
 
-    <div className="flex justify-center h-80">
+    <div className="flex justify-center h-80 xsm:hidden">
       <div className="bg-cover bg-fondo-naruto w-4/5 rounded-lg flex items-center justify-center">
         <div>
           <h1 className="text-white md:text-center md:text-6xl mb-2">Live the emotion of the manga</h1>
@@ -55,16 +56,16 @@ function App() {
         </div>
       </div>
     </div>
-    <div className="flex justify-center mt-4">
-      <div className="w-4/5 h-80 ">
+    <div className="flex justify-center mt-4 xsm:hidden">
+      <div className="w-4/5 h-80 xsm:hidden sm:h-36 md:h-40 lg:h-56 xl:h-80">
         <img className="rounded-[50%_50%_48%_52%_/_0%_0%_100%_100%]" src="./src/assets/images/Rectangle14.png" alt="asd" />
       </div>
     </div>
 
     {/* FOOTER */}
 
-    <div className="flex justify-center">
-      <div className="flex justify-between w-3/5">
+    <div className="flex justify-center xsm:hidden">
+      <div className="flex justify-between w-3/5 sm:w-4/5">
         <div className="flex gap-8">
           <a href="#" >Home</a>
           <a href="#">Mangas</a>
@@ -96,7 +97,32 @@ function App() {
         </div>
       </div>
     </div>
-    
+
+    {/* MOBILE */}
+    <div className="flex justify-center xsm:h-screen sm:hidden">
+      <div className="xsm:bg-fondo-naruto2 xsm:w-full xsm:h-full xsm:bg-cover">
+        <div className="flex justify-center items-center h-20">
+          <div className="flex w-full mx-4 justify-between">
+            <div className="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke-width="1.5" stroke="#F9A8D4" class="w-8 h-8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+            </div>
+            <div>
+              <img className="xsm:w-12" src="./src/assets/images/logo2.png" alt="asd" />
+            </div>
+          </div>
+        </div>
+        <div>
+          <div className="xsm:flex xsm:flex-col xsm:mt-40">
+            <h1 className="text-white xsm:text-4xl xsm:text-center xsm:font-bold">Live the emotion of the manga</h1>
+            <h4 className="text-white xsm:text-base xsm:self-center xsm:mb-2">Find the perfect manga for you</h4>
+            <div className="xsm:self-center">
+              <button class="rounded-3xl bg-gradient-to-b from-[#df5aa3] to-[#F472B6] h-10 w-60  text-white">Explore</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     </>
   )
 }
