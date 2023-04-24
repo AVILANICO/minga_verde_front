@@ -5,6 +5,7 @@ import Carousel from "./components/Carousel";
 import Index from "./pages/Index";
 import Mobile from "./components/Mobile";
 
+
 function App() {
     console.log(apiUrl);
     console.log(process.env.NODE_ENV);
