@@ -10,7 +10,7 @@ export default function Mobile() {
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
               </div>
               <div>
-                <img className="xsm:w-12" src="./src/assets/images/logo2.png" alt="asd" />
+                <img className="xsm:w-12" src="/images/Logo2.png" alt="asd" />
               </div>
             </div>
           </div>

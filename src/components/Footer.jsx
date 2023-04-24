@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <><div className="flex justify-center mt-4 xsm:hidden">
       <div className="w-4/5 h-80 xsm:hidden sm:h-36 md:h-40 lg:h-56 xl:h-80">
-        <img src="./src/assets/images/Frame34631.png" alt="asd" />
+        <img src="/images/Frame34631.png" alt="asd" />
       </div>
     </div><div className="flex justify-center xsm:hidden">
         <div className="flex justify-between w-3/5 sm:w-4/5">
@@ -11,7 +11,7 @@ export default function Footer() {
             <a href="#">Mangas</a>
           </div>
           <div>
-            <img className="w-20" src="./src/assets/images/Logo2.png" alt="ddd" />
+            <img className="w-20" src="/images/Logo2.png" alt="ddd" />
           </div>
           <div>
             <div className="flex gap-6">

@@ -8,7 +8,7 @@ export default function Navbar() {
               <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
           </div>
           <div>
-            <img className="sm:w-12 md:w-16 lg:w-20" src="./src/assets/images/Logo2.png" alt="" />
+            <img className="sm:w-12 md:w-16 lg:w-20" src="/images/Logo2.png" alt="" />
           </div>
         </div>
       </nav>
