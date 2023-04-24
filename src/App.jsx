@@ -45,8 +45,8 @@ function App() {
 
             {/* narutobi sensei */}
 
-            <div className="flex justify-center h-80 xsm:hidden">
-                <div className="bg-cover bg-fondo-naruto w-4/5 rounded-lg flex items-center justify-center">
+            <div className="flex justify-center xsm:hidden">
+                <div className="bg-cover bg-fondo-naruto w-4/5 h-[55vh] rounded-lg flex items-center justify-center">
                     <div>
                         <h1 className="text-white md:text-center md:text-6xl mb-2">Live the emotion of the manga</h1>
                         <h4 className="text-white text-xl md:flex md:justify-center lg:flex lg:justify-start mb-2">Find the perfect manga for you</h4>
@@ -59,7 +59,7 @@ function App() {
             </div>
             <div className="flex justify-center mt-4 xsm:hidden">
                 <div className="w-4/5 h-80 xsm:hidden sm:h-36 md:h-40 lg:h-56 xl:h-80">
-                    <img className="rounded-[50%_50%_48%_52%_/_0%_0%_100%_100%]" src="./src/assets/images/Rectangle14.png" alt="asd" />
+                    <img src="./src/assets/images/Frame34631.png" alt="asd" />
                 </div>
             </div>
 
