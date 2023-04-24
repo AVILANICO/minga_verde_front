@@ -1,5 +1,5 @@
 import apiUrl from "../api"
-import Navbar from "./components/navbar";
+import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Carousel from "./components/Carousel";
 import Index from "./pages/Index";
