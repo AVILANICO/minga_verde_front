@@ -11,7 +11,7 @@ export default function Footer() {
             <a href="#">Mangas</a>
           </div>
           <div>
-            <img className="w-20" src="./assets/images/Logo2.png" alt="ddd" />
+            <img className="w-20" src="./src/assets/images/Logo2.png" alt="ddd" />
           </div>
           <div>
             <div className="flex gap-6">
