@@ -38,7 +38,7 @@ export default function Mobile() {
             <div>
               <div className="bg-gradient-to-b from-[#F9A8D4] to-[#F472B6] h-screen w-screen flex flex-col items-center justify-between">
                 <div className="flex justify-between w-full mt-2 gap-2" >
-                  <img className="w-12 rounded-full" src="https://lh3.googleusercontent.com/a/AGNmyxYTokLoC-ogONl_NCMZnUuyhJc7Rch1omc8xMcnsw=s288" alt="nico" />
+                  <img className="w-12 rounded-full" src="/images/perfilGmail.jpg" alt="nico" />
                   <div>
                     <p className="text-sm text-white font-bold">Alejandro Nicolás Avila</p>
                     <p className="text-sm text-white">wowaura833@gmail.com</p>

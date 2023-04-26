@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-//traigo el useEffect para controlar el efecto una peticion externa con esta funcion.
+//traigo el useEffect para controlar el efecto de una peticion externa con esta funcion.
 import axios from "axios";
 //mejor axios que fetch por métodos y sintaxis. Traigo el modulo de axios para fetchear con el mismo.
 import VITE_API from "../../api";
@@ -10,12 +10,11 @@ export default function Carousel() {
       axios(VITE_API + 'categories').then(res => setCategories(res.data.categories)).catch(err => console.log(err))
 
     },
-    [] //array de dependencias tiene que estar siempre vacío ya que necesitamos fetchear una unica vez aal montarse el componente (y despues esos datos no deberian cambiar)
+    [] //array de dependencias tiene que estar siempre vacío ya que necesitamos fetchear una unica vez al montarse el componente (y despues esos datos no deberian cambiar)
   )
   let [categories, setCategories] = useState([])
   //guardo los datos de categories en una variable global de estado para que cada vez que los mismos se modifiquen, tambien se modifique la vista. El useEffect va de la mano con el useState.
   //inicialmente arranca como un array vacío que cuando se carguen los datos va a cambiar la vista
-  // console.log(categories);
   //sintaxis del Hook
   //"counter" es el valor inicial del useState
   //"setCounter" es la funcion que trabaja con ese valor "counter"
