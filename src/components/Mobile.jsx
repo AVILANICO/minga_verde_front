@@ -31,6 +31,13 @@ export default function Mobile() {
                   </div>
                 </div>
               </div>
+              <div className="w-screen mt-48">
+                <div className="flex justify-between items-center m-4">
+                  <a className="text-white font-semibold" href="">Home</a>
+                  <img className="w-12" src="/images/Logo2.png" alt="ddd" />
+                  <a className="text-white font-semibold" href="">Mangas</a>
+                </div>
+              </div>
             </div>
           </>
         ) : (
@@ -49,7 +56,6 @@ export default function Mobile() {
                     </svg>
                   </button>
                 </div>
-
                 <div className="flex flex-col w-full items-center gap-2 mb-72">
                   <a className="w-4/5  h-10 p-2 font-poppins text-sm text-white text-center hover:bg-white hover:text-fuchsia-400 focus:outline-none focus:bg-white focus:text-fuchsia-400 focus:ring-violet-300 rounded-lg" href="#">Home</a>
                   <a className="w-4/5  h-10 p-2 font-poppins text-sm text-white text-center hover:bg-white hover:text-fuchsia-400 focus:outline-none focus:bg-white focus:text-fuchsia-400 focus:ring-violet-300 rounded-lg" href="#">Mangas</a>
@@ -57,14 +63,6 @@ export default function Mobile() {
                   <a className="w-4/5  h-10 p-2 font-poppins text-sm text-white text-center hover:bg-white hover:text-fuchsia-400 focus:outline-none focus:bg-white focus:text-fuchsia-400 focus:ring-violet-300 rounded-lg" href="#">Favorites</a>
                   <a className="w-4/5  h-10 p-2 font-poppins text-sm text-white text-center hover:bg-white hover:text-fuchsia-400 focus:outline-none focus:bg-white focus:text-fuchsia-400 focus:ring-violet-300 rounded-lg" href="#">Logout</a>
                 </div>
-                <div className="w-screen">
-                  <div className="flex justify-between items-center m-4">
-                    <a className="text-white font-semibold" href="">Home</a>
-                    <img className="w-12" src="/images/Logo2.png" alt="ddd" />
-                    <a className="text-white font-semibold" href="">Mangas</a>
-                  </div>
-                </div>
-
               </div>
 
             </div>

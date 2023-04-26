@@ -10,7 +10,7 @@ export default function Carousel() {
       axios(VITE_API + 'categories').then(res => setCategories(res.data.categories)).catch(err => console.log(err))
 
     },
-    [] //array de dependencias tiene que estar siempre vacío ya que necesitamos fetchear una unica vez al montarse el componente (y despues esos datos no deberian cambiar)
+    [] //array de dependencias tiene que estar siempre vacío ya que necesitamos fetchear una unica vez al montarse el componente (y despues esos datos no deberian cambiar).
   )
   let [categories, setCategories] = useState([])
   //guardo los datos de categories en una variable global de estado para que cada vez que los mismos se modifiquen, tambien se modifique la vista. El useEffect va de la mano con el useState.
@@ -18,7 +18,8 @@ export default function Carousel() {
   //sintaxis del Hook
   //"counter" es el valor inicial del useState
   //"setCounter" es la funcion que trabaja con ese valor "counter"
-  let [counter, setCounter] = useState(0)
+
+  let [counter, setCounter] = useState(0) //cualidad re renderizar
   let sumar = () => {
     setCounter(counter + 1);
     if (counter === categories.length - 1) {
