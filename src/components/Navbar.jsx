@@ -1,10 +1,8 @@
 import { useState } from "react";
 
-
 export default function Navbar() {
-  const [hidde, setHide] = useState(false)
+  const [hidde, setHide] = useState(true)
   function show() {
-    console.log(hidde);
     setHide(!hidde)
   }
   return (
@@ -14,20 +12,32 @@ export default function Navbar() {
           <div>
             {hidde ? (
               <>
-                <button onClick={show} className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke-width="1.5" stroke="#F9A8D4" class="w-8 h-8">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+                <button className="flex items-center">
+                  <svg onClick={show} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" strokeWidth={1.5} stroke="#F9A8D4" className="w-8 h-8">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
                 </button>
               </>
             ) : (
               <>
-                <button onClick={show} className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke-width="1.5" stroke="#F9A8D4" class="w-8 h-8">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+                <button className="flex items-center">
+                  <svg onClick={show} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" strokeWidth={1.5} stroke="#F9A8D4" className="w-8 h-8">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
                 </button>
-                <div className="bg-red-500 h-12">
-                  <p>ESCONDEME WACHIN!!</p>
+                <div className="relative">
+                  <div className="bg-gradient-to-b from-[#F9A8D4] to-[#F472B6] h-80 w-64 absolute flex flex-col items-center justify-evenly rounded-lg">
+                    <button className="w-4/5 h-1 flex justify-end">
+                      <svg onClick={show} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-5 h-5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                    <a className="w-4/5 p-1 h-8 font-poppins font-semibold text-white text-center hover:bg-white hover:text-fuchsia-400 focus:outline-none focus:bg-white focus:text-fuchsia-400 focus:ring-violet-300 rounded-xl" href="#">Home</a>
+                    <a className="w-4/5 p-1 h-8 font-poppins font-semibold text-white text-center hover:bg-white hover:text-fuchsia-400 focus:outline-none focus:bg-white focus:text-fuchsia-400 focus:ring-violet-300 rounded-xl" href="#">Mangas</a>
+                    <a className="w-4/5 p-1 h-8 font-poppins font-semibold text-white text-center hover:bg-white hover:text-fuchsia-400 focus:outline-none focus:bg-white focus:text-fuchsia-400 focus:ring-violet-300 rounded-xl" href="#">My mangas</a>
+                    <a className="w-4/5 p-1 h-8 font-poppins font-semibold text-white text-center hover:bg-white hover:text-fuchsia-400 focus:outline-none focus:bg-white focus:text-fuchsia-400 focus:ring-violet-300 rounded-xl" href="#">Favorites</a>
+                    <a className="w-4/5 p-1 h-8 font-poppins font-semibold text-white text-center hover:bg-white hover:text-fuchsia-400 focus:outline-none focus:bg-white focus:text-fuchsia-400 focus:ring-violet-300 rounded-xl" href="#">Logout</a>
+                  </div>
                 </div>
+
               </>
             )}
           </div>
