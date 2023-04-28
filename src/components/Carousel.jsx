@@ -1,61 +1,54 @@
-import { useState, useEffect } from "react";
-//traigo el useEffect para controlar el efecto de una peticion externa con esta funcion.
-import axios from "axios";
-//mejor axios que fetch por métodos y sintaxis. Traigo el modulo de axios para fetchear con el mismo.
-import VITE_API from "../../api";
+
+import flecha1 from "../assets/image/flecha1.png"
+import flecha2 from "../assets/image/flecha2.png"
+
+import { useState, useEffect } from "react"  //se recomienda que los hooks se definan en las primeras lineas del componente
+import axios from "axios"
+import apiUrl from "../../api"
+
 
 export default function Carousel() {
   useEffect(
-    () => {
-      axios(VITE_API + 'categories').then(res => setCategories(res.data.categories)).catch(err => console.log(err))
-
-    },
-    [] //array de dependencias tiene que estar siempre vacío ya que necesitamos fetchear una unica vez al montarse el componente (y despues esos datos no deberian cambiar).
+    () => { axios(apiUrl + 'categories').then(res => setCategories(res.data.categories)).catch(err => console.error(err)) },
+    []                                       //array de dependecias vacio ya que necesitamos fechar una unica vez al mostrarse el componente
   )
-  let [categories, setCategories] = useState([])
-  //guardo los datos de categories en una variable global de estado para que cada vez que los mismos se modifiquen, tambien se modifique la vista. El useEffect va de la mano con el useState.
-  //inicialmente arranca como un array vacío que cuando se carguen los datos va a cambiar la vista
-  //sintaxis del Hook
-  //"counter" es el valor inicial del useState
-  //"setCounter" es la funcion que trabaja con ese valor "counter"
 
-  let [counter, setCounter] = useState(0) //cualidad re renderizar
+  let [categories, setCategories] = useState([])
+  let [counter, setCounter] = useState(0)
   let sumar = () => {
-    setCounter(counter + 1);
+    setCounter(counter + 1)
     if (counter === categories.length - 1) {
       setCounter(0)
     }
   }
   let restar = () => {
-    setCounter(counter - 1);
+    setCounter(counter - 1)
     if (counter === 0) {
       setCounter(categories.length - 1)
     }
   }
   return (
-    <>
-      <div className="flex justify-center mb-8 xsm:hidden">
-        <div className="flex xsm:hidden sm:w-4/5 sm:h-48 justify-around rounded-lg gap-1" style={{ backgroundColor: categories[counter]?.color }}>
-          <button onClick={restar} className="w-10 self-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF80" viewBox="0 0 24 24" strokeWidth=".5" stroke="currentColor" className="w-10 h-10">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </button>
-          <img className="self-center mb-4 sm:h-48 sm:w-32 sm:mb-12 md:h-52 md:w-48 md:mb-8 lg:h-64 lg:w-60" src={categories[counter]?.character_photo} alt={categories[counter]?.name} />
-          <img className="self-center sm:h-48 sm:w-30 sm:mb-8 lg:mb-14 md:h-48 md:mb-10 lg:h-60 lg:w-44" src={categories[counter]?.cover_photo} alt={categories[counter]?.name} />
+    <div className="flex justify-between items-center w-full h-[16rem] my-8 rounded-md xsm:hidden" style={{ backgroundColor: categories[counter]?.color }}>
 
-          <div className="flex-col lg:mt-16 md:w-40 lg:ml- lg:w-80">
-            <h4 className="text-white sm:text-lg lg:text-2xl">{categories[counter]?.name}</h4>
-            <p className="text-white sm:w-40 lg:w-64  xl:w-80 text-xs">{categories[counter]?.description}</p>
-          </div>
-          <button onClick={sumar} className="w-10 self-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF80" viewBox="0 0 24 24" strokeWidth=".5" stroke="currentColor" className="w-10 h-10">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </button>
+      <div className='absolute w-[92%] flex content-center my-28 justify-between ' >
+        <img src={flecha1} className="w-[3rem] cursor-pointer" onClick={restar} />
+        <img src={flecha2} className="w-[3rem] cursor-pointer" onClick={sumar} />
+      </div>
+
+      <div className="w-[100%] h-[22rem] flex">
+        <div className="w-[50%]">
+          <img src={categories[counter]?.character_photo} className="w-auto h-[80%] my-4 " />
+        </div>
+        <div className="w-[50%]">
+          <img src={categories[counter]?.cover_photo} className="w-auto h-[75%] my-3 " />
         </div>
       </div>
-    </>
+
+      <div className="h-auto w-[90%] ml-10">
+        <h4 className="text-white text-2xl text-start w-[50%] pl-2">{categories[counter]?.name}</h4>
+        <p className="text-white text-sm text-justify w-[60%] pl-2 ">{categories[counter]?.description}</p>
+      </div>
+    </div>
+
   )
 }
-
