@@ -1,8 +1,10 @@
 import BotonExplore from "../components/BotonExplore"
+import Carousel from '../components/Carousel';
 
 export default function Index() {
   return (
     <>
+    <Carousel />
       <div className="flex justify-center xsm:hidden">
         <div className="bg-cover bg-fondo-naruto w-4/5 h-[55vh] rounded-lg flex items-center justify-center">
           <div>
