@@ -3,11 +3,10 @@ import arroba from '../assets/image/@.png'
 import profile from '../assets/image/profile.png'
 import camara from '../assets/image/camera.png'
 import candado from '../assets/image/lock1.png'
+import VITE_API from '../../api'
 import { useRef } from 'react'
 import axios from 'axios'
 import { Link as Anchor } from "react-router-dom";
-
-
 
 const SignUp = () => {
   let name = useRef()
@@ -24,11 +23,10 @@ const SignUp = () => {
       photo: photo.current.value,
       password: password.current.value
     }
-    axios.post("http://localhost:8000/auth/signup", data)
-      .then(res => alert('La cuenta se creó con éxito', res))
+    axios.post(VITE_API + "auth/signup", data)
+      .then(res => alert('Account Created successfully!', res))
       .catch(err => {
         console.log(err)
-        alert(err.response.data.message)
       })
   }
 

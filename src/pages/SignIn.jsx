@@ -2,8 +2,30 @@ import React from 'react'
 import arroba from '../assets/image/@.png'
 import candado from '../assets/image/lock1.png'
 import { Link as Anchor } from "react-router-dom";
+import VITE_API from '../../api'
+import { useRef } from 'react'
+import axios from 'axios'
 
 const Signin = () => {
+  let email = useRef();
+  let password = useRef();
+
+  function handleForm(e) {
+    e.preventDefault()
+    //usando el .current.value vemos lo que tiene adentro del name
+    let data = {
+      email: email.current.value,
+      password: password.current.value
+    }
+    axios.post(VITE_API + "auth/signin", data)
+      .then(res => alert('You have successfully logged in!', res))
+      .catch(err => {
+        console.log(err)
+        alert(err.response.data.message)
+      })
+  }
+
+
   return (
     <>
       <div className='h-screen w-full flex justify-center items-center'>
@@ -12,7 +34,7 @@ const Signin = () => {
           <div className="bg-white min-h-screen w-1/2 flex justify-center items-center">
 
             <div className='flex flex-col'>
-              <form>
+              <form onSubmit={(e) => handleForm(e)}>
                 <div className='flex flex-col items-center'>
                   <p className="text-4xl text-center font-semibold text-gray-900">Welcome <span className='text-fuchsia-400'>back</span>!</p>
                   <h1 className="text-sm text-center text-gray-600 mt-4">Discover manga, manhua and manhwa, track your progress, have fun, read manga.</h1>
@@ -20,19 +42,19 @@ const Signin = () => {
                 <div className="mt-5">
                   <fieldset className='border-2 rounded-md flex items-center'>
                     <legend className='text-sm ml-2 text-fuchsia-400'>Email</legend>
-                    <input className="px-4 w-full  py-2 rounded-md text-sm outline-none" type="email" name="Email" placeholder="DragonballZ@Krowl.com" />
+                    <input ref={email} className="px-4 w-full  py-2 rounded-md text-sm outline-none" type="email" name="Email" placeholder="DragonballZ@Krowl.com" />
                     <img className='w-4 h-4 mr-2' src={arroba} alt="profile" />
                   </fieldset>
                 </div>
                 <div className="mt-5">
                   <fieldset className='border-2 rounded-md flex items-center'>
                     <legend className='text-sm ml-2 text-fuchsia-400'>Password</legend>
-                    <input className="px-4 w-full  py-2 rounded-md text-sm outline-none" type="password" name="Password" placeholder="************" />
+                    <input ref={password} className="px-4 w-full  py-2 rounded-md text-sm outline-none" type="password" name="Password" placeholder="************" />
                     <img className='w-4 h-4 mr-2' src={candado} alt="profile" />
                   </fieldset>
                 </div>
-                <div className="">
-                  <button className="mt-4 mb-3 w-full bg-gradient-to-b from-[#F9A8D4] to-[#F472B6] text-white py-2 rounded-xl transition duration-100 shadow-cyan-600 font-bold text-md h-12">Sing in</button>
+                <div>
+                  <input className="mt-4 mb-3 w-full bg-gradient-to-b from-[#F9A8D4] to-[#F472B6] text-white py-2 rounded-xl transition duration-100 shadow-cyan-600 font-bold text-md h-12 cursor-pointer" type='submit' value="Sign in" />
                 </div>
               </form>
               <div className="flex space-x-2 justify-center items-end border-2 border-gray-300 text-gray-600 py-2 rounded-xl transition duration-100">
