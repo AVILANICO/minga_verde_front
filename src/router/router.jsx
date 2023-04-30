@@ -3,6 +3,7 @@ import Main from '../App.jsx'
 import Layout from '../layouts/Main.jsx'
 import Singup from "../pages/Singup.jsx";
 import Singin from "../pages/singIn.jsx";
+import ChapterForm from "../pages/ChapterForm.jsx";
 
 const routers = createBrowserRouter([
   {
@@ -11,7 +12,8 @@ const routers = createBrowserRouter([
     children: [
       { path: '/', element: <Main /> },
       { path: '/signup', element: <Singup /> },
-      { path: '/singin', element: <Singin /> }
+      { path: '/singin', element: <Singin /> },
+      {path:"/chapters-from",element:<ChapterForm/>}
     ]
   }
 ])

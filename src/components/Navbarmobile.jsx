@@ -8,7 +8,7 @@ export default function Navbarmobile() {
     setShowMenu(!showMenu);
   }
   return (
-    <nav className="flex justify-center items-center h-20">
+    <nav className="flex justify-center items-center h-20 md:hidden">
       <div className="flex w-full mx-4 justify-between">
         <div className="flex items-center">
           <button onClick={handleMenuClick}>
