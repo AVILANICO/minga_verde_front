@@ -1,6 +1,8 @@
 import logo from "../assets/image/logo-minga.png"
 import { useState } from 'react';
-import  {Link as Anchor}  from "react-router-dom";
+
+import { Link as Anchor } from "react-router-dom";
+
 
 export default function Navbar() {
 
@@ -30,7 +32,7 @@ export default function Navbar() {
           </div>
         )}
       </div>
-      <a href="#">
+      <a href="http://localhost:5173/">
         <img src={logo} className="w-[4rem]" alt="Logo-Minga" />
       </a>
     </nav>
