@@ -26,7 +26,7 @@ const SignUp = () => {
     axios.post(VITE_API + "auth/signup", data)
       .then(res => alert('Account Created successfully!', res))
       .catch(err => {
-        console.log(err)
+        alert(err.response.data.message)
       })
   }
 
