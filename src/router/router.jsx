@@ -13,7 +13,7 @@ const routers = createBrowserRouter([
       { path: '/', element: <Main /> },
       { path: '/signup', element: <Singup /> },
       { path: '/singin', element: <Singin /> },
-      {path:"/chapters-from",element:<ChapterForm/>}
+      {path:"/chapters-from/:id_manga",element:<ChapterForm/>}
     ]
   }
 ])
