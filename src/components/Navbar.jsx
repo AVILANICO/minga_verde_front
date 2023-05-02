@@ -1,6 +1,8 @@
 import logo from "../assets/image/logo-minga.png"
 import { useState } from 'react';
+
 import { Link as Anchor } from "react-router-dom";
+
 
 export default function Navbar() {
 
@@ -22,8 +24,8 @@ export default function Navbar() {
           <div className="absolute top-full left-0 w-[30rem]  bg-[#F472B6]/80 rounded-md py-5 z-10 ">
             <ul>
               <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/">Home</Anchor></li>
-              <li><a className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" href="#">Mangas</a></li>
               <li><a className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" href="#">My mangas</a></li>
+              <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/chapters-from">Chapters</Anchor></li>
               <li><a className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" href="#">Favorites</a></li>
               <li><a className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" href="#">Logout</a></li>
             </ul>
