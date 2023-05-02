@@ -10,9 +10,8 @@ export default function main() { //puedo desestructurar props en {children} y ll
     <>
       <header className="mx-8">
         <Navbar />
-       
       </header>
-      {/* <Index /> */}
+     
       <Outlet />
       <Footer />
     </>

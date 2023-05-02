@@ -5,6 +5,7 @@ import Singup from "../pages/Singup.jsx";
 import Singin from "../pages/singIn.jsx";
 import MangaForm from "../pages/MangaForm.jsx";
 
+
 const routers = createBrowserRouter([
   {
     path: '/',
@@ -14,6 +15,7 @@ const routers = createBrowserRouter([
       { path: '/signup', element: <Singup /> },
       { path: '/singin', element: <Singin /> },
       { path: '/manga-form', element: <MangaForm /> },
+
     ]
   }
 ])
