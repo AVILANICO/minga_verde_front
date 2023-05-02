@@ -3,7 +3,7 @@ import logo from "../assets/image/logo-minga.png"
 
 export default function Footermobile() {
   return (
-    <footer>
+    <footer className="md:hidden">
       <div>
         <img src={footer} className="h- bg-gradient-to-b from-[#F9A8D4] to-[#F472B6]" />
       </div>

@@ -1,5 +1,6 @@
 import logo from "../assets/image/logo-minga.png"
 import { useState } from 'react';
+import  {Link as Anchor}  from "react-router-dom";
 
 export default function Navbarmobile() {
   const [showMenu, setShowMenu] = useState(false);
@@ -8,7 +9,7 @@ export default function Navbarmobile() {
     setShowMenu(!showMenu);
   }
   return (
-    <nav className="flex justify-center items-center h-20">
+    <nav className="flex justify-center items-center h-20 md:hidden">
       <div className="flex w-full mx-4 justify-between">
         <div className="flex items-center">
           <button onClick={handleMenuClick}>
@@ -24,9 +25,9 @@ export default function Navbarmobile() {
                 </svg>
               </button>
               <ul className="font-semibold font-poppins pt-[2rem]">
-                <li><a className="flex justify-center px-4 py-2 text-white hover:bg-white hover:text-btn2 hover:rounded-md m-4" href="#">Home</a></li>
-                <li><a className="flex justify-center px-4 py-2 text-white hover:bg-white hover:text-btn2 hover:rounded-md m-4" href="#">Mangas</a></li>
-                <li><a className="flex justify-center px-4 py-2 text-white hover:bg-white hover:text-btn2 hover:rounded-md m-4" href="#">My mangas</a></li>
+                <li><Anchor className="flex justify-center px-4 py-2 text-white hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/">Home</Anchor></li>
+                <li><a className="flex justify-center px-4 py-2 text-white hover:bg-white hover:text-btn2 hover:rounded-md m-4" href="#"> My Mangas</a></li>
+                <li><Anchor className="flex justify-center px-4 py-2 text-white hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/chapters-from">Chapters</Anchor></li>
                 <li><a className="flex justify-center px-4 py-2 text-white hover:bg-white hover:text-btn2 hover:rounded-md m-4" href="#">Favorites</a></li>
                 <li><a className="flex justify-center px-4 py-2 text-white hover:bg-white hover:text-btn2 hover:rounded-md m-4" href="#">Logout</a></li>
               </ul>
