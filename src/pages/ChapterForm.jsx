@@ -3,6 +3,8 @@ import Footermobile from "../components/Footermobile"
 import React, {useRef} from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
+import apiUrl from "../../api"
+
 const ChapterForm = () => {
 
     let id = useParams()
@@ -23,7 +25,7 @@ const ChapterForm = () => {
             pages: listpage
         }
         // console.log(listpage);
-        axios.post("http://localhost:8000/chapters", data).then(res => console.log(res)).catch(err => console.log(err.response.data.message));
+        axios.post(apiUrl + 'chapters', data).then(res => console.log(res)).catch(err => console.log(err.response.data.message));
     }
 
     return (
