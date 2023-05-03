@@ -8,6 +8,7 @@ import Index from "./Index"
 import Swal from "sweetalert2"
 
 const ChapterForm = () => {
+   
     let id = useParams()
     // console.log(id.id_manga);
     let title = useRef()
@@ -16,6 +17,7 @@ const ChapterForm = () => {
 
 
     function handleForm (e){
+        
         e.preventDefault()
         let array = pages.current.value
         let listpage = array.split(",")
@@ -26,8 +28,10 @@ const ChapterForm = () => {
             pages: listpage
         }
         // console.log(listpage);
-        axios.post(apiUrl + 'chapters', headers, data)
+
+        axios.post(apiUrl + 'chapters',data, headers)
         .then(res => { console.log(res)
+            console.log(token);
             const Toast = Swal.mixin({
                 toast: true,
                 position: 'center',
@@ -44,35 +48,33 @@ const ChapterForm = () => {
                 title: 'Chapter successfully!',
             })
         })
-        .catch(err => {console.log(err.response.data.message)
-            if (err.response && err.response.data){
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: err.response.data.message,
-                    confirmButtonText: 'OK',
-                    width: '400px',
-                    
-                })
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'An error occurred while creating the chapter',
-                    confirmButtonText: 'OK',
-                })
-            }
+        .catch(error => {
+            const err = error.response.data.message
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'center',
+                width: 400,
+                showCancelButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+            Toast.fire({
+                icon: 'error',
+                title: err,
+            })
         })
     }
 
     // let role = JSON.parse(localStorage.getItem('user'))?.role;
-    
     let role = localStorage.getItem('role')
     console.log(role);
     let token = localStorage.getItem('token')
     console.log(token);
-    let headers = {headers:{'Authorization': `Bearer ${token}`}}
-
+    let headers = {headers:{'Authorization':`Bearer ${token}`}}
 
     return (
         <>
