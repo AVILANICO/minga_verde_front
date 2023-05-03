@@ -27,6 +27,16 @@ export default function Carousel() {
       setCounter(categories.length - 1)
     }
   }
+
+
+  useEffect(
+    () => {
+        const tiempo = setInterval( () => {
+          setCounter((counter) => (counter + 1) % categories.length);
+        }, 4000);
+        return () => clearInterval(tiempo);
+    }, [])
+
   return (
     <div className="flex justify-between items-center w-full h-[16rem] my-8 rounded-md xsm:hidden" style={{ backgroundColor: categories[counter]?.color }}>
 

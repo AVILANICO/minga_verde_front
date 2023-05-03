@@ -17,7 +17,6 @@ export default function Index() {
         <span className="not-italic font-semibold text-base leading-[95.18%] text-white">#MingaForever 🔥</span>
         <Button />
       </div>
-      <Footer />
     </>
   )
 }

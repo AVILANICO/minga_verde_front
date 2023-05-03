@@ -8,6 +8,9 @@ export default function Navbarmobile() {
   const handleMenuClick = () => {
     setShowMenu(!showMenu);
   }
+
+  const role = localStorage.getItem("role")
+
   return (
     <nav className="flex justify-center items-center h-20 md:hidden">
       <div className="flex w-full mx-4 justify-between">
@@ -23,10 +26,12 @@ export default function Navbarmobile() {
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
+      
               </button>
               <ul className="font-semibold font-poppins pt-[2rem]">
                 <li><Anchor className="flex justify-center px-4 py-2 text-white hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/">Home</Anchor></li>
-                <li><a className="flex justify-center px-4 py-2 text-white hover:bg-white hover:text-btn2 hover:rounded-md m-4" href="#"> My Mangas</a></li>
+                {role == 1 || role == 2 ?(<><li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/manga-form">New mangas</Anchor></li>
+</>):("")}
                 <li><Anchor className="flex justify-center px-4 py-2 text-white hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/chapters-from">Chapters</Anchor></li>
                 <li><a className="flex justify-center px-4 py-2 text-white hover:bg-white hover:text-btn2 hover:rounded-md m-4" href="#">Favorites</a></li>
                 <li><a className="flex justify-center px-4 py-2 text-white hover:bg-white hover:text-btn2 hover:rounded-md m-4" href="#">Logout</a></li>
