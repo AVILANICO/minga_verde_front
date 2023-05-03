@@ -26,8 +26,8 @@ export default function Navbarmobile() {
               </button>
               <ul className="font-semibold font-poppins pt-[2rem]">
                 <li><Anchor className="flex justify-center px-4 py-2 text-white hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/">Home</Anchor></li>
-                <li><a className="flex justify-center px-4 py-2 text-white hover:bg-white hover:text-btn2 hover:rounded-md m-4" href="#"> My Mangas</a></li>
-                <li><Anchor className="flex justify-center px-4 py-2 text-white hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/chapters-from">Chapters</Anchor></li>
+                <li><a className="flex justify-center px-4 py-2 text-white hover:bg-white hover:text-btn2 hover:rounded-md m-4" href="#">Mangas</a></li>
+                <li><Anchor className="flex justify-center px-4 py-2 text-white hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="#">My mangas</Anchor></li>
                 <li><a className="flex justify-center px-4 py-2 text-white hover:bg-white hover:text-btn2 hover:rounded-md m-4" href="#">Favorites</a></li>
                 <li><a className="flex justify-center px-4 py-2 text-white hover:bg-white hover:text-btn2 hover:rounded-md m-4" href="#">Logout</a></li>
               </ul>
