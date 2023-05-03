@@ -36,7 +36,6 @@ const ChapterForm = () => {
                 toast: true,
                 position: 'center',
                 showConfirmButton: false,
-                timer: 2000,
                 timerProgressBar: true,
                 didOpen: (toast) => {
                     toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -53,10 +52,10 @@ const ChapterForm = () => {
             const Toast = Swal.mixin({
                 toast: true,
                 position: 'center',
+                color: 'white',
+                background:'black',
                 width: 400,
                 showCancelButton: false,
-                timer: 2000,
-                timerProgressBar: true,
                 didOpen: (toast) => {
                     toast.addEventListener('mouseenter', Swal.stopTimer)
                     toast.addEventListener('mouseleave', Swal.resumeTimer)
@@ -77,7 +76,7 @@ const ChapterForm = () => {
     let headers = {headers:{'Authorization':`Bearer ${token}`}}
 
     return (
-        <>
+    <>
         { role == 1 || role == 2 ?(
             <>
                     <Navbarmobile />
