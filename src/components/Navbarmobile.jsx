@@ -32,7 +32,6 @@ export default function Navbarmobile() {
                 <li><Anchor className="flex justify-center px-4 py-2 text-white hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/">Home</Anchor></li>
                 {role == 1 || role == 2 ?(<><li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/manga-form">New mangas</Anchor></li>
 </>):("")}
-                <li><Anchor className="flex justify-center px-4 py-2 text-white hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/chapters-from">Chapters</Anchor></li>
                 <li><a className="flex justify-center px-4 py-2 text-white hover:bg-white hover:text-btn2 hover:rounded-md m-4" href="#">Favorites</a></li>
                 <li><a className="flex justify-center px-4 py-2 text-white hover:bg-white hover:text-btn2 hover:rounded-md m-4" href="#">Logout</a></li>
               </ul>

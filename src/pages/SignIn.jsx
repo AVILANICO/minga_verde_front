@@ -5,12 +5,11 @@ import { Link as Anchor } from 'react-router-dom'
 import VITE_API from '../../api'
 import { useRef } from 'react'
 import axios from 'axios'
-import Carousel from '../components/Carousel'
-import Footer from '../components/Footer'
+import Index from './Index'
 import Swal from 'sweetalert2'
 
 
-const Signin = () => {
+const Signin = (props) => {
   let email = useRef();
   let password = useRef();
   const [redirect, setRedirect] = useState(false);
@@ -27,6 +26,10 @@ const Signin = () => {
       .then(res => {
         const token = res.data.token;
         const role = res.data.user.role;
+        const email = res.data.user.email;
+        const photo = res.data.user.photo;
+        // const name = res.data.user.name;
+
 
         //sweetAlert
         const Toast = Swal.mixin({
@@ -47,11 +50,20 @@ const Signin = () => {
 
         localStorage.setItem('token', token);
         localStorage.setItem('role', role);
+        localStorage.setItem('email', email)
+        localStorage.setItem('photo', photo)
+        // localStorage.setItem('name', name)
+
         setRedirect(true);
       })
       .catch(err => {
-        console.log(err)
-        alert(err.response.data.message)
+        // console.log(err)
+        // alert(err.response.data.message)
+
+        Swal.fire({
+          icon: 'error',
+          title: err.response.data.message,
+        })
       })
   }
 
@@ -60,16 +72,7 @@ const Signin = () => {
     <>
       {redirect ? (
         <>
-          <header className="mx-8">
-            <Carousel />
-          </header>
-          <div className="bg-[url(/src/assets/image/bg-main.png)] bg-no-repeat bg-cover bg-center w-fill h-[500px] rounded-md mt-[1] flex flex-col justify-center items-start pl-[10%] gap-[10px] p-0 xsm:hidden mx-8">
-            <h2 className="not-italic font-bold text-[64px] leading-[95.19%] text-white text-shadow: 1px 8px 50px rgba(255, 255, 255, 0.25)">Live the emotion of the manga</h2>
-            <p className="font-normal text-2xl leading-[95.19%] text-white">Find the perfect manga for you</p>
-            <span className="not-italic font-semibold text-base leading-[95.18%] text-white">#MingaForever 🔥</span>
-            <Anchor to="/manga-form"><button className="text-white not-italic font-medium text-2xl leading-[95.19%] bg-gradient-to-r from-btn1 from-(-13.10%) to-btn2 to-58.69% rounded-md flex flex-row justify-center items-center gap-2.5 w-60 h-[55px] p-4">Explore</button></Anchor>
-          </div>
-          <Footer />
+          <Index />
         </>
       ) : (
         <div className='h-screen w-full flex justify-center items-center'>
@@ -106,7 +109,11 @@ const Signin = () => {
                   <a href="https://www.google.com.ar/"><button>Sign in with google</button></a>
                 </div>
                 <div className='flex flex-col items-center'>
-                  <Anchor to="/signup" className="mt-6 ">You don't have an account yet? <span className="cursor-pointer text-sm text-fuchsia-400 font-bold">Sign up</span></Anchor>
+                  {props.setShow ? (
+                    <span className="mt-6 ">You don't have an account yet? <span className="cursor-pointer text-sm text-fuchsia-400 font-bold" onClick={() => props.setShow(false)}>Sign up</span></span>
+                  ) : (
+                    <Anchor to="/signup" className="mt-6 ">You don't have an account yet? <span className="cursor-pointer text-sm text-fuchsia-400 font-bold">Sign up</span></Anchor>
+                  )}
                   <Anchor to="/" className="mt-2"> Go back to  <span className="cursor-pointer text-sm text-fuchsia-400 font-bold">Home page</span></Anchor>
                 </div>
               </div>
