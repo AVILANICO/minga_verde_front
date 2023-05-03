@@ -8,7 +8,6 @@ import Index from "./Index"
 import Swal from "sweetalert2"
 
 const ChapterForm = () => {
-   
     let id = useParams()
     // console.log(id.id_manga);
     let title = useRef()
@@ -29,9 +28,10 @@ const ChapterForm = () => {
         }
         // console.log(listpage);
 
+
         axios.post(apiUrl + 'chapters',data, headers)
         .then(res => { console.log(res)
-            console.log(token);
+           
             const Toast = Swal.mixin({
                 toast: true,
                 position: 'center',
@@ -77,6 +77,7 @@ const ChapterForm = () => {
 
     return (
     <>
+
         { role == 1 || role == 2 ?(
             <>
                     <Navbarmobile />
