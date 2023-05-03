@@ -16,6 +16,7 @@ const ChapterForm = () => {
 
 
     function handleForm (e){
+        
         e.preventDefault()
         let array = pages.current.value
         let listpage = array.split(",")
@@ -26,13 +27,15 @@ const ChapterForm = () => {
             pages: listpage
         }
         // console.log(listpage);
-        axios.post(apiUrl + 'chapters', headers, data)
+
+
+        axios.post(apiUrl + 'chapters',data, headers)
         .then(res => { console.log(res)
+           
             const Toast = Swal.mixin({
                 toast: true,
                 position: 'center',
                 showConfirmButton: false,
-                timer: 2000,
                 timerProgressBar: true,
                 didOpen: (toast) => {
                     toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -44,38 +47,37 @@ const ChapterForm = () => {
                 title: 'Chapter successfully!',
             })
         })
-        .catch(err => {console.log(err.response.data.message)
-            if (err.response && err.response.data){
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: err.response.data.message,
-                    confirmButtonText: 'OK',
-                    width: '400px',
-                    
-                })
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'An error occurred while creating the chapter',
-                    confirmButtonText: 'OK',
-                })
-            }
+        .catch(error => {
+            const err = error.response.data.message
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'center',
+                color: 'white',
+                background:'black',
+                width: 400,
+                showCancelButton: false,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+            Toast.fire({
+                icon: 'error',
+                title: err,
+            })
         })
     }
 
     // let role = JSON.parse(localStorage.getItem('user'))?.role;
-    
     let role = localStorage.getItem('role')
     console.log(role);
     let token = localStorage.getItem('token')
     console.log(token);
-    let headers = {headers:{'Authorization': `Bearer ${token}`}}
-
+    let headers = {headers:{'Authorization':`Bearer ${token}`}}
 
     return (
-        <>
+    <>
+
         { role == 1 || role == 2 ?(
             <>
                     <Navbarmobile />

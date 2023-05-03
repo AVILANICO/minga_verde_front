@@ -25,7 +25,7 @@ export default function Navbar() {
         </button>
         {showMenu && (
           <div className="absolute top-full left-0 w-[30rem]  bg-[#F472B6]/80 rounded-md py-5 z-10 ">
-            <ul>
+            <ul onClick={handleMenuClick}>
               <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/">Home</Anchor></li>
               <li><a className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" href="#">Mangas</a></li>
               <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="#">My mangas</Anchor></li>
