@@ -7,8 +7,10 @@ import VITE_API from '../../api'
 import { useRef } from 'react'
 import axios from 'axios'
 import { Link as Anchor } from "react-router-dom";
+import Swal from 'sweetalert2'
 
-const SignUp = () => {
+
+const Register = (props) => {
   let name = useRef()
   let email = useRef()
   let photo = useRef()
@@ -18,15 +20,33 @@ const SignUp = () => {
     e.preventDefault()
     //usando el .current.value vemos lo que tiene adentro del name
     let data = {
-      name: name.current.value,
       email: email.current.value,
       photo: photo.current.value,
       password: password.current.value
     }
-    axios.post(VITE_API + "auth/signup", data)
-      .then(res => alert('Account Created successfully!', res))
+    axios.post(VITE_API + "auth/register", data)
+      .then(res => {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'center',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        Toast.fire({
+          icon: 'success',
+          title: 'Account Created successfully!',
+        })
+      })
       .catch(err => {
-        alert(err.response.data.message)
+        Swal.fire({
+          icon: 'error',
+          title: err.response.data.message,
+        })
       })
   }
 
@@ -44,7 +64,7 @@ const SignUp = () => {
                 </div>
                 <div className="mt-5">
                   <fieldset className='border-2 rounded-md flex'>
-                    <legend className='text-sm ml-2 text-fuchsia-400'>Name</legend>
+                    <legend className='text-sm ml-2 text-fuchsia-400 '>Name</legend>
                     <input ref={name} className="px-4 w-full  py-2 rounded-md text-sm outline-none" type="text" name="Name" placeholder="Krowl Bell" />
                     <img className='w-5 h-5  mr-2' src={profile} alt="profile" />
                   </fieldset>
@@ -86,7 +106,13 @@ const SignUp = () => {
                 <a href="https://www.google.com.ar/"><button>Sign in with google</button></a>
               </div>
               <div className='flex flex-col items-center'>
-                <Anchor to="/signin" className="mt-6 "> Already have an account? <span className="cursor-pointer text-sm text-fuchsia-400 font-bold">Log in</span></Anchor>
+                {props.setShow ? (
+                  <span className="mt-6 "> Already have an account? <span className="cursor-pointer text-sm text-fuchsia-400 font-bold" onClick={() => props.setShow(true)}>Log in</span></span>
+                ) : (
+                  <Anchor to="/register" className="mt-6 ">You don't have an account yet? <span className="cursor-pointer text-sm text-fuchsia-400 font-bold">Sign up</span></Anchor>
+                )}
+              </div>
+              <div className='flex self-center'>
                 <Anchor to="/" className="mt-2"> Go back to  <span className="cursor-pointer text-sm text-fuchsia-400 font-bold">Home page</span></Anchor>
               </div>
             </div>
@@ -99,4 +125,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp;
+export default Register;
