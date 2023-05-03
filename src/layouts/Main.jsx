@@ -8,10 +8,11 @@ import { Outlet } from 'react-router-dom';
 export default function main() { //puedo desestructurar props en {children} y llamar directamente a la propiedad sin usar el props. 
   return (
     <>
-      <header className="mx-8">
-        <Navbar />
-      </header>
-      <Outlet />
+      <Navbar />
+      <div>
+        <Outlet />
+      </div>
+      <Footer />
     </>
   )
 }

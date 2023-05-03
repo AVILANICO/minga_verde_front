@@ -1,22 +1,24 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from '../App.jsx'
 import Layout from '../layouts/Main.jsx'
-import Signup from "../pages/SignUp.jsx";
+import Register from "../pages/Register.jsx";
 import Signin from "../pages/SignIn.jsx";
+import Authform from "../pages/Authform.jsx";
 import MangaForm from "../pages/MangaForm.jsx";
 import ChapterForm from "../pages/ChapterForm.jsx";
 
+// let token = localStorage.getItem('token')
 
 const routers = createBrowserRouter([
   {
-    path: '/',
-    element: <Layout />,
+    path: '/', element: <Layout />,
     children: [
       { path: '/', element: <Main /> },
-      { path: '/signup', element: <Signup /> },
+      { path: '/auth', element: <Authform /> },
+      { path: '/register', element: <Register /> },
       { path: '/signin', element: <Signin /> },
       { path: '/manga-form', element: <MangaForm /> },
-      {path:"/chapters-form/:id_manga",element:<ChapterForm/>}
+      { path: "/chapters-from/:id_manga", element: <ChapterForm /> }
     ]
   }
 ])
