@@ -31,7 +31,6 @@ const ChapterForm = () => {
 
         axios.post(apiUrl + 'chapters',data, headers)
         .then(res => { console.log(res)
-           
             const Toast = Swal.mixin({
                 toast: true,
                 position: 'center',
@@ -94,7 +93,7 @@ const ChapterForm = () => {
                     <div>
                         <input type="text" id="Insert order" name="Insert order" placeholder="Insert pages" className="w-80 appearance-none  border-0  p-2 px-4 text-black border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 mb-20" ref={pages} />
                     </div>
-                        <button className="rounded-full bg-pink-500 p-2 px-36 py-4 text-white t-10 font-bold text-lg"> Send</button>
+                        <button className="roded-full bg-pink-500 p-2 px-36 py-4 text-white t-10 font-bold text-lg"> Send</button>
                     </form>
                 </section>
                     <Footermobile />

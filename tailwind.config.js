@@ -9,7 +9,8 @@ module.exports = {
     
     screens:{
       'xsm': {'min': '320px', 'max': '767px'},
-      'md': {'min': '768px', 'max': '4000px'}
+      'md': {'min': '768px', 'max': '4000px'},
+      'xxsm':{'min': '320px', 'max': '540px'}
     },
 
       colors:{

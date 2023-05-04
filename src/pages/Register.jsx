@@ -52,12 +52,12 @@ const Register = (props) => {
 
   return (
     <>
-      <div className='h-screen w-full flex justify-center items-center'>
-        <div className="flex justify-center w-1/2">
+      <div className='xsm:w-full h-screen w-full flex justify-center items-center'>
+        <div className="xsm:w-full xsm:mt-40 flex justify-center w-1/2">
           <div className="bg-white min-h-screen w-1/2 flex justify-center items-center">
 
-            <div className='flex flex-col'>
-              <form onSubmit={(e) => handleForm(e)}>
+            <div className='xsm:w-screen xsm:items-center flex flex-col'>
+              <form className='xxsm:w-[16rem] xxsm:mr-4 xsm:w-full' onSubmit={(e) => handleForm(e)}>
                 <div className='flex flex-col items-center'>
                   <span className="text-4xl text-center font-semibold text-gray-900">Welcome!</span>
                   <h1 className="text-sm text-center text-gray-600 mt-4">Discover manga, manhua and manhwa, track your progress, have fun, read manga.</h1>
@@ -109,7 +109,7 @@ const Register = (props) => {
                 {props.setShow ? (
                   <span className="mt-6 "> Already have an account? <span className="cursor-pointer text-sm text-fuchsia-400 font-bold" onClick={() => props.setShow(true)}>Log in</span></span>
                 ) : (
-                  <Anchor to="/register" className="mt-6 ">You don't have an account yet? <span className="cursor-pointer text-sm text-fuchsia-400 font-bold">Sign up</span></Anchor>
+                  <Anchor to="/signin" className="mt-6 ">Already have an account? <span className="cursor-pointer text-sm text-fuchsia-400 font-bold">Sign in</span></Anchor>
                 )}
               </div>
               <div className='flex self-center'>
@@ -118,7 +118,7 @@ const Register = (props) => {
             </div>
           </div>
         </div >
-        <div className='w-1/2 p-4 flex justify-end h-full bg-center bg-cover bg-[url(/src/assets/image/Rectangle81.png)]'>
+        <div className='xsm:hidden w-1/2 p-4 flex justify-end h-full bg-center bg-cover bg-[url(/src/assets/image/Rectangle81.png)]'>
         </div>
       </div >
     </>
