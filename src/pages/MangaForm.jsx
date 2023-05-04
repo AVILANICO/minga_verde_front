@@ -29,6 +29,12 @@ console.log(categor)
 const title = useRef()
 const category = useRef()
 const description = useRef()
+
+
+let role = localStorage.getItem("role")
+let token = localStorage.getItem("token")
+let headers = {headers:{"Authorization":`bearer ${token}`}}
+
 function handleForm(e){
   e.preventDefault()
 let data = {
@@ -36,7 +42,7 @@ let data = {
  category_id : category.current.value,
  description : description.current.value
 }
-axios.post(VITE_API + "mangas",data)
+axios.post(VITE_API + "mangas",data ,headers )
 .then(res=>
   {console.log(res)
     const Toast = Swal.mixin({
@@ -84,8 +90,8 @@ axios.post(VITE_API + "mangas",data)
 
 }
 
- let role = localStorage.getItem("role")
- console.log(role)
+
+  
   return (
 <>
     {role == 1 || role == 2 ?(
