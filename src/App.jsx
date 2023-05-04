@@ -8,8 +8,6 @@ import Indexmobile from "./components/Indexmobile"
 
 
 function App() {
-    console.log(apiUrl);
-    console.log(process.env.NODE_ENV);
 
     return (
         <>
