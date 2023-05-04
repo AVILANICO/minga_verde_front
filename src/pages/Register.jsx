@@ -8,6 +8,7 @@ import { useRef } from 'react'
 import axios from 'axios'
 import { Link as Anchor } from "react-router-dom";
 import Swal from 'sweetalert2'
+import Navbarmobile from '../components/Navbarmobile'
 
 
 const Register = (props) => {
@@ -52,6 +53,7 @@ const Register = (props) => {
 
   return (
     <>
+      <Navbarmobile />
       <div className='xsm:w-full h-screen w-full flex justify-center items-center'>
         <div className="xsm:w-full xsm:mt-40 flex justify-center w-1/2">
           <div className="bg-white min-h-screen w-1/2 flex justify-center items-center">
