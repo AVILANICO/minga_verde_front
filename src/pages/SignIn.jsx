@@ -7,13 +7,8 @@ import { useRef } from 'react'
 import axios from 'axios'
 import Index from './Index'
 import Swal from 'sweetalert2'
-<<<<<<< HEAD
 import App from '../App'
-=======
-import Indexmobile from '../components/Indexmobile'
-import App from '../App'
-
->>>>>>> 75297bd12d72b0754e0bfdc5c0e5477f1ea9cad8
+import Navbarmobile from '../components/Navbarmobile'
 
 const Signin = (props) => {
   let email = useRef();
@@ -78,10 +73,13 @@ const Signin = (props) => {
     <>
       {redirect ? (
         <>
+        
           <Index />
         <App/>
         </>
       ) : (
+        <>
+        <Navbarmobile/>
         <div className='h-screen w-full flex justify-center items-center'>
           <div className='xsm:hidden w-1/2 p-4 flex justify-end h-full bg-center bg-cover bg-[url(/src/assets/image/Rectangle82.png)]'></div >
           <div className="xsm:w-full xsm:flex flex justify-center w-1/2">
@@ -127,6 +125,7 @@ const Signin = (props) => {
             </div>
           </div >
         </div >
+        </>
       )}
     </>
   )

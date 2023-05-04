@@ -53,7 +53,7 @@ export default function Navbar() {
                             </svg>
                             
               </div>}
-            <ul>
+            <ul onClick={handleMenuClick}>
               <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/">Home</Anchor></li>
               {role == 1 || role == 2 ? (<><li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/manga-form">New mangas</Anchor></li>
               </>) : ("")}

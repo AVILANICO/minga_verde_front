@@ -75,46 +75,6 @@ export default function MangaForm() {
   let role = localStorage.getItem("role")
   console.log(role)
   return (
-<<<<<<< HEAD
-<>
-    {role == 1 || role == 2 ?(
-      <>
-<Navbar/>
-      <section className="grid h-screen place-content-center text-slate-300">
-    <div className="mb-10 text-center text-black">
-      <h1 className="text-3xl font-bold">New Manga</h1>
-     
-    </div>
-    <form onSubmit={(e)=>handleForm(e)}>
-    <div className="flex flex-col items-center justify-center space-y-6 pt-14">
-      <input ref={title} type="text" id="title" name="title" placeholder="Insert title" className="w-80 appearance-none  border-0  p-2 px-4  border-b border-gray-500  text-black focus:outline-none focus:ring-0" />
-      <div>
-    <select ref={category} placeholder="Insert order" className="w-80 appearance-none  border-0  p-2 px-4  border-b border-gray-500  text-black" name="categories">
-      <option value="" key="rr">Insert Category</option>
-      {options()}
-    </select>
-      </div>
-      <div>
-        <input ref={description} type="text" id="Insert description" name="Insert order" placeholder="Insert order" className="w-80 appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent  text-black focus:outline-none focus:ring-0" />
-      </div>
- 
-   
-      <button className="rounded-full bg-pink-500 p-2 px-16 py-4 text-white t-10 font-bold text-lg"> Send</button>
-    </div>
-    </form>
-  </section>
-  <Footer/>
-  </>
-   ):(
-    <>
-   <Index/>
-   <App/>
-   </>
-   )}
-   </>
-   
-  
-=======
     <>
       {role == 1 || role == 2 ? (
         <>
@@ -151,6 +111,5 @@ export default function MangaForm() {
         </>
       )}
     </>
->>>>>>> 75297bd12d72b0754e0bfdc5c0e5477f1ea9cad8
   )
 }

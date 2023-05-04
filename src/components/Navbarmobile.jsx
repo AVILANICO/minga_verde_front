@@ -47,7 +47,7 @@ export default function Navbarmobile() {
                   <img className="w-12 h-12 object-cover rounded-full" src={photo} alt="imgUsuario" />
                   <p className="text-xl">{email}</p>
                 </div>}
-              <ul className="font-semibold font-poppins pt-[2rem]">
+              <ul onClick={handleMenuClick} className="font-semibold font-poppins pt-[2rem]">
               <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/">Home</Anchor></li>
               {role == 1 || role == 2 ?(<><li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/manga-form">New mangas</Anchor></li>
 </>):("")}
