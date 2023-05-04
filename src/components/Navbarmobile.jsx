@@ -11,7 +11,7 @@ export default function Navbarmobile() {
   const handleMenuClick = () => {
     setShowMenu(!showMenu);
   }
-  
+  const role = localStorage.getItem("role")
   let token = localStorage.getItem('token')
   let headers = { headers: { 'authorization': `Bearer ${token}` } }
   let email = localStorage.getItem('email')
@@ -48,8 +48,9 @@ export default function Navbarmobile() {
                   <p className="text-xl">{email}</p>
                 </div>}
               <ul className="font-semibold font-poppins pt-[2rem]">
-                {token && <li><a className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" href="#">My mangas</a></li>}
-                {token && <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/chapters-from">Chapters</Anchor></li>}
+              <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/">Home</Anchor></li>
+              {role == 1 || role == 2 ?(<><li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/manga-form">New mangas</Anchor></li>
+</>):("")}
                 {token && <li><a className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" href="#">Favorites</a></li>}
                 {!token && <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/register">Register</Anchor></li>}
                 {!token && <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/signin">Log In</Anchor></li>}

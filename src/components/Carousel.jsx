@@ -32,7 +32,7 @@ export default function Carousel() {
   useEffect(
     () => {
         const tiempo = setInterval( () => {
-          setCounter((counter) => (counter + 1) % categories.length);
+            setCounter( (n) => (n + 1) % 4);
         }, 4000);
         return () => clearInterval(tiempo);
     }, [])

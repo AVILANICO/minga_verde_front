@@ -7,10 +7,7 @@ import Swal from 'sweetalert2'
 import Index from './Index'
 import Navbar from '../components/Navbarmobile'
 import Footer from '../components/Footermobile'
-
-
-
-
+import App from '../App'
 
 
 export default function MangaForm() {
@@ -123,7 +120,10 @@ axios.post(VITE_API + "mangas",data ,headers )
   <Footer/>
   </>
    ):(
+    <>
    <Index/>
+   <App/>
+   </>
    )}
    </>
    

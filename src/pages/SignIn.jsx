@@ -7,7 +7,7 @@ import { useRef } from 'react'
 import axios from 'axios'
 import Index from './Index'
 import Swal from 'sweetalert2'
-
+import App from '../App'
 
 const Signin = (props) => {
   let email = useRef();
@@ -73,6 +73,7 @@ const Signin = (props) => {
       {redirect ? (
         <>
           <Index />
+        <App/>
         </>
       ) : (
         <div className='h-screen w-full flex justify-center items-center'>

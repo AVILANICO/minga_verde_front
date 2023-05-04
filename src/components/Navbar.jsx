@@ -30,7 +30,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="w-full px-8 pt-4 absolute flex justify-between items-center">
+    <nav className="xsm:hidden w-full px-8 pt-4 absolute flex justify-between items-center">
       <div>
         <button onClick={handleMenuClick}>
           <svg
@@ -43,9 +43,15 @@ export default function Navbar() {
         {showMenu && (
           <div className="absolute top-full left-0 w-[30rem]  bg-[#F472B6]/95 rounded-md py-5 z-10 ">
             {token &&
+            
               <div className="flex items-center justify-center gap-4">
+
                 <img className="w-12 h-12 object-cover rounded-full" src={photo} alt="imgUsuario" />
                 <p className="text-xl">{email}</p>
+                <svg onClick={handleMenuClick} className="flex justify-end w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                            
               </div>}
             <ul>
               <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/">Home</Anchor></li>
