@@ -11,6 +11,7 @@ export default function Navbarmobile() {
   const handleMenuClick = () => {
     setShowMenu(!showMenu);
   }
+  
   let token = localStorage.getItem('token')
   let headers = { headers: { 'authorization': `Bearer ${token}` } }
   let email = localStorage.getItem('email')
@@ -24,7 +25,6 @@ export default function Navbarmobile() {
       })
       .catch(err => alert(err))
   }
-
   return (
     <nav className="flex justify-center items-center h-20 md:hidden">
       <div className="flex w-full mx-4 justify-between">
@@ -40,6 +40,7 @@ export default function Navbarmobile() {
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
+      
               </button>
               {token &&
                 <div className="flex items-center justify-center gap-4 mt-8">
