@@ -5,7 +5,7 @@ import Carousel from "../components/Carousel"
 export default function Index() {
   return (
     <>
-      <div className="pt-20">
+      <div className="md:pt-20">
         <header className="mx-8 mt-0">
           <Carousel />
         </header>

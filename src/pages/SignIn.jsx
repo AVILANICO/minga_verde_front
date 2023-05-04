@@ -76,12 +76,12 @@ const Signin = (props) => {
         </>
       ) : (
         <div className='h-screen w-full flex justify-center items-center'>
-          <div className='w-1/2 p-4 flex justify-end h-full bg-center bg-cover bg-[url(/src/assets/image/Rectangle82.png)]'></div >
-          <div className="flex justify-center w-1/2">
-            <div className="bg-white min-h-screen w-1/2 flex justify-center items-center">
+          <div className='xsm:hidden w-1/2 p-4 flex justify-end h-full bg-center bg-cover bg-[url(/src/assets/image/Rectangle82.png)]'></div >
+          <div className="xsm:w-full xsm:flex flex justify-center w-1/2">
+            <div className="xsm:w-full bg-white min-h-screen w-1/2 flex justify-center items-center">
 
-              <div className='flex flex-col'>
-                <form onSubmit={(e) => handleForm(e)}>
+              <div className='xsm:w-full xsm:items-center flex flex-col'>
+                <form className='xsm:w-3/5' onSubmit={(e) => handleForm(e)}>
                   <div className='flex flex-col items-center'>
                     <p className="text-4xl text-center font-semibold text-gray-900">Welcome <span className='text-fuchsia-400'>back</span>!</p>
                     <h1 className="text-sm text-center text-gray-600 mt-4">Discover manga, manhua and manhwa, track your progress, have fun, read manga.</h1>
@@ -104,15 +104,15 @@ const Signin = (props) => {
                     <input className="mt-4 mb-3 w-full bg-gradient-to-b from-[#F9A8D4] to-[#F472B6] text-white py-2 rounded-xl transition duration-100 shadow-cyan-600 font-bold text-md h-12 cursor-pointer" type='submit' value="Sign in" />
                   </div>
                 </form>
-                <div className="flex space-x-2 justify-center items-end border-2 border-gray-300 text-gray-600 py-2 rounded-xl transition duration-100">
+                <div className="xsm:w-3/5 flex space-x-2 justify-center items-end border-2 border-gray-300 text-gray-600 py-2 rounded-xl transition duration-100">
                   <img className=" h-5 cursor-pointer" src="https://i.imgur.com/arC60SB.png" alt="asd" />
                   <a href="https://www.google.com.ar/"><button>Sign in with google</button></a>
                 </div>
-                <div className='flex flex-col items-center'>
+                <div className='xsm:w-3/5 xsm:text-center flex flex-col items-center'>
                   {props.setShow ? (
                     <span className="mt-6 ">You don't have an account yet? <span className="cursor-pointer text-sm text-fuchsia-400 font-bold" onClick={() => props.setShow(false)}>Sign up</span></span>
                   ) : (
-                    <Anchor to="/signup" className="mt-6 ">You don't have an account yet? <span className="cursor-pointer text-sm text-fuchsia-400 font-bold">Sign up</span></Anchor>
+                    <Anchor to="/register" className="mt-6 ">You don't have an account yet? <span className="cursor-pointer text-sm text-fuchsia-400 font-bold">Sign up</span></Anchor>
                   )}
                   <Anchor to="/" className="mt-2"> Go back to  <span className="cursor-pointer text-sm text-fuchsia-400 font-bold">Home page</span></Anchor>
                 </div>
