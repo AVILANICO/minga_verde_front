@@ -78,7 +78,6 @@ const Signin = (props) => {
     <>
       {redirect ? (
         <>
-
           <Index />
           <div className='md:hidden'>
             <App />
