@@ -21,7 +21,7 @@ export default function Navbar() {
   let photo = localStorage.getItem('photo')
 
   function backHome() {
-    axios.post(VITE_API + 'auth/signout', null, headers) //pongo null xq no tengo que enviar datos
+    axios.post(VITE_API + 'auth/signout', null, headers)
       .then(res => {
         localStorage.clear();
         navigate('/')
@@ -37,27 +37,25 @@ export default function Navbar() {
             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#F472B6" className="w-10 h-10">
             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
-
         </button>
-
         {showMenu && (
           <div className="absolute top-full left-0 w-[30rem]  bg-[#F472B6]/95 rounded-md py-5 z-10 ">
             {token &&
-            
+
               <div className="flex items-center justify-center gap-4">
 
                 <img className="w-12 h-12 object-cover rounded-full" src={photo} alt="imgUsuario" />
                 <p className="text-xl">{email}</p>
                 <svg onClick={handleMenuClick} className="flex justify-end w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                            
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+
               </div>}
             <ul onClick={handleMenuClick}>
               <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/">Home</Anchor></li>
               {role == 1 || role == 2 ? (<><li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/manga-form">New mangas</Anchor></li>
               </>) : ("")}
-              {token && <li><a className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" href="#">Favorites</a></li>}
+              {token && <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="#">Favorites</Anchor></li>}
               {!token && <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/register">Register</Anchor></li>}
               {!token && <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/signin">Log In</Anchor></li>}
               {token && <li><a className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4 cursor-pointer" onClick={backHome}>Sign Out</a></li>}
@@ -71,9 +69,3 @@ export default function Navbar() {
     </nav>
   )
 }
-
-
-
-
-
-

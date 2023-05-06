@@ -82,7 +82,6 @@ export default function MangaForm() {
           <section className="grid h-screen place-content-center text-slate-300">
             <div className="mb-10 text-center text-black">
               <h1 className="text-3xl font-bold">New Manga</h1>
-
             </div>
             <form onSubmit={(e) => handleForm(e)}>
               <div className="flex flex-col items-center justify-center space-y-6 pt-14">
@@ -107,7 +106,9 @@ export default function MangaForm() {
       ) : (
         <>
           <Index />
-          <App />
+          <div className='md:hidden'>
+            <App />
+          </div>
         </>
       )}
     </>
