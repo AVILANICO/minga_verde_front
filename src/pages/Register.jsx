@@ -6,16 +6,16 @@ import candado from '../assets/image/lock1.png'
 import VITE_API from '../../api'
 import { useRef } from 'react'
 import axios from 'axios'
-import { Link as Anchor } from "react-router-dom";
+import { Link as Anchor, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 import Navbarmobile from '../components/Navbarmobile'
-
 
 const Register = (props) => {
   let name = useRef()
   let email = useRef()
   let photo = useRef()
   let password = useRef()
+  let navigate = useNavigate();
 
   function handleForm(e) {
     e.preventDefault()
@@ -27,6 +27,7 @@ const Register = (props) => {
     }
     axios.post(VITE_API + "auth/register", data)
       .then(res => {
+
         const Toast = Swal.mixin({
           toast: true,
           position: 'center',
@@ -42,6 +43,8 @@ const Register = (props) => {
           icon: 'success',
           title: 'Account Created successfully!',
         })
+
+        navigate('/signin')
       })
       .catch(err => {
         Swal.fire({
@@ -105,7 +108,7 @@ const Register = (props) => {
               </form>
               <div className="flex space-x-2 justify-center items-end border-2 border-gray-300 text-gray-600 py-2 rounded-xl transition duration-100">
                 <img className=" h-5 cursor-pointer" src="https://i.imgur.com/arC60SB.png" alt="asd" />
-                <a href="https://www.google.com.ar/"><button>Sign in with google</button></a>
+                <Anchor to="https://www.google.com.ar/"><button>Sign in with google</button></Anchor>
               </div>
               <div className='flex flex-col items-center'>
                 {props.setShow ? (

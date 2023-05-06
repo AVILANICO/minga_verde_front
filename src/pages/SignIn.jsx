@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import arroba from '../assets/image/@.png'
 import candado from '../assets/image/lock1.png'
-import { Link as Anchor } from 'react-router-dom'
+import { Link as Anchor, useNavigate } from 'react-router-dom'
 import VITE_API from '../../api'
 import { useRef } from 'react'
 import axios from 'axios'
@@ -13,7 +13,10 @@ import Navbarmobile from '../components/Navbarmobile'
 const Signin = (props) => {
   let email = useRef();
   let password = useRef();
+
   const [redirect, setRedirect] = useState(false);
+
+  let navigate = useNavigate()
 
   function handleForm(e) {
     e.preventDefault()
@@ -56,6 +59,8 @@ const Signin = (props) => {
         // localStorage.setItem('name', name)
 
         setRedirect(true);
+        //investigar useNavigate para cambiar el useState()
+
       })
       .catch(err => {
         // console.log(err)
@@ -73,8 +78,11 @@ const Signin = (props) => {
     <>
       {redirect ? (
         <>
+
           <Index />
-          <App />
+          <div className='md:hidden'>
+            <App />
+          </div>
         </>
       ) : (
         <>
@@ -110,7 +118,7 @@ const Signin = (props) => {
                   </form>
                   <div className="xsm:w-3/5 flex space-x-2 justify-center items-end border-2 border-gray-300 text-gray-600 py-2 rounded-xl transition duration-100">
                     <img className=" h-5 cursor-pointer" src="https://i.imgur.com/arC60SB.png" alt="asd" />
-                    <a href="https://www.google.com.ar/"><button>Sign in with google</button></a>
+                    <Anchor to="https://www.google.com.ar/"><button>Sign in with google</button></Anchor>
                   </div>
                   <div className='xsm:w-3/5 xsm:text-center flex flex-col items-center'>
                     {props.setShow ? (
