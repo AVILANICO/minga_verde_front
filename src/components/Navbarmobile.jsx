@@ -26,7 +26,7 @@ export default function Navbarmobile() {
       .catch(err => alert(err))
   }
   return (
-    <nav className="flex justify-center items-center h-20 md:hidden">
+    <nav className="absolute flex justify-center items-center h-20 md:hidden w-full">
       <div className="flex w-full mx-4 justify-between">
         <div className="flex items-center">
           <button onClick={handleMenuClick}>
