@@ -5,16 +5,27 @@ module.exports = {
   './src/**/*.{js,jsx,ts,tsx}' //esto también es una forma de englobar subdirectorios
   ],
   theme: {
-    extend: {
-      screens:{
-        'xsm': {'min': '320px', 'max': '639px'}
-      },
-      backgroundImage: {
-        'fondo-naruto':"url('/images/7d0eea20d6c53007b24b7e2c4342b8191.png')",
-        'fondo-naruto2': "url('/images/naruto-largo.png')",
-        'fondo-luffy':"url('/images/Rectangle14.png')"  
-      }
+  extend: {
+    
+    screens:{
+      'xsm': {'min': '320px', 'max': '767px'},
+      'md': {'min': '768px', 'max': '4000px'},
+      'xxsm':{'min': '320px', 'max': '540px'}
+    },
+
+      colors:{
+      primary: "#222",
+      secundary: "#fff",
+      acento: "#222",
+
+      btn1:'#F9A8D4',
+      btn2:'#F472B6',
+    },
+  
+      fontFamily: {
+        'montserrat': ['Montserrat'],
     }
+  }
   },
   variants: {},
   plugins: []
