@@ -60,8 +60,7 @@ const ChapterForm = () => {
 
             {role == 1 || role == 2 ? (
                 <>
-                    <Navbarmobile />
-                    <section className="grid h-[80vh] my-8 place-content-center text-slate-300">
+                    <section className="grid h-[80vh] mb-[11rem] place-content-center text-slate-300">
                         <div className="mb-10 text-center text-black">
                             <h1 className="text-3xl -tracking-tight font-sans">New Chapter</h1>
 
@@ -78,7 +77,6 @@ const ChapterForm = () => {
                         </form>
                     </section>
                     <div className="mt-32">
-                        <Footermobile />
                     </div>
                 </>
             ) : (

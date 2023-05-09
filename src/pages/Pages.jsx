@@ -59,7 +59,6 @@ export default function Pages() {
 
     return (
         <>
-			<Navbar/>
 						<p className='flex justify-center font-bold xsn: py-8 text-white bg-pink-500/90 xl:'>Chapter #{order} - {title}</p> 
 			<div className="max-w-screen-2xl mx-auto pt-1 xsm:py-2">
 			
@@ -86,7 +85,6 @@ export default function Pages() {
 			<div className=' flex justify-end w-4/5 '>
 				<p className='text-black font-bold'>{counter}/{allPages.length}</p>
 			</div>
-			<Footer/>
         </>
     )
 }
