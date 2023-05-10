@@ -5,6 +5,9 @@
 //   reducer: {
 //     inputs: inputs_reducer
 //   }
+
+// const store = configureStore({
+//   reducer: ''
 // })
 
 // export default store;
