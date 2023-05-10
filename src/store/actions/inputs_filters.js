@@ -1,5 +1,7 @@
 // import { createAction } from "@reduxjs/toolkit";
 
+// //la accion es un intermediario entre la vista y las operaciones de reduccion!
+// //es la que DISPARA/EJECUTA la modificacion/reduccion de los estados globales
 // const inputs_filter = createAction(
 //   'inputs_filter', //nombre de la accion
 //   (objeto) => {    //funcion que va a enviar datos al reductor 
