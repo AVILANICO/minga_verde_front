@@ -8,7 +8,7 @@ import { useRef } from 'react'
 import axios from 'axios'
 import { Link as Anchor, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
-import Navbarmobile from '../components/Navbarmobile'
+
 
 const Register = (props) => {
   let name = useRef()

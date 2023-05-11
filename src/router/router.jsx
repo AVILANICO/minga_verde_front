@@ -6,6 +6,7 @@ import Signin from "../pages/SignIn.jsx";
 import Authform from "../pages/Authform.jsx";
 import MangaForm from "../pages/MangaForm.jsx";
 import ChapterForm from "../pages/ChapterForm.jsx";
+import Mangas from "../pages/Mangas.jsx";
 import Pages from "../pages/Pages.jsx";
 import Manga from "../pages/Manga.jsx";
 
@@ -20,6 +21,7 @@ const routers = createBrowserRouter([
       { path: '/auth', element: <Authform /> },
       { path: '/register', element: <Register /> },
       { path: '/signin', element: <Signin /> },
+      { path: '/mangas/:page', element: <Mangas /> },
       { path: '/manga-form', element: <MangaForm /> },
       { path: "/chapters-form/:id_manga", element: <ChapterForm /> },
       { path: "/chapters/:url/:id/:page", element: <Pages />},

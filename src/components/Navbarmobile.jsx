@@ -29,8 +29,10 @@ export default function Navbarmobile() {
       .catch(err => alert(err))
   }
   return (
-    <nav className=" absolute w-full h-20 flex justify-between items-center md:hidden">
-      <div className="flex w-full justify-between">
+
+    <nav className="absolute flex justify-center items-center h-20 md:hidden w-full">
+
+      <div className="flex w-full mx-4 justify-between">
         <div className="flex items-center">
           <button onClick={handleMenuClick}className="z-10 absolute left-6 top-7">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke={url === 'chapter' ? '#fff': '#F472B6'} className="w-6 h-6">
@@ -55,7 +57,7 @@ export default function Navbarmobile() {
                 {role == 1 || role == 2 ? (<><li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/manga-form">New mangas</Anchor></li>
                 </>) : ("")}
                 {token && <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="#">Favorites</Anchor></li>}
-
+                {token && <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/mangas/:pages">Mangas</Anchor></li>}
                 {!token && <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/register">Register</Anchor></li>}
                 {!token && <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/signin">Log In</Anchor></li>}
                 {token && <li><a className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4 cursor-pointer" onClick={backHome}>Sign Out</a></li>}
