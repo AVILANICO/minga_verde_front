@@ -3,7 +3,7 @@ import logo from "../assets/image/logo-minga.png"
 
 export default function Footer() {
   return (
-    <footer className="w-auto my-8 xsm:hidden mx-8">
+    <footer className="w-auto  xsm:hidden ">
       <div className="">
         <img src={footer} className="w-[100%]" />
       </div>

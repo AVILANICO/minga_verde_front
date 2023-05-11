@@ -5,10 +5,7 @@ import axios from 'axios'
 import VITE_API from '../../api'
 import Swal from 'sweetalert2'
 import Index from './Index'
-import Navbar from '../components/Navbarmobile'
-import Footer from '../components/Footermobile'
 import App from '../App'
-
 
 export default function MangaForm() {
   useEffect(
@@ -87,12 +84,13 @@ export default function MangaForm() {
         })
       })
   }
+  let role = localStorage.getItem("role")
   console.log(role)
   return (
     <>
       {role == 1 || role == 2 ? (
         <>
-          <Navbar />
+          
           <section className="grid h-screen place-content-center text-slate-300">
             <div className="mb-10 text-center text-black">
               <h1 className="text-3xl font-bold">New Manga</h1>
@@ -115,7 +113,7 @@ export default function MangaForm() {
               </div>
             </form>
           </section>
-          <Footer />
+          
         </>
       ) : (
         <>
