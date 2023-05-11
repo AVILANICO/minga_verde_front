@@ -29,8 +29,10 @@ export default function Navbarmobile() {
       .catch(err => alert(err))
   }
   return (
-    <nav className=" absolute w-full h-20 flex justify-between items-center md:hidden">
-      <div className="flex w-full justify-between">
+
+    <nav className="absolute flex justify-center items-center h-20 md:hidden w-full">
+
+      <div className="flex w-full mx-4 justify-between">
         <div className="flex items-center">
           <button onClick={handleMenuClick}className="z-10 absolute left-6 top-7">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke={url === 'chapter' ? '#fff': '#F472B6'} className="w-6 h-6">
