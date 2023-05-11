@@ -20,7 +20,7 @@ const routers = createBrowserRouter([
       { path: '/signin', element: <Signin /> },
       { path: '/manga-form', element: <MangaForm /> },
       { path: "/chapters-form/:id_manga", element: <ChapterForm /> },
-      { path: "/chapters/:id/:page", element: <Pages />}
+      { path: "/chapters/:url/:id/:page", element: <Pages />}
     ]
   }
 ])

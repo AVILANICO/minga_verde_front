@@ -1,9 +1,6 @@
-import Main from "./layouts/Main"
+
 import Index from "./pages/Index"
 import './App.css'
-import apiUrl from "../api"
-import Navbarmobile from "./components/Navbarmobile"
-import Footermobile from "./components/Footermobile"
 import Indexmobile from "./components/Indexmobile"
 
 

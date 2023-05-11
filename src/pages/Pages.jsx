@@ -1,5 +1,5 @@
-import Navbar from '../components/Navbarmobile'
-import Footer from '../components/Footermobile'
+import { useDispatch, useSelector } from "react-redux"
+import actions from "../store/actions/chapter_bar"
 import { useState, useEffect } from "react" 
 import apiUrl from '../../api'
 import axios from 'axios'
@@ -7,14 +7,22 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 
 export default function Pages() {
+	let [reload, setReload] = useState(true)
+	let [id_prev, setPrev] = useState()
+	let [id_next, setNext] = useState()
+	let chapterStates = useSelector(store => store.title_order)
+	// console.log(chapterStates);
+	let {chapter_bar} = actions
 	let {id, page} = useParams()
+	let dispatch = useDispatch()
 	let navigate = useNavigate()
-	let [order, setOrder] = useState()
-	let [title, setTitle] = useState()
+	let [order, setOrder] = useState(chapterStates.order)
+	let [title, setTitle] = useState(chapterStates.title)
 	let [allPages, setAllPages] = useState([])
 	let [imgPages, setImgPages] = useState('')
 	let [counter, setCounter] = useState(parseInt(page))
 
+		// console.log(chapter_bar);
 	useEffect(
 		() => {axios(apiUrl + 'chapters/' + id)
 		.then(res => {
@@ -23,10 +31,16 @@ export default function Pages() {
 			setOrder(res.data.response.order)
 			// setCounter(parseInt(page));
 			setImgPages(res.data.response.pages[parseInt(page)])
+			setNext(res.data.id_next)
+			setPrev(res.data.id_prev)
+			dispatch(chapter_bar({
+				title: res.data.response.title,
+				order: res.data.response.order,
+			}))
 		})
 
 		.catch(err => console.log(err))},
-		[]
+		[reload]
 		)
 
 		
@@ -34,20 +48,37 @@ export default function Pages() {
 		let next = () => {
 			let newCounter = counter + 1;
 			if (newCounter >= allPages.length - 1) {
-			  newCounter = 0;
+				newCounter = 0;
+				setCounter  (newCounter)
+				navigate(`/chapters/chapter/${id_next}/${newCounter}`);
+				console.log(id_next);
+				setReload(!reload)
+			}else{
+				setCounter(newCounter);
+				console.log(newCounter);
+				dispatch(chapter_bar({
+					title: title,
+					order: order,
+				}))
+				navigate(`/chapters/chapter/${id}/${newCounter}`);
 			}
-			setCounter(newCounter);
-			console.log(newCounter);
-		 	navigate(`/chapters/${id}/${newCounter}`);
 		} 
 
 		let previous = () => {
 			let newCounter = counter - 1;
 		  if (counter === 0) {
-			setCounter = allPages.length - 1
+			newCounter = allPages.length - 1
+			if (id_prev){
+				navigate(`/chapters/chapter/${id_prev}/0`);
+				setReload(!reload)
+				return 
+			} else{
+				navigate(`/manga/${id}/${page}`)
+				return
+			}
 		  }
 			setCounter(newCounter);
-			navigate(`/chapters/${id}/${newCounter}`);
+			navigate(`/chapters/chapter/${id}/${newCounter}`);
 		}
 
 
@@ -55,17 +86,16 @@ export default function Pages() {
 			setImgPages(allPages[counter])
 		},[counter])
 		
-
+		
 
     return (
         <>
-						<p className='flex justify-center font-bold xsn: py-8 text-white bg-pink-500/90 xl:'>Chapter #{order} - {title}</p> 
-			<div className="max-w-screen-2xl mx-auto pt-1 xsm:py-2">
 			
+			<div className="max-w-screen-2xl pt-24 mx-auto xsm:py-2 xsm:pt-24  bg-[#EBEBEB]">
 				<div id="default-carousel" className="relative" data-carousel="static">
 					<div className="flex justify-center items-center rounded-md ">
 						<div>
-							<img src={imgPages} className="w-auto my-2 " />
+							<img src={imgPages} className="w-auto my-2 h-[83vh] " />
 						</div>
 						<button onClick={previous} type="button" className="flex absolute h-[50%] w-[50%] left-0 z-30  items-center px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
 							<span className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 dark:bg-gray-800/30 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
@@ -82,8 +112,15 @@ export default function Pages() {
 					</div>
 				</div>
 			</div>
-			<div className=' flex justify-end w-4/5 '>
-				<p className='text-black font-bold'>{counter}/{allPages.length}</p>
+			<div className=' flex justify-center bg-[#EBEBEB] pb-2'>
+			<svg xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    strokeWidth="1.5" 
+                    stroke="currentColor" className="w-6 h-6 bg-white rounded-md">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                    </svg>
+					<p className="px-3">42</p>
 			</div>
         </>
     )

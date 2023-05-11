@@ -1,7 +1,5 @@
-import Navbarmobile from "../components/Navbarmobile"
-import Footermobile from "../components/Footermobile"
 import React, { useRef } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate} from "react-router-dom"
 import axios from "axios"
 import apiUrl from "../../api"
 import Index from "./Index"
@@ -13,6 +11,7 @@ const ChapterForm = () => {
     let title = useRef()
     let order = useRef()
     let pages = useRef()
+    let navigate = useNavigate()
 
 
     function handleForm(e) {
@@ -32,7 +31,7 @@ const ChapterForm = () => {
         axios.post(apiUrl + 'chapters', data, headers)
             .then(res => {
                 console.log(res)
-
+                navigate('/')
                 Swal.fire({
                     icon: 'success',
                     title: 'Chapter successfully!',
