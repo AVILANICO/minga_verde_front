@@ -1,13 +1,10 @@
-// import { configureStore } from "@reduxjs/toolkit";
-// import inputs_reducer from './reducers/inputs_filter.js'
+import { configureStore } from "@reduxjs/toolkit";
+import chapters_reducer from "./reducers/chapter_bar"
 
-// const store = configureStore({
-//   reducer: {
-//     inputs: inputs_reducer
-//   }
+const store = configureStore({
+    reducer: {
+        title_order: chapters_reducer
+    }
+})
 
-// const store = configureStore({
-//   reducer: ''
-// })
-
-// export default store;
+export default store

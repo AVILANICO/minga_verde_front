@@ -4,13 +4,13 @@ import App from './App.jsx'
 import './index.css'
 import { RouterProvider } from 'react-router-dom'
 import routers from './router/router.jsx'
-// import { Provider } from 'react-redux'
-// import store from './store/store.jsx'
+import { Provider } from 'react-redux'
+import store from './store/store.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <Provider store={store}>
-  <RouterProvider router={routers} />,
-  // </Provider>
+  <Provider store={store}>
+    <RouterProvider router={routers} />
+  </Provider>,
 )
 
 //el enrutador principal tiene que ser hijo del almacenamiento de estados globales
