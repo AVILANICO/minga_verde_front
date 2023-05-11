@@ -22,9 +22,12 @@ export default function Pages() {
 	let [imgPages, setImgPages] = useState('')
 	let [counter, setCounter] = useState(parseInt(page))
 
+	let token = localStorage.getItem('token')
+    let headers = { headers: { 'Authorization': `Bearer ${token}` } }
+
 		// console.log(chapter_bar);
 	useEffect(
-		() => {axios(apiUrl + 'chapters/' + id)
+		() => {axios(apiUrl + 'chapters/' + id, headers)
 		.then(res => {
 			setAllPages(res.data.response.pages);
 			setTitle(res.data.response.title);
@@ -71,7 +74,7 @@ export default function Pages() {
 			if (id_prev){
 				navigate(`/chapters/chapter/${id_prev}/0`);
 				setReload(!reload)
-				return 
+				return   // el return se lo agregamos para evitar de que el codigo se nos siga ejecutando desues de cada navegacion/ejecucion!!
 			} else{
 				navigate(`/manga/${id}/${page}`)
 				return

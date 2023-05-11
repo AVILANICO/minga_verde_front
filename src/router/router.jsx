@@ -7,6 +7,8 @@ import Authform from "../pages/Authform.jsx";
 import MangaForm from "../pages/MangaForm.jsx";
 import ChapterForm from "../pages/ChapterForm.jsx";
 import Pages from "../pages/Pages.jsx";
+import Manga from "../pages/Manga.jsx";
+
 
 // let token = localStorage.getItem('token')
 
@@ -20,7 +22,8 @@ const routers = createBrowserRouter([
       { path: '/signin', element: <Signin /> },
       { path: '/manga-form', element: <MangaForm /> },
       { path: "/chapters-form/:id_manga", element: <ChapterForm /> },
-      { path: "/chapters/:url/:id/:page", element: <Pages />}
+      { path: "/chapters/:url/:id/:page", element: <Pages />},
+      { path: '/mangas/:id', element: <Manga /> },
     ]
   }
 ])
