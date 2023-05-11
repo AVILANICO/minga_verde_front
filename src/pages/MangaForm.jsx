@@ -84,7 +84,6 @@ export default function MangaForm() {
         })
       })
   }
-  let role = localStorage.getItem("role")
   console.log(role)
   return (
     <>
