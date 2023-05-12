@@ -82,7 +82,7 @@ export default function Manga() {
           <img className="xsm:w-72 object-cover xsm:pt-0 xsm:mt-0 mt-20 xsm:h-80 w-80" src={mangas.cover_photo} alt="fotito" />
           <h2 className="text-3xl mt-4">{mangas.title}</h2>
           <div className="flex justify-evenly xsm:gap-40 xsm:w-4/5 w-3/5 mt-4">
-            <h2 className="bg-rose-200 rounded-3xl xsm:w-16 xsm:h-8 flex items-center justify-center text-pink-400 hover:bg-pink-400 hover:text-white w-20 h-10" >{mangas.category_id?.name}</h2>
+            <h2 className="bg-[#FFE0DF] rounded-3xl xsm:w-16 xsm:h-8 flex items-center justify-center text-[#EF8481] w-20 h-10" >{mangas.category_id?.name}</h2>
             <h2 className='font-montserrat xsm:text-lg font-semibold text-lg text-slate-500 hover:text-slate-800'>{mangas.author_id?.name.charAt(0).toUpperCase() + mangas.author_id?.name.slice(1)}</h2>
           </div>
           <div className='flex justify-evenly gap-1 xsm:w-4/5 w-2/5 mt-8'>
@@ -116,7 +116,7 @@ export default function Manga() {
             </div>
           </div>
           <div className="flex w-4/5 justify-center mt-12">
-            <button className={`xsm:w-48 xsm:h-8 w-60  h-8 text-white bg-fuchsia-400 hover:bg-fuchsia-300 transition-all rounded-full ${show}`} onClick={() => setShow(true)}>Manga</button>
+            <button className={`xsm:w-48 xsm:h-8 w-60  h-8 text-white bg-gradient-to-b from-[#F9A8D4] to-[#F472B6] rounded-full ${show}`} onClick={() => setShow(true)}>Manga</button>
             <button className={`xsm:w-48 xsm:h-8 w-60  h-8 text-slate-500 hover:text-slate-600 hover:bg-slate-400 transition-all bg-slate-200 rounded-full ${!show}`} onClick={() => setShow(false)}>Chapters</button>
           </div>
           <p className="mt-8 xsm:w-4/5 w-3/5 text-center">{mangas.description}</p>
@@ -126,7 +126,7 @@ export default function Manga() {
           <img className="xsm:w-72 xsm:pt-0 object-cover xsm:mt-0 pt-20 xsm:h-80 w-[20%] h-full" src={mangas.cover_photo} alt="fotito" />
           <h2 className="text-3xl mt-4">{mangas.title}</h2>
           <div className="flex justify-evenly xsm:gap-40 xsm:w-4/5 w-3/5 mt-4">
-            <h2 className="bg-rose-200 rounded-3xl xsm:w-16 xsm:h-8 flex items-center justify-center text-pink-400 hover:bg-pink-400 hover:text-white w-20 h-10" >{mangas.category_id?.name}</h2>
+            <h2 className="bg-[#FFE0DF] rounded-3xl xsm:w-16 xsm:h-8 flex items-center justify-center text-[#EF8481] w-20 h-10" >{mangas.category_id?.name}</h2>
             <h2 className='text-lg text-slate-500 hover:text-slate-800'>{mangas.author_id?.name.charAt(0).toUpperCase() + mangas.author_id?.name.slice(1)}</h2>
           </div>
           <div className='flex justify-evenly gap-1 xsm:w-4/5 w-2/5 mt-8'>
@@ -161,7 +161,7 @@ export default function Manga() {
           </div>
           <div className="flex w-4/5 justify-center mt-12">
             <button className={`xsm:w-48 xsm:h-8 w-60  h-8 text-slate-500 hover:text-slate-600 hover:bg-slate-400 transition-all bg-slate-200 rounded-full ${show}`} onClick={() => setShow(true)}>Manga</button>
-            <button className={`xsm:w-48 xsm:h-8 w-60  h-8 text-white bg-fuchsia-400 hover:bg-fuchsia-300 transition-all rounded-full ${!show}`} onClick={() => setShow(false)}>Chapters</button>
+            <button className={`xsm:w-48 xsm:h-8 w-60  h-8 text-white bg-gradient-to-b from-[#F9A8D4] to-[#F472B6] rounded-full ${!show}`} onClick={() => setShow(false)}>Chapters</button>
           </div>
 
           <div className="flex flex-col items-center mt-12 gap-4 xsm:mb-4 xsm:w-[90%] w-2/5">
@@ -171,12 +171,12 @@ export default function Manga() {
                 <h3 className='text-center xsm:text-sm text-xl'>{each.title}</h3>
                 <h3 className='text-center xsm:text-sm text-lg'>..202</h3>
               </div>
-              <Anchor to={`/chapters/chapter/${each._id}/0`} className="flex justify-center items-center bg-fuchsia-400 hover:bg-fuchsia-300 transition-all text-neutral-50 rounded-full xsm:w-32 xsm:text-xl xsm:h-16 w-[20%] h-16 md:text-xl font-bold">Read</Anchor>
+              <Anchor to={`/chapters/chapter/${each._id}/0`} className="flex justify-center items-center bg-gradient-to-b from-[#F9A8D4] to-[#F472B6] text-neutral-50 rounded-full xsm:w-32 xsm:text-xl xsm:h-16 w-40 h-16 md:text-xl font-bold">Read</Anchor>
             </div>)}
           </div>
           {count > 5 && <div className="w-3/5 mt-4 mb-6 flex justify-center gap-8">
-            {page != 1 && <input className={`xsm:w-24 xsm:h-12 w-40 h-16 bg-fuchsia-400 rounded-full cursor-pointer hover:bg-fuchsia-300 transition-all text-white text-lg font-bold`} type="button" value='Previus' onClick={prev}></input>}
-            {page != cantPages && <input className={`xsm:w-24 xsm:h-12 w-40 h-16 bg-fuchsia-400 rounded-full cursor-pointer hover:bg-fuchsia-300 transition-all text-white text-lg font-bold`} type="button" value='Next' onClick={next}></input>}
+            {page != 1 && <input className={`xsm:w-24 xsm:h-12 w-40 h-16 bg-gradient-to-b from-[#F9A8D4] to-[#F472B6] rounded-full cursor-pointer text-white text-lg font-bold`} type="button" value='Previus' onClick={prev}></input>}
+            {page != cantPages && <input className={`xsm:w-24 xsm:h-12 w-40 h-16 bg-gradient-to-b from-[#F9A8D4] to-[#F472B6] rounded-full cursor-pointer text-white text-lg font-bold`} type="button" value='Next' onClick={next}></input>}
           </div>}
         </div>
       )

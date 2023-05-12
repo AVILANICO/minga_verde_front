@@ -1,7 +1,5 @@
-import Navbarmobile from "../components/Navbarmobile"
-import Footermobile from "../components/Footermobile"
 import React, { useRef } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import axios from "axios"
 import apiUrl from "../../api"
 import Index from "./Index"
@@ -13,6 +11,7 @@ const ChapterForm = () => {
     let title = useRef()
     let order = useRef()
     let pages = useRef()
+    let navigate = useNavigate()
 
 
     function handleForm(e) {
@@ -32,7 +31,7 @@ const ChapterForm = () => {
         axios.post(apiUrl + 'chapters', data, headers)
             .then(res => {
                 console.log(res)
-
+                navigate('/')
                 Swal.fire({
                     icon: 'success',
                     title: 'Chapter successfully!',
@@ -60,8 +59,7 @@ const ChapterForm = () => {
 
             {role == 1 || role == 2 ? (
                 <>
-                    <Navbarmobile />
-                    <section className="grid h-[80vh] my-8 place-content-center text-slate-300">
+                    <section className="grid h-[80vh] mb-[11rem] place-content-center text-slate-300">
                         <div className="mb-10 text-center text-black">
                             <h1 className="text-3xl -tracking-tight font-sans">New Chapter</h1>
 
@@ -78,7 +76,6 @@ const ChapterForm = () => {
                         </form>
                     </section>
                     <div className="mt-32">
-                        <Footermobile />
                     </div>
                 </>
             ) : (

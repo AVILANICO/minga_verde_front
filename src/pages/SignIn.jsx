@@ -8,7 +8,6 @@ import axios from 'axios'
 import Index from './Index'
 import Swal from 'sweetalert2'
 import App from '../App'
-import Navbarmobile from '../components/Navbarmobile'
 
 const Signin = (props) => {
   let email = useRef();
@@ -85,8 +84,8 @@ const Signin = (props) => {
         </>
       ) : (
         <>
-          <Navbarmobile />
-          <div className='h-screen w-full flex justify-center items-center'>
+
+          <div className='h-screen w-full flex pt-6 justify-center items-center'>
             <div className='xsm:hidden w-1/2 p-4 flex justify-end h-full bg-center bg-cover bg-[url(/src/assets/image/Rectangle82.png)]'></div >
             <div className="xsm:w-full xsm:flex flex justify-center w-1/2">
               <div className="xsm:w-full bg-white min-h-screen w-1/2 flex justify-center items-center">
