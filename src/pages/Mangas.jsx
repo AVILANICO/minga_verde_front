@@ -23,12 +23,15 @@ export default function Mangas() {
     const category_id = useRef()
     const [reload, setReload] = useState(false)
     const [count,setCount] = useState()
-    const [pagAct,setNextPag] = useState(1)
+    const [page,setPag] = useState(1)
+
+    let token = localStorage.getItem("token")
+    let headers = {headers:{"Authorization":`bearer ${token}`}}
 
 console.log(count)
     useEffect(
         () => {
-            axios(apiUrl + `mangas?title=${buscador.current?.value}&category_id=${categories?.join(',')}&page=${pagAct}`, headers)
+            axios(apiUrl + `mangas?title=${buscador.current?.value}&category_id=${categories?.join(',')}&page=${page}`, headers)
                 .then(res => {
                     setMangas(res.data.response)
                     setCount(res.data.count)
@@ -37,7 +40,7 @@ console.log(count)
                 )
                 .catch(err => console.error(err))
         },
-        [reload,pagAct]                                    //array de dependecias vacio ya que necesitamos fechar una unica vez al mostrarse el componente
+        [reload,page]                                    //array de dependecias vacio ya que necesitamos fechar una unica vez al mostrarse el componente
     )
     useEffect(
         () => { axios(apiUrl + 'categories')
@@ -60,7 +63,7 @@ console.log(count)
                 {categor?.map(a => (
                  
                     <div  key={a._id}>
-                         <label htmlFor={a._id} key={a._id}  style={{ height: "5rem", backgroundColor: a.hover, color: a.color, padding: '1rem', borderRadius: '26px', fontSize: "12px", textAlign: "center", ...(categories.includes(a._id)? {backgroundColor: a.color, color:"white"}:{}) }}>
+                         <label htmlFor={a._id} key={a._id}  style={{ height: "5rem", backgroundColor: a.hover, color: a.color, padding: '1rem', borderRadius: '26px', fontSize: "12px", textAlign: "center", ...(categories.includes(a._id)? {backgroundColor: a.color, color:"black"}:{}) }}>
                                     {a.name.charAt(0).toUpperCase() + a.name.slice(1)}
                                     <input name="category_id" onClick={capture} style={{ appearance: 'none' }} type="checkbox" value={a._id} id={a._id} />
                         
@@ -85,12 +88,12 @@ function capture(){
 }
 
 function next(){
-setNextPag(pagAct+1)
+setPag(page+1)
 }
 
 function prev(){
     if(mangas)
-    setNextPag(pagAct-1)
+    setPag(page-1)
     
 }
 
@@ -150,7 +153,7 @@ function prev(){
                                             <h1 className='md:text-[1.5rem]'> {each.title} </h1>
                                             <p style={{color:each.category_id.color}}> {each.category_id.name}</p>
                                             <button className="xsm:hidden mt-10 w-[40%] bg-green-200 hover:bg-green-700 text-green-500 font-bold py-2 px-4 rounded-full">
-                                            <Anchor to={`/manga/${each._id}`}>Read</Anchor> 
+                                            <Anchor to={`/manga/${each._id}/:page`}>Read</Anchor> 
                                             </button>
                                         </div>
                                         <img className="h-[100%] w-[40%] xsm:h-[20vh] xsm:w-[40%] rounded-[40px_8px_8px_40px/84px_8px_8px_64px;]" src={each.cover_photo} alt="" />
@@ -163,8 +166,8 @@ function prev(){
                                 )}
                                 <div className='w-[100%] flex justify-around pt-5'>
                             
-                            {pagAct == 1 ? null : (<input className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-[15%]" type="button"  value="prev" onClick={prev}/>)}
-                            {pagAct > count ? null : (<input className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-[15%] " type="button"  value="next" onClick={next}/>)}
+                            {page == 1 ? null : (<input className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-[15%]" type="button"  value="prev" onClick={prev}/>)}
+                            {page > count || mangas?.lengh >= 6 ? null : (<input className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-[15%] " type="button"  value="next" onClick={next}/>)}
                             </div>
                             </div>
 

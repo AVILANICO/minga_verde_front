@@ -9,6 +9,7 @@ import ChapterForm from "../pages/ChapterForm.jsx";
 import Mangas from "../pages/Mangas.jsx";
 import Pages from "../pages/Pages.jsx";
 import Manga from "../pages/Manga.jsx";
+import Adminpanel from "../pages/Adminpanel.jsx"
 
 
 // let token = localStorage.getItem('token')
@@ -26,6 +27,7 @@ const routers = createBrowserRouter([
       { path: "/chapters-form/:id_manga", element: <ChapterForm /> },
       { path: "/chapters/:url/:id/:page", element: <Pages />},
       { path: '/mangas/:id', element: <Manga /> },
+      { path: '/admin', element: <Adminpanel /> }
     ]
   }
 ])
