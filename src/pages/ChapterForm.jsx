@@ -1,5 +1,5 @@
 import React, { useRef } from "react"
-import { useParams, useNavigate} from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import axios from "axios"
 import apiUrl from "../../api"
 import Index from "./Index"

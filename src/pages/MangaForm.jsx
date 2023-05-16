@@ -23,12 +23,9 @@ export default function MangaForm() {
   const title = useRef()
   const category = useRef()
   const description = useRef()
-  
-
-  
   let role = localStorage.getItem("role")
   let token = localStorage.getItem("token")
-  let headers = {headers:{"Authorization":`bearer ${token}`}}
+  let headers = { headers: { "Authorization": `bearer ${token}` } }
   console.log(role);
   console.log(token);
   console.log(headers);
@@ -41,9 +38,7 @@ export default function MangaForm() {
       description: description.current.value
     }
 
-
-
-    axios.post(VITE_API + "mangas", data,headers)
+    axios.post(VITE_API + "mangas", data, headers)
       .then(res => {
         console.log(res)
         const Toast = Swal.mixin({
@@ -89,7 +84,7 @@ export default function MangaForm() {
     <>
       {role == 1 || role == 2 ? (
         <>
-          
+
           <section className="grid h-screen place-content-center text-slate-300">
             <div className="mb-10 text-center text-black">
               <h1 className="text-3xl font-bold">New Manga</h1>
@@ -112,7 +107,6 @@ export default function MangaForm() {
               </div>
             </form>
           </section>
-          
         </>
       ) : (
         <>
