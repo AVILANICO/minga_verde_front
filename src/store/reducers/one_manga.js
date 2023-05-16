@@ -14,6 +14,7 @@ let initial_state = {
 const reducer = createReducer (
   initial_state,
   (builder) => builder
+  //.addCase define la logica necesaria para modificar los estados
   .addCase(
     one_manga,
     (state, action) => {

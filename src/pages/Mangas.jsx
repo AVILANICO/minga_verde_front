@@ -25,7 +25,7 @@ export default function Mangas() {
     const [count, setCount] = useState()
     const [pagAct, setNextPag] = useState(1)
 
-    console.log(count)
+    // console.log(count)
     useEffect(
         () => {
             axios(apiUrl + `mangas?title=${buscador.current?.value}&category_id=${categories?.join(',')}&page=${pagAct}`, headers)
@@ -152,7 +152,7 @@ export default function Mangas() {
                                                 <h1 className='md:text-[1.5rem]'> {each.title} </h1>
                                                 <p style={{ color: each.category_id.color }}> {each.category_id.name}</p>
                                                 <button className="xsm:hidden mt-10 w-[40%] bg-green-200 hover:bg-green-700 text-green-500 font-bold py-2 px-4 rounded-full">
-                                                    <Anchor to={`/manga/${each._id}/:page`}>Read</Anchor>
+                                                    <Anchor to={`/manga/${each._id}/1`}>Read</Anchor>
                                                 </button>
                                             </div>
                                             <img className="h-[100%] w-[40%] xsm:h-[20vh] xsm:w-[40%] object-cover rounded-[40px_8px_8px_40px/84px_8px_8px_64px;]" src={each.cover_photo} alt="" />

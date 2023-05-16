@@ -51,6 +51,7 @@ const Signin = (props) => {
           title: 'Signed in successfully!',
         })
 
+
         localStorage.setItem('token', token);
         localStorage.setItem('role', role);
         localStorage.setItem('email', email)

@@ -16,16 +16,18 @@ const { one_chapter } = actionsChapter;
 
 export default function Manga() {
 
-  const store = useSelector(store => console.log(store))
-  //con useSelector selecciono los estados que necesito
+  const storeManga = useSelector(store => store.one_manga)
+  const storeChapter = useSelector(store => store.one_chapter)
+  console.log(storeManga);
+  console.log(storeChapter);
   const { id } = useParams()
+  const { page } = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  // console.log({ id });
   const [mangas, setMangas] = useState([]);
   const [show, setShow] = useState([true])
   const [chapters, setChapters] = useState({ data: [], totalPages: 1 })
-  const [page, setPage] = useState(1)
+  const [pages, setPages] = useState(Number(page))
   const [reload, setReload] = useState(false)
   const [count, setCount] = useState(0)
   const [cantPages, setCantPages] = useState(0)
@@ -39,12 +41,12 @@ export default function Manga() {
           cover_photo: res.data.response.cover_photo
         }))
       })
-      .catch(err => console.log(err))
+      .catch(err =>
+        console.log(err))
   }, [id])
-  // console.log(mangas);
 
   useEffect(() => {
-    axios.get(VITE_API + `chapters?manga_id=${id}&page=${page}&limit=`)
+    axios.get(VITE_API + `chapters?manga_id=${id}&page=${pages}&limit=`)
       .then(res => {
         const data = res.data.response
         setChapters(data)
@@ -54,36 +56,32 @@ export default function Manga() {
       })
       .catch(err => console.log(err))
   },
-    [id, page, reload]
+    [id, pages, reload]
   )
-  // console.log(count);
-  // console.log(chapters)
-  console.log(cantPages);
 
   function next() {
-    setPage(prevPage => prevPage + 1)
-    navigate(`/manga/${id}/${page}`)
+    setPages(page => page + 1)
+    navigate(`/manga/${id}/${pages + 1}`)
     setReload(!reload)
   }
 
   function prev() {
-    if (page > 1) {
-      setPage(prevPage => prevPage - 1)
-      navigate(`/manga/${id}/${page}`)
-      setReload(!reload)
+    if (pages === 1) {
+      return;
     }
+    setPages(page => page - 1);
+    navigate(`/manga/${id}/${pages - 1}`);
+    setReload(!reload);
   }
-
-  // console.log(page)
   return (
     <>
       {show ? (
-        <div className="min-h-screen flex flex-col items-center">
-          <img className="xsm:w-72 object-cover xsm:pt-0 xsm:mt-0 mt-20 xsm:h-80 w-80" src={mangas.cover_photo} alt="fotito" />
-          <h2 className="text-3xl mt-4">{mangas.title}</h2>
+        <div className="min-h-screen xsm:pt-20 flex flex-col items-center">
+          <img className="xsm:w-72 object-cover xsm:pt-0 xsm:mt-0 mt-20 xsm:h-80 w-80" src={storeManga.cover_photo} alt="fotito" />
+          <h2 className="text-3xl mt-4">{storeManga.title}</h2>
           <div className="flex justify-evenly xsm:gap-40 xsm:w-4/5 w-3/5 mt-4">
             <h2 className="bg-[#FFE0DF] rounded-3xl xsm:w-16 xsm:h-8 flex items-center justify-center text-[#EF8481] w-20 h-10" >{mangas.category_id?.name}</h2>
-            <h2 className='font-montserrat xsm:text-lg font-semibold text-lg text-slate-500 hover:text-slate-800'>{mangas.author_id?.name.charAt(0).toUpperCase() + mangas.author_id?.name.slice(1)}</h2>
+            <h2 className=' xsm:text-lg font-montserrat font-semibold text-lg text-slate-500 hover:text-slate-800'>{mangas.author_id?.name.charAt(0).toUpperCase() + mangas.author_id?.name.slice(1)}</h2>
           </div>
           <div className='flex justify-evenly gap-1 xsm:w-4/5 w-2/5 mt-8'>
             <div className='bg-slate-300 hover:bg-slate-400 cursor-pointer rounded-full xsm:w-16  xsm:h-16 w-24 h-24 flex items-center justify-center '>
@@ -122,12 +120,12 @@ export default function Manga() {
           <p className="mt-8 xsm:w-4/5 w-3/5 text-center">{mangas.description}</p>
         </div>
       ) : (
-        <div className="min-h-screen flex flex-col items-center">
-          <img className="xsm:w-72 xsm:pt-0 object-cover xsm:mt-0 pt-20 xsm:h-80 w-[20%] h-full" src={mangas.cover_photo} alt="fotito" />
-          <h2 className="text-3xl mt-4">{mangas.title}</h2>
+        <div className="min-h-screen xsm:pt-20 flex flex-col items-center">
+          <img className="xsm:w-72 xsm:pt-0 object-cover xsm:mt-0 pt-20 xsm:h-80 w-[20%] h-full" src={storeManga.cover_photo} alt="fotito" />
+          <h2 className="text-3xl mt-4">{storeManga.title}</h2>
           <div className="flex justify-evenly xsm:gap-40 xsm:w-4/5 w-3/5 mt-4">
             <h2 className="bg-[#FFE0DF] rounded-3xl xsm:w-16 xsm:h-8 flex items-center justify-center text-[#EF8481] w-20 h-10" >{mangas.category_id?.name}</h2>
-            <h2 className='text-lg text-slate-500 hover:text-slate-800'>{mangas.author_id?.name.charAt(0).toUpperCase() + mangas.author_id?.name.slice(1)}</h2>
+            <h2 className=' xsm:text-lg font-montserrat font-semibold text-lg text-slate-500 hover:text-slate-800'>{mangas.author_id?.name.charAt(0).toUpperCase() + mangas.author_id?.name.slice(1)}</h2>
           </div>
           <div className='flex justify-evenly gap-1 xsm:w-4/5 w-2/5 mt-8'>
             <div className='bg-slate-300 hover:bg-slate-400 cursor-pointer rounded-full xsm:w-16  xsm:h-16 w-24 h-24 flex items-center justify-center '>
@@ -175,8 +173,8 @@ export default function Manga() {
             </div>)}
           </div>
           {count > 5 && <div className="w-3/5 mt-4 mb-6 flex justify-center gap-8">
-            {page != 1 && <input className={`xsm:w-24 xsm:h-12 w-40 h-16 bg-gradient-to-b from-[#F9A8D4] to-[#F472B6] rounded-full cursor-pointer text-white text-lg font-bold`} type="button" value='Previus' onClick={prev}></input>}
-            {page != cantPages && <input className={`xsm:w-24 xsm:h-12 w-40 h-16 bg-gradient-to-b from-[#F9A8D4] to-[#F472B6] rounded-full cursor-pointer text-white text-lg font-bold`} type="button" value='Next' onClick={next}></input>}
+            {pages != 1 && <input className={`xsm:w-24 xsm:h-12 w-40 h-16 bg-gradient-to-b from-[#F9A8D4] to-[#F472B6] rounded-full cursor-pointer text-white text-lg font-bold`} type="button" value='Previus' onClick={prev}></input>}
+            {pages != cantPages && <input className={`xsm:w-24 xsm:h-12 w-40 h-16 bg-gradient-to-b from-[#F9A8D4] to-[#F472B6] rounded-full cursor-pointer text-white text-lg font-bold`} type="button" value='Next' onClick={next}></input>}
           </div>}
         </div>
       )
