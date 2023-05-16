@@ -14,6 +14,7 @@ export default function Pages() {
 	// console.log(chapterStates);
 	let {chapter_bar} = actions
 	let {id, page} = useParams()
+	// console.log(typeof page);
 	let dispatch = useDispatch()
 	let navigate = useNavigate()
 	let [order, setOrder] = useState(chapterStates.order)
@@ -21,7 +22,6 @@ export default function Pages() {
 	let [allPages, setAllPages] = useState([])
 	let [imgPages, setImgPages] = useState('')
 	let [counter, setCounter] = useState(parseInt(page))
-
 	let token = localStorage.getItem('token')
     let headers = { headers: { 'Authorization': `Bearer ${token}` } }
 
@@ -32,7 +32,6 @@ export default function Pages() {
 			setAllPages(res.data.response.pages);
 			setTitle(res.data.response.title);
 			setOrder(res.data.response.order)
-			// setCounter(parseInt(page));
 			setImgPages(res.data.response.pages[parseInt(page)])
 			setNext(res.data.id_next)
 			setPrev(res.data.id_prev)
@@ -74,9 +73,9 @@ export default function Pages() {
 			if (id_prev){
 				navigate(`/chapters/chapter/${id_prev}/0`);
 				setReload(!reload)
-				return   // el return se lo agregamos para evitar de que el codigo se nos siga ejecutando desues de cada navegacion/ejecucion!!
+				return   // el return se lo agregamos para evitar de que el codigo se nos siga ejecutando despues de cada navegacion/ejecucion!!
 			} else{
-				navigate(`/manga/${id}/${page}`)
+				navigate(`/manga/${mangas_id}/${page}`)
 				return
 			}
 		  }
@@ -100,13 +99,13 @@ export default function Pages() {
 						<div>
 							<img src={imgPages} className="w-auto my-2 h-[83vh] " />
 						</div>
-						<button onClick={previous} type="button" className="flex absolute h-[50%] w-[50%] left-0 z-30  items-center px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+						<button onClick={previous} type="button" className="flex absolute h-[30%] w-[50%] left-0 z-30  items-center px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
 							<span className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 dark:bg-gray-800/30 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
 								<svg className="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
 								<span className="hidden">Previous</span>
 							</span>
 						</button>
-						<button onClick={next} type="button" className="flex absolute h-[50%] w-[50%] right-0 z-30 justify-end items-center px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+						<button onClick={next} type="button" className="flex absolute h-[30%] w-[50%] right-0 z-30 justify-end items-center px-4 cursor-pointer group focus:outline-none" data-carousel-next>
 							<span className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10  dark:bg-gray-800/30 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
 								<svg className="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
 								<span className="hidden">Next</span>

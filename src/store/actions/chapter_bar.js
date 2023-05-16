@@ -18,3 +18,4 @@ const chapter_bar = createAction(
 const actions = {chapter_bar}
 //construyo un objeto con la accion (mas adelante se van a agregar mas acciones)
 export default actions
+
