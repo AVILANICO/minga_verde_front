@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
-import { useSelector,useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
 import inputs_filter_actions from '../store/actions/inputs_filters'
 import apiUrl from "../../api"
@@ -10,11 +10,11 @@ import { Link as Anchor, Link, useNavigate } from "react-router-dom";
 let token = localStorage.getItem("token")
 let headers = { headers: { "Authorization": `bearer ${token}` } }
 
-const {inputs_filter} = inputs_filter_actions
+const { inputs_filter } = inputs_filter_actions
 
 export default function Mangas() {
 
-    const {title,categories}= useSelector(store => store.inputs) 
+    const { title, categories } = useSelector(store => store.inputs)
     /* console.log(title)
     console.log(categories) */
     const dispatch = useDispatch()
@@ -22,10 +22,10 @@ export default function Mangas() {
     const buscador = useRef()
     const category_id = useRef()
     const [reload, setReload] = useState(false)
-    const [count,setCount] = useState()
-    const [pagAct,setNextPag] = useState(1)
+    const [count, setCount] = useState()
+    const [pagAct, setNextPag] = useState(1)
 
-console.log(count)
+    // console.log(count)
     useEffect(
         () => {
             axios(apiUrl + `mangas?title=${buscador.current?.value}&category_id=${categories?.join(',')}&page=${pagAct}`, headers)
@@ -33,16 +33,18 @@ console.log(count)
                     setMangas(res.data.response)
                     setCount(res.data.count)
                 }
-                
+
                 )
                 .catch(err => console.error(err))
         },
-        [reload,pagAct]                                    //array de dependecias vacio ya que necesitamos fechar una unica vez al mostrarse el componente
+        [reload, pagAct]                                    //array de dependecias vacio ya que necesitamos fechar una unica vez al mostrarse el componente
     )
     useEffect(
-        () => { axios(apiUrl + 'categories')
-        .then(res => categorie(res.data.categories))
-        .catch(err => console.error(err)) },
+        () => {
+            axios(apiUrl + 'categories')
+                .then(res => categorie(res.data.categories))
+                .catch(err => console.error(err))
+        },
         []                                    //array de dependecias vacio ya que necesitamos fechar una unica vez al mostrarse el componente
     )
     let [categor, categorie] = useState([])
@@ -51,48 +53,48 @@ console.log(count)
         return (
             <div className='flex flex-row gap-5 w-[100%] h-[40%]'>
 
-<label className='mt-[-0.5rem] xsm:hidden flex flex-row items-center justify-center w-10 h-10 bg-[#999999] text-white p-[1rem] rounded-[26px] text-[12px]' >
-                                    All
-                                    <input name="category_id" onClick={capture} style={{ appearance: 'none' }} type="checkbox"  />
-                                
-                        </label>
+                <label className='mt-[-0.5rem] xsm:hidden flex flex-row items-center justify-center w-10 h-10 bg-[#999999] text-white p-[1rem] rounded-[26px] text-[12px]' >
+                    All
+                    <input name="category_id" onClick={capture} style={{ appearance: 'none' }} type="checkbox" />
+
+                </label>
 
                 {categor?.map(a => (
-                 
-                    <div  key={a._id}>
-                         <label htmlFor={a._id} key={a._id}  style={{ height: "5rem", backgroundColor: a.hover, color: a.color, padding: '1rem', borderRadius: '26px', fontSize: "12px", textAlign: "center", ...(categories.includes(a._id)? {backgroundColor: a.color, color:"white"}:{}) }}>
-                                    {a.name.charAt(0).toUpperCase() + a.name.slice(1)}
-                                    <input name="category_id" onClick={capture} style={{ appearance: 'none' }} type="checkbox" value={a._id} id={a._id} />
-                        
+
+                    <div key={a._id}>
+                        <label htmlFor={a._id} key={a._id} style={{ height: "5rem", backgroundColor: a.hover, color: a.color, padding: '1rem', borderRadius: '26px', fontSize: "12px", textAlign: "center", ...(categories.includes(a._id) ? { backgroundColor: a.color, color: "white" } : {}) }}>
+                            {a.name.charAt(0).toUpperCase() + a.name.slice(1)}
+                            <input name="category_id" onClick={capture} style={{ appearance: 'none' }} type="checkbox" value={a._id} id={a._id} />
+
                         </label>
 
 
                     </div>
                 ))}
-                    
+
             </div>
         );
     }
 
-function capture(){
-    dispatch(inputs_filter({
-       title: buscador.current?.value,
-       categories: Object.values(category_id.current)?.filter (each => each.checked)?.map(each=>each.value)
+    function capture() {
+        dispatch(inputs_filter({
+            title: buscador.current?.value,
+            categories: Object.values(category_id.current)?.filter(each => each.checked)?.map(each => each.value)
+
+        }
+        ))
+        setReload(!reload)
+    }
+
+    function next() {
+        setNextPag(pagAct + 1)
+    }
+
+    function prev() {
+        if (mangas)
+            setNextPag(pagAct - 1)
 
     }
-    ))
-    setReload(!reload)
-}
-
-function next(){
-setNextPag(pagAct+1)
-}
-
-function prev(){
-    if(mangas)
-    setNextPag(pagAct-1)
-    
-}
 
     return (
         <>
@@ -138,42 +140,42 @@ function prev(){
                             </div>
 
                             <div className='pb-[20vh] flex xsm:flex-col h-[500%] pb-50 xsm:items-center md:flex-wrap w-[70%] gap-[10%] xsm:w-full '>
-                                {mangas && mangas.length > 0 ?(
-                                
-                                mangas?.map((each =>
-                                   
-                                    <div key={each._id} className='shadow-lg h-[12vw] mt-4 flex flex-row items-center w-[45%] xsm:w-[80%] xsm:h-[40%] bg-white rounded-lg'>
-                                        <div className= 'h-[15vh] w-2 xsm:w-2 xsm:h-[10vh]' style={{ background: each.category_id.color}}>
+                                {mangas && mangas.length > 0 ? (
+
+                                    mangas?.map((each =>
+
+                                        <div key={each._id} className='shadow-lg h-[12vw] mt-4 flex flex-row items-center w-[45%] xsm:w-[80%] xsm:h-[40%] bg-white rounded-lg'>
+                                            <div className='h-[15vh] w-2 xsm:w-2 xsm:h-[10vh]' style={{ background: each.category_id.color }}>
+
+                                            </div>
+                                            <div className='flex flex-col p-5 w-[60%] font-bold'>
+                                                <h1 className='md:text-[1.5rem]'> {each.title} </h1>
+                                                <p style={{ color: each.category_id.color }}> {each.category_id.name}</p>
+                                                <button className="xsm:hidden mt-10 w-[40%] bg-green-200 hover:bg-green-700 text-green-500 font-bold py-2 px-4 rounded-full">
+                                                    <Anchor to={`/manga/${each._id}/1`}>Read</Anchor>
+                                                </button>
+                                            </div>
+                                            <img className="h-[100%] w-[40%] xsm:h-[20vh] xsm:w-[40%] object-cover rounded-[40px_8px_8px_40px/84px_8px_8px_64px;]" src={each.cover_photo} alt="" />
 
                                         </div>
-                                        <div className='flex flex-col p-5 w-[60%] font-bold'>
-                                            <h1 className='md:text-[1.5rem]'> {each.title} </h1>
-                                            <p style={{color:each.category_id.color}}> {each.category_id.name}</p>
-                                            <button className="xsm:hidden mt-10 w-[40%] bg-green-200 hover:bg-green-700 text-green-500 font-bold py-2 px-4 rounded-full">
-                                            <Anchor to={`/manga/${each._id}`}>Read</Anchor> 
-                                            </button>
-                                        </div>
-                                        <img className="h-[100%] w-[40%] xsm:h-[20vh] xsm:w-[40%] rounded-[40px_8px_8px_40px/84px_8px_8px_64px;]" src={each.cover_photo} alt="" />
-
-                                    </div>
-                                   ))): (
+                                    ))) : (
                                     <div className='flex flex-row justify-center'>
-                                    <h1 className='text-[2rem]'>No matches found in the search</h1>
+                                        <h1 className='text-[2rem]'>No matches found in the search</h1>
                                     </div>
                                 )}
                                 <div className='w-[100%] flex justify-around pt-5'>
-                            
-                            {pagAct == 1 ? null : (<input className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-[15%]" type="button"  value="prev" onClick={prev}/>)}
-                            {pagAct > count ? null : (<input className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-[15%] " type="button"  value="next" onClick={next}/>)}
-                            </div>
+
+                                    {pagAct == 1 ? null : (<input className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-[15%]" type="button" value="prev" onClick={prev} />)}
+                                    {pagAct > count ? null : (<input className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-[15%] " type="button" value="next" onClick={next} />)}
+                                </div>
                             </div>
 
-                          
-                        </div> 
+
+                        </div>
                     </div>
                 </div>
             </div>
-           
+
         </>
 
     )
