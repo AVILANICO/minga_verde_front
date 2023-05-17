@@ -6,9 +6,11 @@ import Signin from "../pages/SignIn.jsx";
 import Authform from "../pages/Authform.jsx";
 import MangaForm from "../pages/MangaForm.jsx";
 import ChapterForm from "../pages/ChapterForm.jsx";
+import EditChapter from "../pages/EditChapter.jsx";
+import Mangas from "../pages/Mangas.jsx";
 import Pages from "../pages/Pages.jsx";
 import Manga from "../pages/Manga.jsx";
-import EditChapter from "../pages/EditChapter.jsx";
+import Mymangas from "../pages/Mymangas.jsx"
 
 
 // let token = localStorage.getItem('token')
@@ -21,11 +23,13 @@ const routers = createBrowserRouter([
       { path: '/auth', element: <Authform /> },
       { path: '/register', element: <Register /> },
       { path: '/signin', element: <Signin /> },
+      { path: '/mangas/:page', element: <Mangas /> },
       { path: '/manga-form', element: <MangaForm /> },
       { path: "/chapters-form/:id_manga", element: <ChapterForm /> },
       { path: "/chapters/:url/:id/:page", element: <Pages />},
-      { path: '/mangas/:id', element: <Manga /> },
-      { path: '/edit/:id_manga', element: <EditChapter />}
+      { path: '/manga/:id/:page', element: <Manga /> },
+      { path: '/edit/:id_manga', element: <EditChapter />},
+      { path: '/mymangas', element: <Mymangas /> }
     ]
   }
 ])

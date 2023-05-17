@@ -1,17 +1,18 @@
 import { createReducer } from "@reduxjs/toolkit";
-import actions from "../actions/edit_chapter";
-const { edit_chatpter, delete_chatpter, update_chapter} = actions
+import actions from "../actions/edit_chapter.js";
+const { read_chapters , read_manga } = actions
+
 
 let initialState = {
     chapters: [],
+    mangas: []
 }
-
 const reducer = createReducer(
     initialState,
-    builder => builder
+    (builder) => builder
     .addCase(
-        edit_chatpter.fulfilled,
-        (state, action) =>{
+        read_chapters.fulfilled,
+        (state,action)=> {
             let newState = {
                 ...state,
                 chapters: action.payload.chapters
@@ -20,27 +21,11 @@ const reducer = createReducer(
         }
     )
     .addCase(
-        delete_chatpter.fulfilled,
-        (state, action) =>{
+        read_manga.fulfilled,
+        (state,action)=> {
             let newState = {
                 ...state,
-                chapters: state.chapters.filter(each => each._id === action.payload.id)
-            }
-            return newState
-        }
-    )
-    .addCase(
-        update_chapter.fulfilled,
-        (state, action) =>{
-            let newState = {
-                ...state,
-                chapters: state.chapters.map(each =>{
-                    if(each._id === action.payload.id){
-                        return action.payload.data
-                    }else{
-                        return each
-                    }
-                })
+                mangas: action.payload.mangas
             }
             return newState
         }

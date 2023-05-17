@@ -8,7 +8,8 @@ const chapter_bar = createAction(
     return {
       payload: {
         title: object.title,
-        order: object.order
+        order: object.order,
+        manga_id: object.manga_id
       } 
     }               
   } 
@@ -18,4 +19,3 @@ const chapter_bar = createAction(
 const actions = {chapter_bar}
 //construyo un objeto con la accion (mas adelante se van a agregar mas acciones)
 export default actions
-

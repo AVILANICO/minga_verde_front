@@ -23,6 +23,13 @@ export default function MangaForm() {
   const title = useRef()
   const category = useRef()
   const description = useRef()
+  let role = localStorage.getItem("role")
+  let token = localStorage.getItem("token")
+  let headers = { headers: { "Authorization": `bearer ${token}` } }
+  console.log(role);
+  console.log(token);
+  console.log(headers);
+
   function handleForm(e) {
     e.preventDefault()
     let data = {
@@ -30,7 +37,8 @@ export default function MangaForm() {
       category_id: category.current.value,
       description: description.current.value
     }
-    axios.post(VITE_API + "mangas", data)
+
+    axios.post(VITE_API + "mangas", data, headers)
       .then(res => {
         console.log(res)
         const Toast = Swal.mixin({
@@ -51,6 +59,7 @@ export default function MangaForm() {
         })
       })
       .catch(error => {
+        console.log(error)
         const err = error.response.data.message
         const Toast = Swal.mixin({
           toast: true,
@@ -70,13 +79,11 @@ export default function MangaForm() {
         })
       })
   }
-  let role = localStorage.getItem("role")
   console.log(role)
   return (
     <>
       {role == 1 || role == 2 ? (
         <>
-          
           <section className="grid h-screen place-content-center text-slate-300">
             <div className="mb-10 text-center text-black">
               <h1 className="text-3xl font-bold">New Manga</h1>
@@ -99,7 +106,6 @@ export default function MangaForm() {
               </div>
             </form>
           </section>
-          
         </>
       ) : (
         <>

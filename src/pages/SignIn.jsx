@@ -8,7 +8,6 @@ import axios from 'axios'
 import Index from './Index'
 import Swal from 'sweetalert2'
 import App from '../App'
-import Navbarmobile from '../components/Navbarmobile'
 
 const Signin = (props) => {
   let email = useRef();
@@ -51,6 +50,7 @@ const Signin = (props) => {
           icon: 'success',
           title: 'Signed in successfully!',
         })
+
 
         localStorage.setItem('token', token);
         localStorage.setItem('role', role);

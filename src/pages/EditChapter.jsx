@@ -1,50 +1,69 @@
-import React, { useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { useParams, useNavigate} from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
-import chapter_actions from '../store/actions/edit_chapter'
 import Index from "./Index"
 import Swal from "sweetalert2"
 
+import chapters_actions from '../store/actions/edit_chapter'
+const { read_chapters, read_manga } = chapters_actions
 
-const {edit_chapters, delete_chatpter, update_chapter} = chapter_actions
+
 
 
 export default function EditChapter() {
-    // let chapters = useSelector(store => store.chapters)
-    // console.log(chapters);
+    let mangas = useSelector(store => store.chapters.mangas.title)
+    console.log(mangas);
+    let chapters = useSelector(store => store.chapters.chapters)
+    console.log(chapters)
     let dispatch = useDispatch()
-    let id = useParams()
-    // console.log(id.id_manga);
-    let title = useRef()
+    let {id_manga} = useParams()
+    // console.log(id_manga);
+    let title_chapter = useRef()
+    let [coverFoto, setCoverFoto] = useState('')
+    let [title, setTitle] = useState('')
+    let [order, setOrder] = useState('')
+
+
+
+    useEffect(() => {
+        dispatch(read_chapters({id_manga}))
+        dispatch(read_manga({id_manga}))
+    },[])
+
 
 
 function handleForm(e){
     e.preventDefault()
     let data = {
-        manga_id: id.id_manga,
-        title: title.current.value,
+        id_chapter: title_chapter.current.value
     }
-
+    let cover = chapters.filter(image => image._id === data.id_chapter)
+    setCoverFoto(cover[0].cover_photo)
+    let titleChapter = chapters.filter(title => title._id === data.id_chapter)
+    setTitle(titleChapter[0].title)
+    let orderChapter = chapters.filter(order => order._id === data.id_chapter)
+    setOrder(orderChapter[0].order)
+    console.log(data)
 }
-let alert = (title) =>{
-    Swal.fire({
-        title,
-        showDenyButton: false,
-        showCancelButton: false,
-        confirmButtonText:'save',
-        denyButtonText:'cancel',
-    }).then((result) =>{
-        if(result.isConfirme){
-            Swal.fire({
-                //aqui va la peticion
-            })
-        }else {
-            Swal.fire({
-                html: 'cancel',
-            })
-        }
-    })
-}
+// let alert = () =>{
+//     Swal.fire({
+//         title,
+//         showDenyButton: false,
+//         showCancelButton: false,
+//         confirmButtonText:'save',
+//         denyButtonText:'cancel',
+//     }).then((result) =>{
+//         if(result.isConfirme){
+//             Swal.fire({
+//                 //aqui va la peticion
+//             })
+//         }else {
+//             Swal.fire({
+//                 html: 'cancel',
+//             })
+//         }
+//     })
+// }
 
 
 let role = localStorage.getItem('role')
@@ -60,16 +79,21 @@ let role = localStorage.getItem('role')
                     <div className="mb-10 text-center text-black">
                                     <h1 className="text-3xl -tracking-tight font-sans">Edit Chapter</h1>
                     </div>
-                    <form onSubmit={(e) => handleForm(e)} className="flex flex-col items-center justify-center space-y-6 pt-14">
-                        <input type="text" id="" name="" placeholder="Name of the manga" className="w-80 appearance-none  border-0  p-2 px-4 text-black border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0" ref={title} />
+                    <form onChange={(e) => handleForm(e)} className="flex flex-col items-center justify-center space-y-6 pt-14">
+                        <input type="text" id="" name="" placeholder="Name of the manga" className="w-80 appearance-none  border-0  p-2 px-4 text-black border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0" value={mangas?? ''} disabled= {true}/>
                         <div>
-                            <select  placeholder="Insert order" className="w-80 appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0  text-slate-400" name="chapters">
-                                <option value="" key="rr">Select chapter</option>
+                            <select  placeholder="Insert order" className="w-80 appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0  text-slate-400" name="chapters" ref={title_chapter}>
+                            {chapters.map((chapter, index) => (
+                            <option key={index} value={chapter._id}>{chapter.title}</option>
+                            ))}
                             </select>
                         </div>
                         <div>
                             <select  placeholder="Insert order" className="w-80 appearance-none  border-0  p-2 px-4  border-b border-gray-500 text-slate-400" name="chapters">
                                 <option value="" key="rr">Select data</option>
+                                <option value="title" key="title">Title</option>
+                                <option value="order" key="order">Order</option>
+                                <option value="cover-photo" key="cover-photo">Cover_photo</option>
                             </select>
                         </div>
                         <div>
@@ -80,8 +104,8 @@ let role = localStorage.getItem('role')
                     </form>
                 </section>
                 <div className="grid place-content-center pt-36 h-full xsm:hidden">
-                    <p className="text-center mb-5 font-bold">Chapter #1 - Discover the word</p>
-                    <img className="h-[35rem] w-auto" src='https://i.postimg.cc/Nj4bXyr2/main-shingeki-no-kyojin.png'/>
+                    <p className="text-center mb-5 font-bold">Chapter #{order} - {title}</p>
+                    <img className="h-[35rem] w-auto" src={coverFoto}/>
                 </div>
                 </div>
             </>

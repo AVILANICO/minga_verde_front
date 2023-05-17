@@ -5,7 +5,8 @@ const {chapter_bar} = chapter_actions;
 
 let initial_state = {
     title: '',
-    order: ''
+    order: '',
+    manga_id: '',
 }
 
 const reducer = createReducer(
@@ -17,7 +18,8 @@ const reducer = createReducer(
             const new_state = {
                 ...state,
                 title: actions.payload.title,
-                order: actions.payload.order
+                order: actions.payload.order,
+                manga_id: actions.payload.manga_id
             }
             return new_state
         }

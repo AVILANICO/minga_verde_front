@@ -11,7 +11,7 @@ export default function Pages() {
 	let [id_prev, setPrev] = useState()
 	let [id_next, setNext] = useState()
 	let chapterStates = useSelector(store => store.title_order)
-	// console.log(chapterStates);
+	console.log(chapterStates);
 	let {chapter_bar} = actions
 	let {id, page} = useParams()
 	// console.log(typeof page);
@@ -19,6 +19,7 @@ export default function Pages() {
 	let navigate = useNavigate()
 	let [order, setOrder] = useState(chapterStates.order)
 	let [title, setTitle] = useState(chapterStates.title)
+	let [manga_id, setManga] = useState(chapterStates.manga_id)
 	let [allPages, setAllPages] = useState([])
 	let [imgPages, setImgPages] = useState('')
 	let [counter, setCounter] = useState(parseInt(page))
@@ -32,12 +33,14 @@ export default function Pages() {
 			setAllPages(res.data.response.pages);
 			setTitle(res.data.response.title);
 			setOrder(res.data.response.order)
+			setManga(res.data.response.manga_id) //
 			setImgPages(res.data.response.pages[parseInt(page)])
 			setNext(res.data.id_next)
 			setPrev(res.data.id_prev)
 			dispatch(chapter_bar({
 				title: res.data.response.title,
 				order: res.data.response.order,
+				manga_id: res.data.response.manga_id,
 			}))
 		})
 
@@ -61,6 +64,7 @@ export default function Pages() {
 				dispatch(chapter_bar({
 					title: title,
 					order: order,
+					manga_id: manga_id,
 				}))
 				navigate(`/chapters/chapter/${id}/${newCounter}`);
 			}
@@ -75,7 +79,7 @@ export default function Pages() {
 				setReload(!reload)
 				return   // el return se lo agregamos para evitar de que el codigo se nos siga ejecutando despues de cada navegacion/ejecucion!!
 			} else{
-				navigate(`/manga/${mangas_id}/${page}`)
+				navigate(`/manga/${manga_id}/${page}`)
 				return
 			}
 		  }
