@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react"
-import { useParams, useNavigate} from "react-router-dom"
+import { useParams, useNavigate, Navigate} from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import Index from "./Index"
 import Swal from "sweetalert2"
 
-import chapters_actions from '../store/actions/edit_chapter'
+import chapters_actions from '../store/actions/chapters'
 const { read_chapters, read_manga } = chapters_actions
 
 
@@ -110,7 +110,7 @@ let role = localStorage.getItem('role')
                 </div>
             </>
         ) : (
-            <Index />
+            <Navigate to= '/' />
         )}
     </>
   )

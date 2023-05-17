@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import actions from "../actions/edit_chapter.js";
+import actions from "../actions/chapters.js";
 const { read_chapters , read_manga } = actions
 
 
