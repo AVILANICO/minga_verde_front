@@ -10,6 +10,7 @@ import Mangas from "../pages/Mangas.jsx";
 import Pages from "../pages/Pages.jsx";
 import Manga from "../pages/Manga.jsx";
 import Mymangas from "../pages/Mymangas.jsx"
+import Editmanga from "../pages/EditManga.jsx";
 
 
 // let token = localStorage.getItem('token')
@@ -27,7 +28,8 @@ const routers = createBrowserRouter([
       { path: "/chapters-form/:id_manga", element: <ChapterForm /> },
       { path: "/chapters/:url/:id/:page", element: <Pages /> },
       { path: '/manga/:id/:page', element: <Manga /> },
-      { path: '/mymangas', element: <Mymangas /> }
+      { path: '/mymangas', element: <Mymangas /> },
+      { path: '/editmanga', element: <Editmanga /> }
     ]
   }
 ])
