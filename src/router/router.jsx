@@ -11,9 +11,11 @@ import Pages from "../pages/Pages.jsx";
 import Manga from "../pages/Manga.jsx";
 import Mymangas from "../pages/Mymangas.jsx"
 import Editmanga from "../pages/EditManga.jsx";
-
-
-// let token = localStorage.getItem('token')
+import Adminpanel from "../pages/Adminpanel.jsx"
+import Mymangas from "../pages/Mymangas.jsx"
+import Newrole from "../pages/Newrole.jsx"
+import Companyform from "../pages/Companies-form.jsx"
+import Authorform from "../pages/Author-form.jsx"
 
 const routers = createBrowserRouter([
   {
@@ -30,6 +32,13 @@ const routers = createBrowserRouter([
       { path: '/manga/:id/:page', element: <Manga /> },
       { path: '/mymangas', element: <Mymangas /> },
       { path: '/editmanga', element: <Editmanga /> }
+      { path: "/chapters/:url/:id/:page", element: <Pages />},
+      { path: '/admin', element: <Adminpanel /> },
+      { path: '/manga/:id/:page', element: <Manga /> },
+      { path: '/mymangas', element: <Mymangas /> },
+      { path: '/new-role', element: <Newrole /> },
+      { path: '/company-form', element: <Companyform /> },
+      { path: '/authorregister', element: <Authorform /> }
     ]
   }
 ])
