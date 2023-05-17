@@ -107,8 +107,9 @@ export default function Mymangas() {
                     </svg>
                   </button>
                 </div>
-                <div className='h-[60%] w-2' style={{ backgroundColor: each.category_id.color }}>
-                </div>
+
+                <div className='h-[60%] w-2' style={{ backgroundColor: each.category_id.color }}></div>
+
                 <div className='flex flex-col p-5 w-full h-40 font-semibold'>
                   <h1 className='md:text-xl xsm:text-xl xsm:w-full'> {each.title} </h1>
                   <p style={{ color: each.category_id.color }}> {each.category_id.name}</p>
@@ -139,3 +140,5 @@ export default function Mymangas() {
     </>
   )
 }
+
+

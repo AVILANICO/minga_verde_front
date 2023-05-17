@@ -1,11 +1,22 @@
 import { Fragment, useRef, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import { Link as Anchor } from 'react-router-dom';
 import { Dialog, Transition } from '@headlessui/react';
 import React from 'react'
 
 export default function Editmanga({ open, setOpen }) {
 
+  const categories = useSelector(store => store.categories.categories)
+
   const cancelButtonRef = useRef(null);
+
+  const category = () => {
+    return categories.map(categoria => (
+      <option key={categoria._id} value={categoria._id}>
+        {categoria.name}
+      </option>
+    ))
+  }
 
   return (
     <>
@@ -82,3 +93,5 @@ export default function Editmanga({ open, setOpen }) {
     </>
   )
 }
+
+

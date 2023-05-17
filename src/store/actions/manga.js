@@ -57,3 +57,4 @@ const manga_update = createAsyncThunk('manga_update', async ({id, data}) => {
 const actions={ manga_read, manga_delete, manga_update }
 
 export default actions
+
