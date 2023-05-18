@@ -40,38 +40,39 @@ const read_manga = createAsyncThunk('read_manga', async({id_manga})=>{
     }
 })
 
-const actions = {read_chapters, read_manga}
+
+const delete_chapter = createAsyncThunk('delete_chapter', async({id}) =>{
+    try {
+        let response = await axios.delete(apiUrl + 'chapters/' + id, headers)
+        console.log(response);
+        return {
+            id_delete: id,
+        }
+    } catch (error) {
+        return {
+            chapters: []
+        }
+    }
+})
+
+const update_chapter = createAsyncThunk('update_chapter', async({id})=>{
+    try {
+        
+        let res = await axios.put(apiUrl + 'chapters/' +id,data,headers)
+        console.log(res);
+        return {
+            data:response.data.update
+        }
+    } catch (error) {
+        return{
+            chapters: []
+        } 
+    }
+})
+
+
+
+
+const actions = {read_chapters, read_manga, delete_chapter, update_chapter}
 export default actions
 
-// const delete_chapter = createAsyncThunk('delete_chapter', async([{id}]) =>{
-//     try {
-        
-//         let res = await axios.delete(apiUrl + 'chapters/' +id, headers)
-//         console.log(res);
-//         return {
-//             id: id,
-//         }
-//     } catch (error) {
-//         return {
-//             chapters: []
-//         }
-//     }
-// })
-
-// const update_chapter = createAsyncThunk('update_chapter', async({id})=>{
-//     try {
-        
-//         let res = await axios.put(apiUrl + 'chapters/' +id,data,headers)
-//         console.log(res);
-//         return {
-//             data:data,
-//         }
-//     } catch (error) {
-//         return{
-//             chapters: []
-//         } 
-//     }
-// })
-
-// const actions = {edit_chapter, delete_chapter, update_chapter}
-// export default actions
