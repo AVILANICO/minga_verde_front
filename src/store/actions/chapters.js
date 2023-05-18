@@ -8,8 +8,7 @@ const read_chapters = createAsyncThunk('read_chapters', async({id_manga})=>{
     try {
         // console.log(id_manga);
         let response = await axios(apiUrl + 'chapters/me?manga_id=' + id_manga  , headers)
-        console.log(response)
-    
+        // console.log(response)
         return {
             chapters:response.data.response
         }
@@ -59,9 +58,9 @@ const update_chapter = createAsyncThunk('update_chapter', async({id,data})=>{
     try {
         
         let res = await axios.put(apiUrl + 'chapters/' +id,data,headers)
-        console.log(res.data.update);
+        // console.log(res.data.update);
         return {
-            data:res.data.update
+            data:res.data.response
         }
     } catch (error) {
         return{

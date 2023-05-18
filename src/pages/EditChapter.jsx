@@ -2,31 +2,54 @@ import React, { useEffect, useRef, useState } from "react"
 import { useParams,  Navigate} from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import Swal from "sweetalert2"
-
 import chapters_actions from '../store/actions/chapters'
+
 const { read_chapters, read_manga, delete_chapter, update_chapter} = chapters_actions
 
 export default function EditChapter() {
     let mangas = useSelector(store => store.chapters.mangas.title)
-    console.log(mangas);
+    // console.log(mangas);
     let chapters = useSelector(store => store.chapters.chapters)
     // console.log(chapters)
-    let dispatch = useDispatch()
     let {id_manga} = useParams()
-    // console.log(id_manga);
     let title_chapter = useRef()
     let selectData = useRef()
     let inputData = useRef()
     let [coverFoto, setCoverFoto] = useState('')
+    let [pages, setPages] = useState()
     let [title, setTitle] = useState('')
     let [order, setOrder] = useState('')
+    let dispatch = useDispatch()
     let [idDelete, setIdDelete] = useState('')
+    let [idUpdate,setIdUpdate] = useState('')
+    const [currentKey, setCurrentKey] = useState("");
+    const [currentValue, setCurrentValue] = useState("");
 
     let delete_Id = () => {
         dispatch(delete_chapter({
             id:idDelete}))
             setCoverFoto('')
         }
+
+    const upd_chapters = () => {
+        let dataToUpdate = {};
+            dataToUpdate = {
+            _id: idUpdate,
+                title: currentKey == "title" ? currentValue : title,
+                order: currentKey == "order" ? currentValue : order,
+                cover_photo: currentKey == "cover_photo" ? currentValue : coverFoto,
+                pages: currentKey == "pages" ? currentValue.split(',') : pages
+            }
+
+        dispatch(update_chapter({
+            id: idUpdate, 
+            data: dataToUpdate
+        }))
+
+    setOrder(dataToUpdate.order)
+    setCoverFoto(dataToUpdate.cover_photo)
+    setTitle(dataToUpdate.title)
+    }
 
     useEffect(() => {
         dispatch(read_chapters({id_manga}))
@@ -39,15 +62,25 @@ function handleForm(e){
     e.preventDefault()
     let data = {
         id_chapter: title_chapter.current.value,
+        selectData: selectData.current.value,
+        inputData: inputData.current.value
     }
+    console.log(data);
     setIdDelete(data.id_chapter)
-    
-    let cover = chapters.filter(image => image._id === data.id_chapter)
-    setCoverFoto(cover[0].cover_photo)
-    let titleChapter = chapters.filter(title => title._id === data.id_chapter)
-    setTitle(titleChapter[0].title)
-    let orderChapter = chapters.filter(order => order._id === data.id_chapter)
-    setOrder(orderChapter[0].order)
+    setIdUpdate(data.id_chapter)
+    let selectedChapter = chapters.filter(image => image._id === data.id_chapter)
+    setCoverFoto(selectedChapter[0].cover_photo)
+    setOrder(selectedChapter[0].order)
+    setTitle(selectedChapter[0].title)
+    setPages(selectedChapter[0].pages)
+    setCurrentKey(data.selectData)
+    setCurrentValue(data.inputData)
+    // let cover = chapters.filter(image => image._id === data.id_chapter)
+    // setCoverFoto(cover[0].cover_photo)
+    // let titleChapter = chapters.filter(title => title._id === data.id_chapter)
+    // setTitle(titleChapter[0].title)
+    // let orderChapter = chapters.filter(order => order._id === data.id_chapter)
+    // setOrder(orderChapter[0].order)
     console.log(data.id_chapter)
 }
 
@@ -78,12 +111,7 @@ let alertDelete = (deleteFunctions) =>{
     })
 }
 
-let alertUpdate = (id) =>{
-    let data = {
-        key: selectData.current.value,
-        value: inputData.current.value
-    }
-    console.log(data);
+let alertUpdate = (updateFunctions) =>{
     Swal.fire({
         title:'Are you sure you want to update this chapter',
         text:'You won`t be able to revert your changes',
@@ -94,7 +122,7 @@ let alertUpdate = (id) =>{
         confirmButtonText:'Yes, update it!',
     }).then((result) => {
         if(result.isConfirmed){
-            dispatch(update_chapter({ id, data}))
+            updateFunctions()
             Swal.fire(
                 'Saved!',
                 'Your file has been updated',
@@ -110,7 +138,6 @@ let alertUpdate = (id) =>{
         }
     })
 }
-
 
 let role = localStorage.getItem('role')
 
@@ -145,7 +172,7 @@ let role = localStorage.getItem('role')
                             <input type="text" id="Insert order" name="Insert order" placeholder="Data to edit" className="w-80 appearance-none  border-0  p-2 px-4 text-black border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 mb-16" ref={inputData}  />
                         </div>
                     </form>
-                            <button onClick= { ()=>alertUpdate(title_chapter.current.value)} className="rounded-full bg-[#34D399] p-2 px-32 py-4 text-white t-10 font-bold text-lg mb-8"> Send</button>
+                            <button onClick= { ()=>alertUpdate(upd_chapters)} className="rounded-full bg-[#34D399] p-2 px-32 py-4 text-white t-10 font-bold text-lg mb-8"> Send</button>
 
                             <button onClick= { ()=>alertDelete(delete_Id)} className="rounded-full bg-[#FBDDDC] p-2 px-32 py-4 text-[#EE8380] t-10 font-bold text-lg"> Delete</button>
                 </section>       
