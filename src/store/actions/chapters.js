@@ -55,13 +55,13 @@ const delete_chapter = createAsyncThunk('delete_chapter', async({id}) =>{
     }
 })
 
-const update_chapter = createAsyncThunk('update_chapter', async({id})=>{
+const update_chapter = createAsyncThunk('update_chapter', async({id,data})=>{
     try {
         
         let res = await axios.put(apiUrl + 'chapters/' +id,data,headers)
-        console.log(res);
+        console.log(res.data.update);
         return {
-            data:response.data.update
+            data:res.data.update
         }
     } catch (error) {
         return{

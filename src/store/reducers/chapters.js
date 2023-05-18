@@ -44,6 +44,7 @@ const reducer = createReducer(
     .addCase(
         update_chapter.fulfilled,
         (state,action)=> {
+            console.log();
             let newState = {
                 ...state,
                 chapters:state.chapters.map(each => {

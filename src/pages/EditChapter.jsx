@@ -4,17 +4,19 @@ import { useSelector, useDispatch } from "react-redux"
 import Swal from "sweetalert2"
 
 import chapters_actions from '../store/actions/chapters'
-const { read_chapters, read_manga, delete_chapter } = chapters_actions
+const { read_chapters, read_manga, delete_chapter, update_chapter} = chapters_actions
 
 export default function EditChapter() {
     let mangas = useSelector(store => store.chapters.mangas.title)
     console.log(mangas);
     let chapters = useSelector(store => store.chapters.chapters)
-    console.log(chapters)
+    // console.log(chapters)
     let dispatch = useDispatch()
     let {id_manga} = useParams()
     // console.log(id_manga);
     let title_chapter = useRef()
+    let selectData = useRef()
+    let inputData = useRef()
     let [coverFoto, setCoverFoto] = useState('')
     let [title, setTitle] = useState('')
     let [order, setOrder] = useState('')
@@ -26,7 +28,6 @@ export default function EditChapter() {
             setCoverFoto('')
         }
 
-
     useEffect(() => {
         dispatch(read_chapters({id_manga}))
         dispatch(read_manga({id_manga}))
@@ -37,9 +38,8 @@ export default function EditChapter() {
 function handleForm(e){
     e.preventDefault()
     let data = {
-        id_chapter: title_chapter.current.value
+        id_chapter: title_chapter.current.value,
     }
-
     setIdDelete(data.id_chapter)
     
     let cover = chapters.filter(image => image._id === data.id_chapter)
@@ -78,6 +78,40 @@ let alertDelete = (deleteFunctions) =>{
     })
 }
 
+let alertUpdate = (id) =>{
+    let data = {
+        key: selectData.current.value,
+        value: inputData.current.value
+    }
+    console.log(data);
+    Swal.fire({
+        title:'Are you sure you want to update this chapter',
+        text:'You won`t be able to revert your changes',
+        icon:'warning',
+        showCancelButton: true,
+        confirmButtonColor:'#34D399',
+        cancelButtonColor:'#d33',
+        confirmButtonText:'Yes, update it!',
+    }).then((result) => {
+        if(result.isConfirmed){
+            dispatch(update_chapter({ id, data}))
+            Swal.fire(
+                'Saved!',
+                'Your file has been updated',
+                'success' 
+            )
+            
+        } else {
+            Swal.fire(
+                'Cancelled', 
+                'Your chapter is safe',
+                'error'
+            )
+        }
+    })
+}
+
+
 let role = localStorage.getItem('role')
 
   return (
@@ -99,19 +133,19 @@ let role = localStorage.getItem('role')
                             </select>
                         </div>
                         <div>
-                            <select  placeholder="Insert order" className="w-80 appearance-none  border-0  p-2 px-4  border-b border-gray-500 text-slate-400" name="chapters">
+                            <select ref={selectData} placeholder="Insert order" className="w-80 appearance-none  border-0  p-2 px-4  border-b border-gray-500 text-slate-400" name="chapters">
                                 <option value="" key="rr">Select data</option>
                                 <option value="title" key="title">Title</option>
                                 <option value="order" key="order">Order</option>
-                                <option value="cover-photo" key="cover-photo">Cover_photo</option>
+                                <option value="cover_photo" key="cover_photo">Cover_photo</option>
                                 <option value="pages" key="pages">Pages</option>
                             </select>
                         </div>
                         <div>
-                            <input type="text" id="Insert order" name="Insert order" placeholder="Data to edit" className="w-80 appearance-none  border-0  p-2 px-4 text-black border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 mb-16"  />
+                            <input type="text" id="Insert order" name="Insert order" placeholder="Data to edit" className="w-80 appearance-none  border-0  p-2 px-4 text-black border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 mb-16" ref={inputData}  />
                         </div>
                     </form>
-                            <button className="rounded-full bg-[#34D399] p-2 px-32 py-4 text-white t-10 font-bold text-lg mb-8"> Send</button>
+                            <button onClick= { ()=>alertUpdate(title_chapter.current.value)} className="rounded-full bg-[#34D399] p-2 px-32 py-4 text-white t-10 font-bold text-lg mb-8"> Send</button>
 
                             <button onClick= { ()=>alertDelete(delete_Id)} className="rounded-full bg-[#FBDDDC] p-2 px-32 py-4 text-[#EE8380] t-10 font-bold text-lg"> Delete</button>
                 </section>       
