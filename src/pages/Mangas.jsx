@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector,useDispatch } from 'react-redux'
 import axios from 'axios'
 import inputs_filter_actions from '../store/actions/inputs_filters'
 import apiUrl from "../../api"
@@ -10,11 +10,11 @@ import { Link as Anchor, Link, useNavigate } from "react-router-dom";
 let token = localStorage.getItem("token")
 let headers = { headers: { "Authorization": `bearer ${token}` } }
 
-const { inputs_filter } = inputs_filter_actions
+const {inputs_filter} = inputs_filter_actions
 
 export default function Mangas() {
 
-    const { title, categories } = useSelector(store => store.inputs)
+    const {title,categories}= useSelector(store => store.inputs) 
     /* console.log(title)
     console.log(categories) */
     const dispatch = useDispatch()
@@ -33,18 +33,16 @@ export default function Mangas() {
                     setMangas(res.data.response)
                     setCount(res.data.count)
                 }
-
+                
                 )
                 .catch(err => console.error(err))
         },
-        [reload, pagAct]                                    //array de dependecias vacio ya que necesitamos fechar una unica vez al mostrarse el componente
+        [reload,pagAct]                                    //array de dependecias vacio ya que necesitamos fechar una unica vez al mostrarse el componente
     )
     useEffect(
-        () => {
-            axios(apiUrl + 'categories')
-                .then(res => categorie(res.data.categories))
-                .catch(err => console.error(err))
-        },
+        () => { axios(apiUrl + 'categories')
+        .then(res => categorie(res.data.categories))
+        .catch(err => console.error(err)) },
         []                                    //array de dependecias vacio ya que necesitamos fechar una unica vez al mostrarse el componente
     )
     let [categor, categorie] = useState([])
@@ -71,7 +69,6 @@ export default function Mangas() {
 
                     </div>
                 ))}
-
             </div>
         );
     }
