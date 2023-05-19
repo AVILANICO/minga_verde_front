@@ -14,6 +14,7 @@ export default function Pages() {
 	// console.log(chapterStates);
 	let { chapter_bar } = actions
 	let { id, page } = useParams()
+	// console.log(typeof page);
 	let dispatch = useDispatch()
 	let navigate = useNavigate()
 	let [order, setOrder] = useState(chapterStates.order)
@@ -29,25 +30,26 @@ export default function Pages() {
 	useEffect(
 		() => {
 			axios(apiUrl + 'chapters/' + id, headers)
-			.then(res => {
-				setAllPages(res.data.response.pages);
-				setTitle(res.data.response.title);
-				setOrder(res.data.response.order)
-				setManga(res.data.response.manga_id) //
-				setImgPages(res.data.response.pages[parseInt(page)])
-				setNext(res.data.id_next)
-				setPrev(res.data.id_prev)
-				dispatch(chapter_bar({
-					title: res.data.response.title,
-					order: res.data.response.order,
-					manga_id: res.data.response.manga_id,
-				}))
-			})
+				.then(res => {
+					setAllPages(res.data.response.pages);
+					setTitle(res.data.response.title);
+					setOrder(res.data.response.order)
+					setManga(res.data.response.manga_id) //
+					setImgPages(res.data.response.pages[parseInt(page)])
+					setNext(res.data.id_next)
+					setPrev(res.data.id_prev)
+					dispatch(chapter_bar({
+						title: res.data.response.title,
+						order: res.data.response.order,
+						manga_id: res.data.response.manga_id,
+					}))
+				})
 
-			.catch(err => console.log(err))
+				.catch(err => console.log(err))
 		},
 		[reload]
 	)
+
 
 
 	let next = () => {
