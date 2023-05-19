@@ -20,7 +20,6 @@ const reducer = createReducer(
         return newState
     }
   )
-
   .addCase(
     manga_delete.fulfilled,
     (state, action) => {

@@ -29,10 +29,8 @@ export default function Navbarmobile() {
       .catch(err => alert(err))
   }
   return (
-
-    <nav className="absolute flex justify-center items-center h-20 md:hidden w-full">
-
-      <div className="flex w-full mx-4 justify-between">
+    <nav className=" absolute w-full h-20 flex justify-between items-center md:hidden">
+      <div className="flex w-full justify-between">
         <div className="flex items-center">
           <button onClick={handleMenuClick} className="z-10 absolute left-6 top-7">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke={url === 'chapter' ? '#fff' : '#F472B6'} className="w-6 h-6">
@@ -54,6 +52,8 @@ export default function Navbarmobile() {
                 </div>}
               <ul onClick={handleMenuClick} className="font-semibold font-poppins pt-[2rem]">
                 <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/">Home</Anchor></li>
+                <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/new-role">New Role</Anchor></li>
+              <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/admin">Panel</Anchor></li>
                 {role == 1 || role == 2 ? (<><li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/manga-form">New mangas</Anchor></li>
                 </>) : ("")}
                 {token && <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="#">Favorites</Anchor></li>}

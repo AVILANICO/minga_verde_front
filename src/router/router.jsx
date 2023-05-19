@@ -6,14 +6,16 @@ import Signin from "../pages/SignIn.jsx";
 import Authform from "../pages/Authform.jsx";
 import MangaForm from "../pages/MangaForm.jsx";
 import ChapterForm from "../pages/ChapterForm.jsx";
+import EditChapter from "../pages/EditChapter.jsx";
 import Mangas from "../pages/Mangas.jsx";
 import Pages from "../pages/Pages.jsx";
 import Manga from "../pages/Manga.jsx";
 import Mymangas from "../pages/Mymangas.jsx"
 import Editmanga from "../pages/EditManga.jsx";
-
-
-// let token = localStorage.getItem('token')
+import Adminpanel from "../pages/Adminpanel.jsx"
+import Newrole from "../pages/Newrole.jsx"
+import Companyform from "../pages/Companies-form.jsx"
+import Authorform from "../pages/Author-form.jsx"
 
 const routers = createBrowserRouter([
   {
@@ -29,7 +31,13 @@ const routers = createBrowserRouter([
       { path: "/chapters/:url/:id/:page", element: <Pages /> },
       { path: '/manga/:id/:page', element: <Manga /> },
       { path: '/mymangas', element: <Mymangas /> },
-      { path: '/editmanga', element: <Editmanga /> }
+      { path: '/editmanga', element: <Editmanga /> },
+      { path: '/edit/:id_manga', element: <EditChapter /> },
+      { path: '/admin', element: <Adminpanel /> },
+      { path: '/new-role', element: <Newrole /> },
+      { path: '/company-form', element: <Companyform /> },
+      { path: '/authorregister', element: <Authorform /> }
+
     ]
   }
 ])

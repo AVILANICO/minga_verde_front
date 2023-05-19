@@ -146,5 +146,3 @@ export default function Editmanga({ open, setOpen, mangas, categories }) {
     </>
   )
 }
-
-
