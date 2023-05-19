@@ -84,7 +84,6 @@ export default function MangaForm() {
     <>
       {role == 1 || role == 2 ? (
         <>
-
           <section className="grid h-screen place-content-center text-slate-300">
             <div className="mb-10 text-center text-black">
               <h1 className="text-3xl font-bold">New Manga</h1>

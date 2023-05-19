@@ -8,7 +8,8 @@ const chapter_bar = createAction(
     return {
       payload: {
         title: object.title,
-        order: object.order
+        order: object.order,
+        manga_id: object.manga_id
       } 
     }               
   } 
