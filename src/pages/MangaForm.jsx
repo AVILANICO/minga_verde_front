@@ -100,8 +100,6 @@ export default function MangaForm() {
                 <div>
                   <input ref={description} type="text" id="Insert description" name="Insert order" placeholder="Insert order" className="w-80 appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent  text-black focus:outline-none focus:ring-0" />
                 </div>
-
-
                 <button className="rounded-full bg-pink-500 p-2 px-16 py-4 text-white t-10 font-bold text-lg"> Send</button>
               </div>
             </form>
