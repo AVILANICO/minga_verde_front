@@ -44,15 +44,16 @@ const reducer = createReducer(
     .addCase(
         update_chapter.fulfilled,
         (state,action)=> {
-            let newState = {
-                ...state,
-                chapters:state.chapters.map(each => {
+            let chapters = state.chapters.map(each => {
                     if(each._id === action.payload.data._id){
                         return action.payload.data
                     }else{
                         return each
                     }
                 })
+            let newState = {
+                ...state,
+                chapters
             }
             return newState
         }

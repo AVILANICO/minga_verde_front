@@ -75,12 +75,6 @@ function handleForm(e){
     setPages(selectedChapter[0].pages)
     setCurrentKey(data.selectData)
     setCurrentValue(data.inputData)
-    // let cover = chapters.filter(image => image._id === data.id_chapter)
-    // setCoverFoto(cover[0].cover_photo)
-    // let titleChapter = chapters.filter(title => title._id === data.id_chapter)
-    // setTitle(titleChapter[0].title)
-    // let orderChapter = chapters.filter(order => order._id === data.id_chapter)
-    // setOrder(orderChapter[0].order)
     console.log(data.id_chapter)
 }
 
@@ -172,7 +166,7 @@ let role = localStorage.getItem('role')
                             <input type="text" id="Insert order" name="Insert order" placeholder="Data to edit" className="w-80 appearance-none  border-0  p-2 px-4 text-black border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0 mb-16" ref={inputData}  />
                         </div>
                     </form>
-                            <button onClick= { ()=>alertUpdate(upd_chapters)} className="rounded-full bg-[#34D399] p-2 px-32 py-4 text-white t-10 font-bold text-lg mb-8"> Send</button>
+                            <button onClick= { ()=>alertUpdate(upd_chapters)} className="rounded-full bg-[#34D399] p-2 px-32 py-4 text-white t-10 font-bold text-lg mb-8"> Edit</button>
 
                             <button onClick= { ()=>alertDelete(delete_Id)} className="rounded-full bg-[#FBDDDC] p-2 px-32 py-4 text-[#EE8380] t-10 font-bold text-lg"> Delete</button>
                 </section>       
