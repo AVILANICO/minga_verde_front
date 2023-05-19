@@ -1,5 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 import actions from "../actions/categories";
+
 const {categories_read}=actions 
 let inicialState={
     categories:[]
