@@ -3,8 +3,8 @@ import reducer_one_manga from './reducers/one_manga.js'
 import reducer_one_chapter from './reducers/one_chapter.js'
 import inputs_reducer from './reducers/inputs_filter'
 import chapters_reducer from "./reducers/chapter_bar"
-import authors from '../store/reducers/authors'
-import companies from '../store/reducers/companies'
+import companies from './reducers/companies'
+import authors from './reducers/authors'
 
 const store = configureStore({
   reducer: {
@@ -12,8 +12,8 @@ const store = configureStore({
     one_chapter: reducer_one_chapter,
     inputs: inputs_reducer,
     title_order: chapters_reducer,
-    authors: authors,
-    companies : companies
+    companies: companies,
+    authors: authors
   }
 })
 export default store;
