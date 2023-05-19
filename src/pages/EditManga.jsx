@@ -3,19 +3,74 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link as Anchor } from 'react-router-dom';
 import { Dialog, Transition } from '@headlessui/react';
 import React from 'react'
+import manga_action from '../store/actions/manga'
+import Swal from 'sweetalert2';
 
-export default function Editmanga({ open, setOpen }) {
+const { manga_update } = manga_action
 
-  const categories = useSelector(store => store.categories.categories)
+export default function Editmanga({ open, setOpen, mangas, categories }) {
 
   const cancelButtonRef = useRef(null);
+  const dispatch = useDispatch()
+
+  const [titleValue, setTitleValue] = useState(mangas.title);
+  const [descriptionValue, setDescriptionValue] = useState(mangas.description);
+  const [coverPhotoValue, setCoverPhotoValue] = useState(mangas.cover_photo);
+  const [categoryIdValue, setCategoryIdValue] = useState(mangas.category_id);
+
+  const handleTitleChange = (event) => {
+    setTitleValue(event.target.value)
+  }
+
+  const handleDescriptionChange = (event) => {
+    setDescriptionValue(event.target.value)
+  }
+
+  const handleCoverPhotoChange = (event) => {
+    setCoverPhotoValue(event.target.value)
+  }
+
+  const handleCategoryIdChange = (event) => {
+    setCategoryIdValue(event.target.value)
+  }
 
   const category = () => {
-    return categories.map(categoria => (
-      <option key={categoria._id} value={categoria._id}>
-        {categoria.name}
+    return categories?.map(categoria => (
+      <option key={categoria?._id} value={categoria?._id}>
+        {categoria?.name}
       </option>
     ))
+  }
+
+  const editManga = (id) => {
+    const data = {
+      title: titleValue,
+      description: descriptionValue,
+      cover_photo: coverPhotoValue,
+      category_id: categoryIdValue
+    }
+    Swal.fire({
+      title: 'Do you want to save the changes?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Save',
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire('Saved!', '', 'success')
+        dispatch(manga_update({ id, data }))
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info')
+      }
+    })
+    setOpen(false)
+  }
+
+
+
+  const cancel = () => {
+    setOpen(false)
   }
 
   return (
@@ -53,34 +108,32 @@ export default function Editmanga({ open, setOpen }) {
                 <div className='flex justify-center bg-white py-8 '>
                   <div className='flex flex-col'>
                     <h1 className='text-4xl w-72 text-center'>Edit Manga</h1>
+
                     <form className='flex flex-col mt-12 w-40 gap-6' action="">
 
                       <label className='w-40' htmlFor="">
-                        <input className='w-72 h-8 border-b rounded-md border-slate-500' type="text" name="name" id="name" placeholder='Title of the manga' />
+                        <input onChange={handleTitleChange} className='w-72 h-8 border-b rounded-md border-slate-500' type="text" name="name" id="name" placeholder='Title of the manga' />
                       </label>
                       <label htmlFor="">
-                        <input className='w-72 h-8 border-b rounded-md border-slate-500' type="text" name="name" id="name" placeholder='Description' />
+                        <input onChange={handleDescriptionChange} className='w-72 h-8 border-b rounded-md border-slate-500' type="text" name="name" id="name" placeholder='Description' />
                       </label>
                       <label htmlFor="">
-                        <input className='w-72 h-8 border-b rounded-md border-slate-500' type="text" name="name" id="name" placeholder='Photo' />
+                        <input onChange={handleCoverPhotoChange} className='w-72 h-8 border-b rounded-md border-slate-500' type="text" name="name" id="name" placeholder='Photo' />
                       </label>
                       <label htmlFor="">
-                        <select className='w-72 h-8 border-b rounded-md border-slate-500' name="" id="">
-                          <option value="" disabled selected hidden>Category</option>
-                          <option value="opcion1">Shonen</option>
-                          <option value="opcion2">Seinen</option>
-                          <option value="opcion3">Comic</option>
-                          <option value="opcion3">Shojo</option>
+                        <select onChange={handleCategoryIdChange} defaultValue={categoryIdValue} className='w-72 h-8 border-b rounded-md border-slate-500' name="category" id="category"  >
+                          <option>Category</option>
+                          {category()}
                         </select>
                       </label>
 
                     </form>
                     <div className='flex flex-col items-center mt-12 gap-4'>
-                      <button className="w-60 h-16 bg-[#34D399] rounded-full cursor-pointer text-white text-lg font-bold hover:bg-green-500 hover:scale-110 transition-all">
-                        <Anchor to="">Edit</Anchor>
+                      <button onClick={() => editManga(mangas._id)} type='submit' className="w-60 h-16 bg-[#34D399] rounded-full cursor-pointer text-white text-lg font-bold hover:bg-green-500 hover:scale-110 transition-all">
+                        Edit
                       </button>
-                      <button className="w-60 h-16 bg-[#FBDDDC] rounded-full cursor-pointer text-red-400 text-lg font-bold hover:bg-red-400 hover:text-white hover:scale-110 transition-all">
-                        <Anchor to="">Delete</Anchor>
+                      <button onClick={() => cancel()} className="w-60 h-16 bg-[#FBDDDC] rounded-full cursor-pointer text-red-400 text-lg font-bold hover:bg-red-400 hover:text-white hover:scale-110 transition-all">
+                        Cancel
                       </button>
                     </div>
                   </div>

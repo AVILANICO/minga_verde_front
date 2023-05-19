@@ -122,7 +122,7 @@ const Register = (props) => {
             </div>
           </div>
         </div >
-        <div className='xsm:hidden w-1/2 p-4 flex justify-end h-full bg-center bg-cover bg-[url(/src/assets/image/Rectangle81.png)]'>
+        <div className='xsm:hidden w-1/2 p-4 flex justify-end h-screen bg-center bg-cover bg-[url(/src/assets/image/Rectangle81.png)]'>
         </div>
       </div >
     </>
