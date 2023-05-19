@@ -10,12 +10,13 @@ import EditChapter from "../pages/EditChapter.jsx";
 import Mangas from "../pages/Mangas.jsx";
 import Pages from "../pages/Pages.jsx";
 import Manga from "../pages/Manga.jsx";
-import Mymangas from "../pages/Mymangas.jsx"
-import Editmanga from "../pages/EditManga.jsx";
 import Adminpanel from "../pages/Adminpanel.jsx"
 import Newrole from "../pages/Newrole.jsx"
 import Companyform from "../pages/Companies-form.jsx"
 import Authorform from "../pages/Author-form.jsx"
+import Editmanga from "../pages/EditManga.jsx";
+import Mymangas from "../pages/Mymangas.jsx";
+
 
 const routers = createBrowserRouter([
   {
@@ -36,7 +37,7 @@ const routers = createBrowserRouter([
       { path: '/admin', element: <Adminpanel /> },
       { path: '/new-role', element: <Newrole /> },
       { path: '/company-form', element: <Companyform /> },
-      { path: '/authorregister', element: <Authorform /> }
+      { path: '/authorregister', element: <Authorform /> },
 
     ]
   }
