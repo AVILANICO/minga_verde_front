@@ -26,6 +26,10 @@ const MyMangasCard = ({ each, categories }) => {
     navigate(`/edit/${each._id}`)
   }
 
+  function urlDetail() {
+    navigate(`/manga/${each._id}/1`)
+  }
+
   const alertDelete = (httpCb) => {
     Swal.fire({
       title: 'Are you sure?',
@@ -54,7 +58,7 @@ const MyMangasCard = ({ each, categories }) => {
     })
   }
   return (
-    <div key={each._id} className='shadow-lg xsm:h-56 xsm:w-full md:w-80 md:h-52 lg:h-48 lg:w-2/5 mt-4 flex flex-row items-center bg-slate-200 rounded-lg'>
+    <div key={each._id} className='shadow-lg xsm:h-56 xsm:w-full md:w-80 md:h-52 lg:h-48 lg:w-[26rem] mt-4 flex flex-row items-center bg-slate-200 rounded-lg'>
       <div className='relative mt-4'>
         <button onClick={urlChapter}>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 absolute bottom-20 left-4 hover:scale-125 transition-all">
@@ -69,7 +73,7 @@ const MyMangasCard = ({ each, categories }) => {
       </div>
       <div className='h-32 w-3 rounded-lg' style={{ backgroundColor: each?.category_id?.color }}></div>
       <div className='flex flex-col md:h-40 p-5 w-full h-40 font-semibold'>
-        <h1 className='md:text-xl xsm:text-xl xsm:w-full'> {each?.title} </h1>
+        <h1 onClick={urlDetail} className='md:text-xl xsm:text-xl xsm:w-full cursor-pointer hover:scale-95 transition-all'> {each?.title} </h1>
         <p style={{ color: each?.category_id?.color }}> {each?.category_id?.name}</p>
         <div className='flex gap-4'>
           <button onClick={() => alertEdit()} className="mt-10 w-20 bg-[#E0DBFF] text-[#8883F0] hover:bg-violet-400 hover:text-violet-600 cursor-pointer font-bold py-2 px-4 rounded-full hover:scale-125 transition-all">
@@ -80,7 +84,7 @@ const MyMangasCard = ({ each, categories }) => {
           </button>
         </div>
       </div>
-      <img className="h-full w-[30%] xsm:h-full object-cover rounded-[80px_8px_8px_100px/80px_8px_8px_100px;]" src={each?.cover_photo} alt="" />
+      <img onClick={urlDetail} className="h-full w-[30%] cursor-pointer hover:scale-95 transition-all xsm:h-full object-cover rounded-[80px_8px_8px_100px/80px_8px_8px_100px;]" src={each?.cover_photo} alt="" />
       <Editmanga mangas={each} categories={categories} open={open} setOpen={setOpen} />
     </div>
   )
