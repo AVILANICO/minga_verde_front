@@ -148,6 +148,7 @@ let role = localStorage.getItem('role')
                         <input type="text" id="" name="" placeholder="Name of the manga" className="w-80 appearance-none  border-0  p-2 px-4 text-black border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0" value={mangas?? ''} disabled= {true}/>
                         <div>
                             <select  placeholder="Insert order" className="w-80 appearance-none  border-0  p-2 px-4  border-b border-gray-500 bg-transparent focus:outline-none focus:ring-0  text-slate-400" name="chapters" ref={title_chapter}>
+                            <option value="">Select Chapter</option>
                             {chapters.map((chapter, index) => (
                             <option key={index} value={chapter._id}>{chapter.title}</option>
                             ))}
@@ -155,7 +156,7 @@ let role = localStorage.getItem('role')
                         </div>
                         <div>
                             <select ref={selectData} placeholder="Insert order" className="w-80 appearance-none  border-0  p-2 px-4  border-b border-gray-500 text-slate-400" name="chapters">
-                                <option value="" key="rr">Select data</option>
+                                <option value="">Select data</option>
                                 <option value="title" key="title">Title</option>
                                 <option value="order" key="order">Order</option>
                                 <option value="cover_photo" key="cover_photo">Cover_photo</option>
