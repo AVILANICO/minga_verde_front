@@ -5,10 +5,9 @@ let token = localStorage.getItem('token')
 let headers = {headers:{'Authorization':`Bearer ${token}`}}
 
 const read_chapters = createAsyncThunk('read_chapters', async({id_manga})=>{
+    console.log(id_manga);
     try {
-        // console.log(id_manga);
         let response = await axios(apiUrl + 'chapters/me?manga_id=' + id_manga  , headers)
-        // console.log(response)
         return {
             chapters:response.data.response
         }
@@ -23,9 +22,7 @@ const read_chapters = createAsyncThunk('read_chapters', async({id_manga})=>{
 
 const read_manga = createAsyncThunk('read_manga', async({id_manga})=>{
     try {
-        // console.log(id_manga);
         let response = await axios(apiUrl + 'mangas/' + id_manga  , headers)
-        console.log(response)
     
         return {
             mangas:response.data.response

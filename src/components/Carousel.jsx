@@ -54,7 +54,7 @@ export default function Carousel() {
       </div>
 
       <div className="h-auto w-[90%] ml-10">
-        <h4 className="text-white text-2xl text-start w-[50%] pl-2">{categories[counter]?.name.toUpperCase}</h4>
+        <h4 className="text-white text-2xl text-start w-[50%] pl-2">{categories[counter]?.name.toUpperCase()}</h4>
         <p className="text-white text-sm text-justify w-[60%] pl-2 ">{categories[counter]?.description}</p>
       </div>
     </div>
