@@ -92,7 +92,7 @@ const Register = (props) => {
                 <div className="mt-5">
                   <fieldset className='border-2 rounded-md flex items-center'>
                     <legend className='text-sm ml-2 text-fuchsia-400'>Photo</legend>
-                    <input ref={photo} className="px-4 w-full  py-2 rounded-md text-sm outline-none" type="file" name="photo" placeholder="Image" />
+                    <input ref={photo} className="px-4 w-full  py-2 rounded-md text-sm outline-none file:bg-fuchsia-400 file:border-none file:rounded-full file:h-12 file:text-white file:cursor-pointer file:shadow-lg file:hover:shadow-fuchsia-600/50 file:hover:bg-fuchsia-500 file:font-semibold" type="file" name="photo" placeholder="Image" />
                     <img className='w-6 h-6 mr-2' src={camara} alt="profile" />
                   </fieldset>
                 </div>

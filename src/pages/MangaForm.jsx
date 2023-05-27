@@ -95,7 +95,7 @@ export default function MangaForm() {
             <form onSubmit={(e) => handleForm(e)} method='post' encType='multipart/form-data'>
               <div className="flex flex-col items-center justify-center space-y-6 pt-14">
                 <input ref={title} type="text" id="title" name="title" placeholder="Insert title" className="w-80 appearance-none  border-0  p-2 px-4  border-b border-gray-500  text-black focus:outline-none focus:ring-0" />
-                <input ref={cover_photo} type="file" id="title" name="cover_photo" placeholder="Insert cover photo" className="w-80 appearance-none  border-0  p-2 px-4  border-b border-gray-500  text-black focus:outline-none focus:ring-0" />
+                <input ref={cover_photo} type="file" id="photo" name="photo" placeholder='hola' className="w-80 appearance-none  border-0  p-2 px-4  border-b border-gray-500  text-black focus:outline-none focus:ring-0 file:bg-fuchsia-400 file:border-none file:rounded-full file:h-12 file:text-white file:cursor-pointer file:shadow-lg file:hover:shadow-fuchsia-600/50 file:hover:bg-fuchsia-500 file:font-semibold" />
                 <div>
                   <select ref={category} placeholder="Insert order" className="w-80 appearance-none  border-0  p-2 px-4  border-b border-gray-500  text-black" name="categories">
                     <option value="" key="rr">Insert Category</option>
