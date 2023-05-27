@@ -29,12 +29,6 @@ const routers = createBrowserRouter([
       { path: '/mangas/:page', element: <Mangas /> },
       { path: '/manga-form', element: <MangaForm /> },
       { path: "/chapters-form/:id_manga", element: <ChapterForm /> },
-<<<<<<< HEAD
-      { path: "/chapters/:url/:id/:page", element: <Pages />},
-      { path: '/manga/:id/:page', element: <Manga /> },
-      { path: '/edit/:id_manga', element: <EditChapter />},
-      { path: '/mymangas', element: <Mymangas /> }
-=======
       { path: '/manga/:id/:page', element: <Manga /> },
       { path: '/mymangas', element: <Mymangas /> },
       { path: '/editmanga', element: <Editmanga /> },
@@ -45,7 +39,6 @@ const routers = createBrowserRouter([
       { path: '/company-form', element: <Companyform /> },
       { path: '/authorregister', element: <Authorform /> },
 
->>>>>>> db88c49f73bb1abaae5cb4e60c51f6cc158bb8eb
     ]
   }
 ])

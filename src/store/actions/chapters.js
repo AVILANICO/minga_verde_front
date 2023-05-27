@@ -9,7 +9,7 @@ const read_chapters = createAsyncThunk('read_chapters', async({id_manga})=>{
         // console.log(id_manga);
         let response = await axios(apiUrl + 'chapters/me?manga_id=' + id_manga  , headers)
         // console.log(response)
-        return {
+        return {                                                                
             chapters:response.data.response
         }
 
