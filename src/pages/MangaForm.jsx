@@ -30,12 +30,6 @@ export default function MangaForm() {
 
   function handleForm(e) {
     e.preventDefault()
-    // let data = {
-    //   title: title.current.value,
-    //   category_id: category.current.value,
-    //   description: description.current.value,
-    //   cover_photo: cover_photo.current.value
-    // }
 
     const formData = new FormData();
     formData.append('title', title.current.value);

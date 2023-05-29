@@ -18,20 +18,16 @@ const Register = (props) => {
 
   function handleForm(e) {
     e.preventDefault()
-    //usando el .current.value vemos lo que tiene adentro del name
-    // let data = {
-    //   email: email.current.value,
-    //   photo: photo.current.value,
-    //   password: password.current.value
-    // }
-    // console.log(data);
+
+    //El FormData es un objeto que se utiliza para construir y enviar datos en formato multipart/form-data
+    //El formato multipart/form-data es un tipo de formato de codificación utilizado en la transferencia de datos. Se utiliza especialmente cuando se envían formularios que contienen archivos binarios, como imágenes o archivos multimedia.
 
     const formData = new FormData();
     formData.append('name', name.current.value);
     formData.append('email', email.current.value);
     formData.append('photo', photo.current.files[0]);
     formData.append('password', password.current.value);
-
+    //Cada llamada al método append() agrega un par clave-valor al objeto formData, donde la clave es el nombre del campo y el valor es el valor del campo ingresado por el usuario.
 
     axios.post(VITE_API + "auth/register", formData)
       .then(res => {
