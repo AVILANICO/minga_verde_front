@@ -44,6 +44,7 @@ const Register = (props) => {
     axios.post(VITE_API + "auth/register", data)
     .then(res => {
       Swal.fire({
+        icon: 'success',
         title: 'check your email to verify your account',
         confirmButtonText: 'Ok!'
       })
