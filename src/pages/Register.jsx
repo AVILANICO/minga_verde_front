@@ -66,7 +66,7 @@ const Register = (props) => {
           <div className="bg-white min-h-screen w-1/2 flex justify-center items-center">
 
             <div className='xsm:w-screen xsm:items-center flex flex-col'>
-              <form className='xxsm:w-[16rem] xxsm:mr-4 xsm:w-full' onSubmit={(e) => handleForm(e)} method='post' encType='multipart/form-data' action='/register'>
+              <form className='xxsm:w-[16rem] xxsm:mr-4 xsm:w-full' onSubmit={(e) => handleForm(e)} encType='multipart/form-data'>
                 <div className='flex flex-col items-center'>
                   <span className="text-4xl text-center font-semibold text-gray-900">Welcome!</span>
                   <h1 className="text-sm text-center text-gray-600 mt-4">Discover manga, manhua and manhwa, track your progress, have fun, read manga.</h1>
