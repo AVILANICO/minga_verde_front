@@ -62,6 +62,7 @@ export default function Pages() {
 			setReload(!reload)
 		} else {
 			setCounter(newCounter);
+      
 			dispatch(chapter_bar({
 				title: title,
 				order: order,

@@ -7,7 +7,6 @@ import authors from './reducers/authors'
 import categories_read from "./reducers/categories"
 import manga_read from "./reducers/manga.js"
 import read_chapters from './reducers/chapters'
-import chapters_reducer from './reducers/chapter_bar.js'
 
 const store = configureStore({
   reducer: {
