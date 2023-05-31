@@ -4,7 +4,6 @@ import { createAction } from "@reduxjs/toolkit";
 const chapter_bar = createAction(
   'chapter_bar', //nombre de la accion
   (object) => {    //funcion que va a enviar datos al reductor 
-     console.log(object);             //el objeto debe tener todas las propiedades a guardarse en el estado global
     return {
       payload: {
         title: object.title,

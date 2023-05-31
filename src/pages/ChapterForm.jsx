@@ -1,5 +1,5 @@
 import React, { useRef } from "react"
-import { useParams, useNavigate} from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import axios from "axios"
 import apiUrl from "../../api"
 import Index from "./Index"
@@ -49,9 +49,7 @@ const ChapterForm = () => {
 
     // let role = JSON.parse(localStorage.getItem('user'))?.role;
     let role = localStorage.getItem('role')
-    console.log(role);
     let token = localStorage.getItem('token')
-    console.log(token);
     let headers = { headers: { 'Authorization': `Bearer ${token}` } }
 
     return (

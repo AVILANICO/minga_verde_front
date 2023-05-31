@@ -74,7 +74,7 @@ export default function Mymangas() {
         <div className="w-full flex flex-col items-center">
           <div className="w-full h-[60vh] xsm:h-80 flex flex-col justify-center items-center bg-contain bg-top bg-[url(/src/assets/image/companyAuthor.png)]">
             <h1 className="text-[5rem] m-4 text-white font-bold mt-10">
-              {authorName?.charAt(0).toUpperCase() + authorName?.slice(1)}
+              {authorName ? authorName.charAt(0).toUpperCase() + authorName.slice(1) : ''}
             </h1>
           </div>
           <div className="min-h-screen bg-white w-[90%] flex flex-col items-center rounded-3xl m-[-5rem] xsm:w-full">
@@ -108,14 +108,14 @@ export default function Mymangas() {
               </form>
             </div>
             <div className="pb-28 flex justify-center xsm:flex-col xsm:items-center xsm:w-full xsm:gap-6 flex-wrap md:w-full md:h-full lg:w-full gap-4">
-              <div className='flex justify-center items-end xsm:h-40 xsm:w-full md:h-48 md:w-40'>
+              <div className='mr-16 flex justify-center items-end xsm:h-40 xsm:w-full md:h-48 md:w-40'>
                 <Anchor to='/manga-form'>
                   <img className='xsm:h-28 rounded-3xl xsm:w-28 md:w-40 md:h-40 lg:h-fit lg:w-fit hover:scale-110 transition-all cursor-pointer' src={Mas9} alt="New Manga" title="New Manga" />
                 </Anchor>
               </div>
               {filterMangas().length > 0 ? (
                 filterMangas().map((each) => (
-                  <MyMangasCard each={each} categories={categories} />
+                  <MyMangasCard key={each._id} each={each} categories={categories} />
                 ))
               ) : (
                 <div className="flex flex-row justify-center">

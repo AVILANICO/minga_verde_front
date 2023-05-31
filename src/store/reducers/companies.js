@@ -25,7 +25,6 @@ const reducer = createReducer(
         .addCase(
             update_companies.fulfilled,
             (state, action) => {
-                console.log(state.active)
                 if (action.payload.active) {
                     let newState = {
                         ...state,
