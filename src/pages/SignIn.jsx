@@ -16,10 +16,7 @@ import { useEffect } from 'react'
 const Signin = (props) => {
   let email = useRef();
   let password = useRef();
-
-  const [redirect, setRedirect] = useState(false);
-
-
+  
   const clientID = '892361509691-n4pmsomkc10vrk2ghsggosstqg5v8pph.apps.googleusercontent.com'
 
   useEffect (() =>{
@@ -92,6 +89,10 @@ const Signin = (props) => {
     console.log("something went wrong");
   }
 
+  const [redirect, setRedirect] = useState(localStorage.getItem('redirect') === 'true');
+  let navigate = useNavigate()
+
+
   function handleForm(e) {
     e.preventDefault()
     //usando el .current.value vemos lo que tiene adentro del name
@@ -99,17 +100,15 @@ const Signin = (props) => {
       email: email.current.value,
       password: password.current.value
     }
-
     axios.post(VITE_API + "auth/signin", data)
       .then(res => {
-        const token = res.data.token;
-        const role = res.data.user.role;
-        const email = res.data.user.email;
-        const photo = res.data.user.photo;
-        // const name = res.data.user.name;
+        const token = res.data?.token;
+        const role = res.data?.user?.role;
+        const email = res.data?.user?.email;
+        const photo = res.data?.user?.photo;
 
+        console.log(photo);
 
-        //sweetAlert
         const Toast = Swal.mixin({
           toast: true,
           position: 'center',
@@ -131,16 +130,24 @@ const Signin = (props) => {
         localStorage.setItem('role', role);
         localStorage.setItem('email', email)
         localStorage.setItem('photo', photo)
-        // localStorage.setItem('name', name)
+        localStorage.setItem('redirect', 'true')
 
         setRedirect(true);
-        //investigar useNavigate para cambiar el useState()
+
+        useEffect(() => {
+          if (redirect) {
+            localStorage.removeItem('redirect'); // Eliminar el estado de localStorage
+          }
+        }, [redirect]);
+
+        useEffect(() => {
+          if (redirect) {
+            navigate('/'); // Redirigir al usuario a la página de inicio
+          }
+        }, [redirect, navigate]);
 
       })
       .catch(err => {
-        // console.log(err)
-        // alert(err.response.data.message)
-
         Swal.fire({
           icon: 'error',
           title: err.response.data.message,
@@ -160,7 +167,7 @@ const Signin = (props) => {
         </>
       ) : (
         <>
-          
+
           <div className='h-screen w-full flex justify-center items-center'>
             <div className='xsm:hidden w-1/2 p-4 flex justify-end h-full bg-center bg-cover bg-[url(/src/assets/image/Rectangle82.png)]'></div >
             <div className="xsm:w-full xsm:flex flex justify-center w-1/2">

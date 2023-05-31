@@ -64,13 +64,18 @@ const Register = (props) => {
 
   function handleForm(e) {
     e.preventDefault()
-    //usando el .current.value vemos lo que tiene adentro del name
-    let data = {
-      email: email.current.value,
-      photo: photo.current.value,
-      password: password.current.value
-    }
-    axios.post(VITE_API + "auth/register", data)
+
+    //El FormData es un objeto que se utiliza para construir y enviar datos en formato multipart/form-data
+    //El formato multipart/form-data es un tipo de formato de codificación utilizado en la transferencia de datos. Se utiliza especialmente cuando se envían formularios que contienen archivos binarios, como imágenes o archivos multimedia.
+
+    const formData = new FormData();
+    formData.append('name', name.current.value);
+    formData.append('email', email.current.value);
+    formData.append('photo', photo.current.files[0]);
+    formData.append('password', password.current.value);
+    //Cada llamada al método append() agrega un par clave-valor al objeto formData, donde la clave es el nombre del campo y el valor es el valor del campo ingresado por el usuario.
+
+    axios.post(VITE_API + "auth/register", formData)
       .then(res => {
 
         const Toast = Swal.mixin({
@@ -106,7 +111,7 @@ const Register = (props) => {
           <div className="bg-white min-h-screen w-1/2 flex justify-center items-center">
 
             <div className='xsm:w-screen xsm:items-center flex flex-col'>
-              <form className='xxsm:w-[16rem] xxsm:mr-4 xsm:w-full' onSubmit={(e) => handleForm(e)}>
+              <form className='xxsm:w-[16rem] xxsm:mr-4 xsm:w-full' onSubmit={(e) => handleForm(e)} encType='multipart/form-data'>
                 <div className='flex flex-col items-center'>
                   <span className="text-4xl text-center font-semibold text-gray-900">Welcome!</span>
                   <h1 className="text-sm text-center text-gray-600 mt-4">Discover manga, manhua and manhwa, track your progress, have fun, read manga.</h1>
@@ -115,28 +120,28 @@ const Register = (props) => {
                   <fieldset className='border-2 rounded-md flex'>
                     <legend className='text-sm ml-2 text-fuchsia-400 '>Name</legend>
                     <input ref={name} className="px-4 w-full  py-2 rounded-md text-sm outline-none" type="text" name="Name" placeholder="Krowl Bell" />
-                    <img className='w-5 h-5  mr-2' src={profile} alt="profile" />
+                    <img className='w-6 h-6  mr-2' src={profile} alt="profile" />
                   </fieldset>
                 </div>
                 <div className="mt-5">
                   <fieldset className='border-2 rounded-md flex items-center'>
                     <legend className='text-sm ml-2 text-fuchsia-400'>Email</legend>
                     <input ref={email} className="px-4 w-full  py-2 rounded-md text-sm outline-none" type="email" name="Email" placeholder="DragonballZ@Krowl.com" />
-                    <img className='w-4 h-4 mr-2' src={arroba} alt="profile" />
+                    <img className='w-5 h-5 mr-2' src={arroba} alt="profile" />
                   </fieldset>
                 </div>
                 <div className="mt-5">
                   <fieldset className='border-2 rounded-md flex items-center'>
                     <legend className='text-sm ml-2 text-fuchsia-400'>Photo</legend>
-                    <input ref={photo} className="px-4 w-full  py-2 rounded-md text-sm outline-none" type="url" name="Photo" placeholder="Url" />
-                    <img className='w-4 h-4 mr-2' src={camara} alt="profile" />
+                    <input ref={photo} className="px-4 w-full  py-2 rounded-md text-sm outline-none file:bg-fuchsia-400 file:border-none file:rounded-full file:h-12 file:text-white file:cursor-pointer file:shadow-lg file:hover:shadow-fuchsia-600/50 file:hover:bg-fuchsia-500 file:font-semibold" type="file" name="photo" placeholder="Image" />
+                    <img className='w-6 h-6 mr-2' src={camara} alt="profile" />
                   </fieldset>
                 </div>
                 <div className="mt-5">
                   <fieldset className='border-2 rounded-md flex items-center'>
                     <legend className='text-sm ml-2 text-fuchsia-400'>Password</legend>
                     <input ref={password} className="px-4 w-full  py-2 rounded-md text-sm outline-none" type="password" name="Password" placeholder="************" />
-                    <img className='w-4 h-4 mr-2' src={candado} alt="profile" />
+                    <img className='w-6 h-6 mr-2' src={candado} alt="profile" />
                   </fieldset>
                 </div>
 
