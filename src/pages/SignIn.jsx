@@ -9,11 +9,89 @@ import Index from './Index'
 import Swal from 'sweetalert2'
 import App from '../App'
 
+import { gapi } from 'gapi-script'
+import GoogleLogin from 'react-google-login'
+import { useEffect } from 'react'
+
 const Signin = (props) => {
   let email = useRef();
   let password = useRef();
+
+  const clientID = '892361509691-n4pmsomkc10vrk2ghsggosstqg5v8pph.apps.googleusercontent.com'
+
+  useEffect(() => {
+    const start = () => {
+      gapi.auth2.init({
+        clientId: clientID
+      })
+    }
+
+    gapi.load("client:auth2", start)
+  }, [])
+
+  const onSuccess = (response) => {
+    // console.log(response)
+    const { email, googleId } = response.profileObj;
+
+    let data = {
+      email: email,
+      password: googleId,
+    }
+    axios.post(VITE_API + "auth/signin", data)
+      .then(res => {
+        const token = res.data.token;
+        const role = res.data.user.role;
+        const email = res.data.user.email;
+        const photo = res.data.user.photo;
+        // const name = res.data.user.name;
+
+
+        //sweetAlert
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'center',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        Toast.fire({
+          icon: 'success',
+          title: 'Signed in successfully!',
+        })
+
+
+        localStorage.setItem('token', token);
+        localStorage.setItem('role', role);
+        localStorage.setItem('email', email)
+        localStorage.setItem('photo', photo)
+        // localStorage.setItem('name', name)
+
+        setRedirect(true);
+        //investigar useNavigate para cambiar el useState()
+
+      })
+      .catch(err => {
+        // console.log(err)
+        // alert(err.response.data.message)
+
+        Swal.fire({
+          icon: 'error',
+          title: err.response.data.message,
+        })
+      })
+
+  }
+  const onFailure = () => {
+    console.log("something went wrong");
+  }
+
   const [redirect, setRedirect] = useState(localStorage.getItem('redirect') === 'true');
   let navigate = useNavigate()
+
 
   function handleForm(e) {
     e.preventDefault()
@@ -119,10 +197,14 @@ const Signin = (props) => {
                       <input className="mt-4 mb-3 w-full bg-gradient-to-b from-[#F9A8D4] to-[#F472B6] text-white py-2 rounded-xl transition duration-100 shadow-cyan-600 font-bold text-md h-12 cursor-pointer" type='submit' value="Sign in" />
                     </div>
                   </form>
-                  <Anchor to="https://www.google.com.ar/" className="xsm:w-3/5 flex space-x-2 justify-center items-end border-2 border-gray-300 text-gray-600 py-2 rounded-xl transition duration-100">
-                    <img className=" h-5 cursor-pointer" src="https://i.imgur.com/arC60SB.png" alt="asd" />
-                    <p>Sign in with google</p>
-                  </Anchor>
+                  <div>
+                    <GoogleLogin className="flex space-x-2 justify-center items-end w-[100%] border-2 border-gray-300 text-gray-600 py-2 rounded-xl transition duration-100"
+                      clientId={clientID}
+                      onSuccess={onSuccess}
+                      onFailure={onFailure}
+                      cookiePolicy={"single_host_policy"}
+                    />
+                  </div>
                   <div className='xsm:w-3/5 xsm:text-center flex flex-col items-center'>
                     {props.setShow ? (
                       <span className="mt-6 ">You don't have an account yet? <span className="cursor-pointer text-sm text-fuchsia-400 font-bold" onClick={() => props.setShow(false)}>Sign up</span></span>
