@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import chapters_reducer from "./reducers/chapter_bar"
 import reducer_one_manga from './reducers/one_manga.js'
 import reducer_one_chapter from './reducers/one_chapter.js'
 import inputs_reducer from './reducers/inputs_filter'
