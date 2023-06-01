@@ -1,18 +1,25 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
-import Carousel from '../components/Carousel';
 import Footer from '../components/Footer'
+import Footermobile from '../components/Footermobile';
+import Navbarmobile from '../components/Navbarmobile';
 import { Outlet } from 'react-router-dom';
 
 
 export default function main() { //puedo desestructurar props en {children} y llamar directamente a la propiedad sin usar el props. 
   return (
     <>
-      <Navbar />
+        <div className=''>
+      <Navbarmobile/>
+        </div>
+          <Navbar />
       <div>
         <Outlet />
       </div>
-      <Footer />
+        <div className=''>
+      <Footermobile />
+        </div>
+          <Footer />
     </>
   )
 }
