@@ -3,82 +3,107 @@ import noOk from '../assets/image/noOk.png'
 import love from '../assets/image/love.png'
 import sorprise from '../assets/image/sorprise.png'
 import { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate, Link as Anchor } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+import actionsManga from '../store/actions/one_manga';
+import actionsChapter from '../store/actions/one_chapter'
 import axios from "axios";
 import VITE_API from '../../api'
 import React from 'react'
+import Swal from 'sweetalert2';
+
+const { one_manga } = actionsManga;
+const { one_chapter } = actionsChapter;
 
 export default function Manga() {
 
+  const storeManga = useSelector(store => store.one_manga)
   const { id } = useParams()
-  // console.log({ id });
-
+  const { page } = useParams()
+  const parsedPage = parseInt(page, 10);
+  const [pages, setPages] = useState(isNaN(parsedPage) ? 0 : parsedPage);
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [mangas, setMangas] = useState([]);
   const [show, setShow] = useState([true])
+  const [chapters, setChapters] = useState({ data: [], totalPages: 1 })
+  const [reload, setReload] = useState(false)
+  const [count, setCount] = useState(0)
+  const [cantPages, setCantPages] = useState(0)
 
   useEffect(() => {
     axios.get(VITE_API + `mangas/${id}`)
-      .then(res => setMangas(res.data.response))
-      .catch(err => console.log(err))
-  }, [])
-  console.log(mangas);
-
-
-  // const [showChapters, setShowChapters] = useState([true])
-  const [chapters, setChapters] = useState({ data: [], totalPages: 1 })
-  const [page, setPage] = useState(1)
-  const [reload, setReload] = useState(false)
+      .then(res => {
+        setMangas(res.data.response)
+        dispatch(one_manga({
+          title: res.data.response.title,
+          cover_photo: res.data.response.cover_photo
+        }))
+      })
+      .catch(err =>
+        Swal.fire({
+          icon: 'error',
+          title: err.response.data.message,
+        })
+      )
+  }, [id])
 
   useEffect(() => {
-    axios.get(VITE_API + `chapters?manga_id=${id}&page=${page + 1}&limit=4`)
-      .then(res => setChapters(res.data.response))
-      .catch(err => console.log(err))
-
-    axios.get(VITE_API + `chapters?manga_id=${id}&page=${page - 1}&limit=4`)
-      .then(res => setChapters(res.data.response))
+    axios.get(VITE_API + `chapters?manga_id=${id}&page=${pages}&limit=`)
+      .then(res => {
+        const data = res.data.response
+        setChapters(data)
+        dispatch(one_chapter(data))
+        setCount(res.data.count)
+        setCantPages(res.data.cantPages)
+      })
       .catch(err => console.log(err))
   },
-    [page, reload]
+    [id, pages, reload]
   )
 
   function next() {
-    setPage(page + 1)
-    setReload(!reload)
+    const nextPage = pages + 1;
+    setPages(nextPage);
+    navigate(`/manga/${id}/${nextPage}`);
+    setReload(!reload);
   }
 
   function prev() {
-    if (chapters)
-      setPage(page - 1)
-    setReload(!reload)
+    if (pages === 1) {
+      return;
+    }
+    const prevPage = pages - 1;
+    setPages(prevPage);
+    navigate(`/manga/${id}/${prevPage}`);
+    setReload(!reload);
   }
-
-  // console.log(chapters);
 
   return (
     <>
       {show ? (
-        <div className="min-h-screen pt-20 flex flex-col items-center">
-          <img className="xsm:w-72 xsm:h-80" src={mangas.cover_photo} alt="fotito" />
-          <h2 className="text-3xl">{mangas.title}</h2>
-          <div className="flex justify-between w-4/5">
-            <h2 className="bg-rose-200 rounded-3xl w-16 h-8 flex items-center justify-center text-pink-400" >{mangas.category_id?.name}</h2>
-            <h2>Author</h2>
+        <div className="min-h-screen xsm:pt-20 flex flex-col items-center">
+          <img className="xsm:w-72 object-cover xsm:pt-0 xsm:mt-0 mt-20 xsm:h-80 w-80" src={storeManga.cover_photo} alt="fotito" />
+          <h2 className="text-3xl mt-4">{String(storeManga.title)}</h2>
+          <div className="flex justify-evenly xsm:gap-40 xsm:w-4/5 w-3/5 mt-4">
+            <h2 className="bg-[#FFE0DF] rounded-3xl xsm:w-16 xsm:h-8 flex items-center justify-center text-[#EF8481] w-20 h-10" >{String(mangas.category_id?.name)}</h2>
+            <h2 className=' xsm:text-lg font-montserrat font-semibold text-lg text-slate-500 hover:text-slate-800'>{String(mangas.author_id?.name.charAt(0).toUpperCase() + mangas.author_id?.name.slice(1))}</h2>
           </div>
-          <div className='flex justify-between w-72 mt-8'>
-            <div className='bg-slate-200 shadow-2xl rounded-full w-16 h-16 flex items-center justify-center '>
-              <img className='w-10' src={ok} alt="ok" />
+          <div className='flex justify-evenly gap-1 xsm:w-4/5 w-2/5 mt-8'>
+            <div className='bg-slate-300 hover:bg-slate-400 cursor-pointer rounded-full xsm:w-16  xsm:h-16 w-24 h-24 flex items-center justify-center '>
+              <img className='xsm:w-10 w-14 object-cover' src={ok} alt="ok" />
             </div>
-            <div className='bg-slate-300 rounded-full w-16 h-16 flex items-center justify-center'>
-              <img className='w-10' src={noOk} alt="ok" />
+            <div className='bg-slate-300 hover:bg-slate-400 cursor-pointer rounded-full xsm:w-16  xsm:h-16 w-24 h-24 flex items-center justify-center'>
+              <img className='xsm:w-10 w-14 object-cover' src={noOk} alt="ok" />
             </div>
-            <div className='bg-slate-300 rounded-full w-16 h-16 flex items-center justify-center'>
-              <img className='w-10' src={sorprise} alt="ok" />
+            <div className='bg-slate-300 hover:bg-slate-400 cursor-pointer rounded-full xsm:w-16  xsm:h-16 w-24 h-24 flex items-center justify-center'>
+              <img className='xsm:w-10 w-14 object-cover' src={sorprise} alt="ok" />
             </div>
-            <div className='bg-slate-300 rounded-full w-16 h-16 flex items-center justify-center'>
-              <img className='w-10' src={love} alt="ok" />
+            <div className='bg-slate-300 hover:bg-slate-400 cursor-pointer rounded-full xsm:w-16  xsm:h-16 w-24 h-24 flex items-center justify-center'>
+              <img className='xsm:w-10 w-14 object-cover' src={love} alt="ok" />
             </div>
           </div>
-          <div className='bg-slate-300 rounded-2xl mt-6 flex w-3/5 h-16 items-center justify-evenly'>
+          <div className='bg-slate-300 hover:bg-slate-400 cursor-pointer rounded-2xl mt-6 flex xsm:w-4/5 w-2/5 h-16 items-center justify-evenly'>
             <div className='flex flex-col'>
               <h3 className='text-center'>4.5/5</h3>
               <p>Rating</p>
@@ -95,33 +120,68 @@ export default function Manga() {
             </div>
           </div>
           <div className="flex w-4/5 justify-center mt-12">
-            <button className={`w-1/2 bg-slate-600 rounded-xl ${show}`} onClick={() => setShow(true)}>Manga</button>
-            <button className={`w-1/2 bg-orange-600 rounded-xl ${!show}`} onClick={() => setShow(false)}>Chapters</button>
+            <button className={`xsm:w-48 xsm:h-8 w-60  h-8 text-white bg-gradient-to-b from-[#F9A8D4] to-[#F472B6] rounded-full ${show}`} onClick={() => setShow(true)}>Manga</button>
+            <button className={`xsm:w-48 xsm:h-8 w-60  h-8 text-slate-500 hover:text-slate-600 hover:bg-slate-400 transition-all bg-slate-200 rounded-full ${!show}`} onClick={() => setShow(false)}>Chapters</button>
           </div>
-          <p className="mt-8 w-4/5">{mangas.description}</p>
+          <p className="mt-8 xsm:w-4/5 w-3/5 text-center">{mangas.description}</p>
         </div>
       ) : (
-        <div className="min-h-screen pt-20 flex flex-col items-center">
-          <img className="xsm:w-[80%] w-[20%]" src={mangas.cover_photo} alt="fotito" />
-          <h3>Chapters</h3>
-          <div className="w-3/5 mt-4">
-            <input className={`w-1/2 bg-slate-600 rounded-l`} type="button" value='previus' onClick={prev}></input>
-            <input className={`w-1/2 bg-orange-600 rounded-l`} type="button" value='next' onClick={next}></input>
+        <div className="min-h-screen xsm:pt-20 flex flex-col items-center">
+          <img className="xsm:w-72 xsm:pt-0 object-cover xsm:mt-0 pt-20 xsm:h-80 w-[20%] h-full" src={storeManga.cover_photo} alt="fotito" />
+          <h2 className="text-3xl mt-4">{storeManga.title}</h2>
+          <div className="flex justify-evenly xsm:gap-40 xsm:w-4/5 w-3/5 mt-4">
+            <h2 className="bg-[#FFE0DF] rounded-3xl xsm:w-16 xsm:h-8 flex items-center justify-center text-[#EF8481] w-20 h-10" >{mangas.category_id?.name}</h2>
+            <h2 className=' xsm:text-lg font-montserrat font-semibold text-lg text-slate-500 hover:text-slate-800'>{mangas.author_id?.name.charAt(0).toUpperCase() + mangas.author_id?.name.slice(1)}</h2>
+          </div>
+          <div className='flex justify-evenly gap-1 xsm:w-4/5 w-2/5 mt-8'>
+            <div className='bg-slate-300 hover:bg-slate-400 cursor-pointer rounded-full xsm:w-16  xsm:h-16 w-24 h-24 flex items-center justify-center '>
+              <img className='xsm:w-10 w-14 object-cover' src={ok} alt="ok" />
+            </div>
+            <div className='bg-slate-300 hover:bg-slate-400 cursor-pointer rounded-full xsm:w-16  xsm:h-16 w-24 h-24 flex items-center justify-center'>
+              <img className='xsm:w-10 w-14 object-cover' src={noOk} alt="ok" />
+            </div>
+            <div className='bg-slate-300 hover:bg-slate-400 cursor-pointer rounded-full xsm:w-16  xsm:h-16 w-24 h-24 flex items-center justify-center'>
+              <img className='xsm:w-10 w-14 object-cover' src={sorprise} alt="ok" />
+            </div>
+            <div className='bg-slate-300 hover:bg-slate-400 cursor-pointer rounded-full xsm:w-16  xsm:h-16 w-24 h-24 flex items-center justify-center'>
+              <img className='xsm:w-10 w-14 object-cover' src={love} alt="ok" />
+            </div>
+          </div>
+          <div className='bg-slate-300 hover:bg-slate-400 cursor-pointer rounded-2xl mt-6 flex xsm:w-4/5 w-2/5 h-16 items-center justify-evenly'>
+            <div className='flex flex-col'>
+              <h3 className='text-center'>4.5/5</h3>
+              <p>Rating</p>
+            </div>
+            |
+            <div>
+              <h3 className='text-center'>265</h3>
+              <p>Chapters</p>
+            </div>
+            |
+            <div>
+              <h3 className='text-center'>Eng</h3>
+              <p>Language</p>
+            </div>
           </div>
           <div className="flex w-4/5 justify-center mt-12">
-            <button className={`w-1/2 bg-slate-600 rounded-xl ${show}`} onClick={() => setShow(true)}>Manga</button>
-            <button className={`w-1/2 bg-orange-600 rounded-xl ${!show}`} onClick={() => setShow(false)}>Chapters</button>
+            <button className={`xsm:w-48 xsm:h-8 w-60  h-8 text-slate-500 hover:text-slate-600 hover:bg-slate-400 transition-all bg-slate-200 rounded-full ${show}`} onClick={() => setShow(true)}>Manga</button>
+            <button className={`xsm:w-48 xsm:h-8 w-60  h-8 text-white bg-gradient-to-b from-[#F9A8D4] to-[#F472B6] rounded-full ${!show}`} onClick={() => setShow(false)}>Chapters</button>
           </div>
-          <div className="flex flex-col mt-12">
-            {chapters.map(each => <div key={each._id} className="flex items-center justify-between w-full">
-              <img className="w-20 h-20" src={each.cover_photo} alt="" />
+
+          <div className="flex flex-col items-center mt-12 gap-4 xsm:mb-4 xsm:w-[90%] w-2/5">
+            {chapters.map(each => <div key={each.title} className="flex items-center justify-between w-full">
+              <img className="xsm:w-20 xsm:h-20 p-1 w-36 h-36 object-cover" src={each.cover_photo} alt="asd" />
               <div className=" flex flex-col items-center">
-                <h3>{each.title}</h3>
-                <h3>#######</h3>
+                <h3 className='text-center xsm:text-sm text-xl'>{each.title}</h3>
+                <h3 className='text-center xsm:text-sm text-lg'>..202</h3>
               </div>
-              <button className="bg-gradient-to-r from-btn1 from-(-13.9%) to-btn2 to-58.69% text-neutral-50 rounded-3xl w-24 h-12">Read</button>
+              <Anchor to={`/chapters/chapter/${each._id}/0`} className="flex justify-center items-center bg-gradient-to-b from-[#F9A8D4] to-[#F472B6] text-neutral-50 rounded-full xsm:w-32 xsm:text-xl xsm:h-16 w-40 h-16 md:text-xl font-bold">Read</Anchor>
             </div>)}
           </div>
+          {count > 5 && <div className="w-3/5 mt-4 mb-6 flex justify-center gap-8">
+            {pages != 1 && <input className={`xsm:w-24 xsm:h-12 w-40 h-16 bg-gradient-to-b from-[#F9A8D4] to-[#F472B6] rounded-full cursor-pointer text-white text-lg font-bold`} type="button" value='Previus' onClick={prev}></input>}
+            {pages != cantPages && <input className={`xsm:w-24 xsm:h-12 w-40 h-16 bg-gradient-to-b from-[#F9A8D4] to-[#F472B6] rounded-full cursor-pointer text-white text-lg font-bold`} type="button" value='Next' onClick={next}></input>}
+          </div>}
         </div>
       )
       }
