@@ -77,7 +77,6 @@ export default function MangaForm() {
         })
       })
   }
-
   return (
     <>
       {role == 1 || role == 2 ? (

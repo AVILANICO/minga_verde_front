@@ -10,6 +10,10 @@ const headers = () =>{
 const get_authors = createAsyncThunk('get_authors', async () => {
     try {
         let res = await axios(apiUrl + 'authors/admin', headers())
+<<<<<<< HEAD
+        console.log(res.data.authors)
+=======
+>>>>>>> 5c8649f410fc67069315d8fbac99edcfaddad2d6
         return {
             authors: res.data.authors
         }
@@ -23,6 +27,10 @@ const get_authors = createAsyncThunk('get_authors', async () => {
 const update_authors = createAsyncThunk('update_authors', async ({ id, data }) => {
     try {
         let res = await axios.put(apiUrl + 'auth/role/author/' + id, data, headers())
+<<<<<<< HEAD
+        console.log(res.data.update)
+=======
+>>>>>>> 5c8649f410fc67069315d8fbac99edcfaddad2d6
         return {
             author: res.data.update,
             active: res.data.update.active
