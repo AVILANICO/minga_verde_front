@@ -16,8 +16,7 @@ import Newrole from "../pages/Newrole.jsx"
 import Companyform from "../pages/Companies-form.jsx"
 import Authorform from "../pages/Author-form.jsx"
 import Editmanga from "../pages/EditManga.jsx";
-
-
+import Payments from "../pages/Payments.jsx";
 
 
 const routers = createBrowserRouter([
@@ -40,7 +39,7 @@ const routers = createBrowserRouter([
       { path: '/authorregister', element: <Authorform /> },
       { path: '/editmanga', element: <Editmanga /> },
       { path: '/edit/:id_manga', element: <EditChapter />},
-
+      { path: '/donations', element: <Payments />},
     ]
   }
 ])
