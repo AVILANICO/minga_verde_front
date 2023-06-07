@@ -12,7 +12,6 @@ export default function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate()
   let { order, title } = useSelector(store => store.title_order)
-  console.log(order, title);
 
   const handleMenuClick = () => {
     setShowMenu(!showMenu);
@@ -23,6 +22,7 @@ export default function Navbar() {
   let headers = { headers: { 'authorization': `Bearer ${token}` } }
   let email = localStorage.getItem('email')
   let photo = localStorage.getItem('photo')
+
 
   function backHome() {
     axios.post(VITE_API + 'auth/signout', null, headers)
@@ -36,9 +36,9 @@ export default function Navbar() {
   return (
     <nav className="xsm:hidden w-full h-24 absolute flex justify-between items-center">
       <div>
-        <button onClick={handleMenuClick} className="z-10 absolute left-10 top-7">
+        <button onClick={handleMenuClick} className="z-10 fixed left-10 top-7">
           <svg
-            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke={url === 'chapter' ? '#fff': '#F472B6'} className="w-10 h-10">
+            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke={url === 'chapter' ? '#fff' : '#F472B6'} className="w-10 h-10">
             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
         </button>
@@ -61,19 +61,19 @@ export default function Navbar() {
               </>) : ("")}
               {role == 3 ? (<><li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/admin">Panel</Anchor></li>
               </>) : ("")}
-              {role == 1 || role == 2 ? (<><li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/manga-form">New mangas</Anchor></li>
+              {role == 1 || role == 2 ? (<><li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/manga-form">New manga</Anchor></li>
               </>) : ("")}
               {token && <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/mangas/:pages">Mangas</Anchor></li>}
-              {token && <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/mymangas">My Mangas</Anchor></li>}
+              {role == 1 || role == 2 ? (<><li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/mymangas">My Mangas</Anchor></li> </>) : ("")}
               {token && <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="#">Favorites</Anchor></li>}
               {!token && <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/register">Register</Anchor></li>}
               {!token && <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4" to="/signin">Log In</Anchor></li>}
-              {token && <li><Anchor className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4 cursor-pointer" onClick={backHome}>Sign Out</Anchor></li>}
+              {token && <li><a className="flex justify-center px-4 py-2 text-black hover:bg-white hover:text-btn2 hover:rounded-md m-4 cursor-pointer" onClick={backHome}>Sign Out</a></li>}
             </ul>
           </div>
         )}
       </div>
-      { url === 'chapter' ? (<p className='flex justify-center font-bold h-24 items-center text-white bg-pink-500/90 w-full absolute'>Chapter #{order} - {title}</p> ):('')}
+      {url === 'chapter' ? (<p className='flex justify-center font-bold h-24 items-center text-white bg-pink-500/90 w-full absolute'>Chapter #{order} - {title}</p>) : ('')}
       <div className="absolute z-10 right-10 top-4">
         <img src={logo} className="w-[4rem] xsm:w-12" alt="Logo-Minga" />
       </div>

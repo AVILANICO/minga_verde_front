@@ -10,6 +10,7 @@ import actionsChapter from '../store/actions/one_chapter'
 import axios from "axios";
 import VITE_API from '../../api'
 import React from 'react'
+import Swal from 'sweetalert2';
 
 const { one_manga } = actionsManga;
 const { one_chapter } = actionsChapter;
@@ -17,17 +18,15 @@ const { one_chapter } = actionsChapter;
 export default function Manga() {
 
   const storeManga = useSelector(store => store.one_manga)
-  const storeChapter = useSelector(store => store.one_chapter)
-  console.log(storeManga);
-  console.log(storeChapter);
   const { id } = useParams()
   const { page } = useParams()
+  const parsedPage = parseInt(page, 10);
+  const [pages, setPages] = useState(isNaN(parsedPage) ? 0 : parsedPage);
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [mangas, setMangas] = useState([]);
   const [show, setShow] = useState([true])
   const [chapters, setChapters] = useState({ data: [], totalPages: 1 })
-  const [pages, setPages] = useState(Number(page))
   const [reload, setReload] = useState(false)
   const [count, setCount] = useState(0)
   const [cantPages, setCantPages] = useState(0)
@@ -42,7 +41,11 @@ export default function Manga() {
         }))
       })
       .catch(err =>
-        console.log(err))
+        Swal.fire({
+          icon: 'error',
+          title: err.response.data.message,
+        })
+      )
   }, [id])
 
   useEffect(() => {
@@ -60,28 +63,31 @@ export default function Manga() {
   )
 
   function next() {
-    setPages(page => page + 1)
-    navigate(`/manga/${id}/${pages + 1}`)
-    setReload(!reload)
+    const nextPage = pages + 1;
+    setPages(nextPage);
+    navigate(`/manga/${id}/${nextPage}`);
+    setReload(!reload);
   }
 
   function prev() {
     if (pages === 1) {
       return;
     }
-    setPages(page => page - 1);
-    navigate(`/manga/${id}/${pages - 1}`);
+    const prevPage = pages - 1;
+    setPages(prevPage);
+    navigate(`/manga/${id}/${prevPage}`);
     setReload(!reload);
   }
+
   return (
     <>
       {show ? (
         <div className="min-h-screen xsm:pt-20 flex flex-col items-center">
           <img className="xsm:w-72 object-cover xsm:pt-0 xsm:mt-0 mt-20 xsm:h-80 w-80" src={storeManga.cover_photo} alt="fotito" />
-          <h2 className="text-3xl mt-4">{storeManga.title}</h2>
+          <h2 className="text-3xl mt-4">{String(storeManga.title)}</h2>
           <div className="flex justify-evenly xsm:gap-40 xsm:w-4/5 w-3/5 mt-4">
-            <h2 className="bg-[#FFE0DF] rounded-3xl xsm:w-16 xsm:h-8 flex items-center justify-center text-[#EF8481] w-20 h-10" >{mangas.category_id?.name}</h2>
-            <h2 className=' xsm:text-lg font-montserrat font-semibold text-lg text-slate-500 hover:text-slate-800'>{mangas.author_id?.name.charAt(0).toUpperCase() + mangas.author_id?.name.slice(1)}</h2>
+            <h2 className="bg-[#FFE0DF] rounded-3xl xsm:w-16 xsm:h-8 flex items-center justify-center text-[#EF8481] w-20 h-10" >{String(mangas.category_id?.name)}</h2>
+            <h2 className=' xsm:text-lg font-montserrat font-semibold text-lg text-slate-500 hover:text-slate-800'>{String(mangas.author_id?.name.charAt(0).toUpperCase() + mangas.author_id?.name.slice(1))}</h2>
           </div>
           <div className='flex justify-evenly gap-1 xsm:w-4/5 w-2/5 mt-8'>
             <div className='bg-slate-300 hover:bg-slate-400 cursor-pointer rounded-full xsm:w-16  xsm:h-16 w-24 h-24 flex items-center justify-center '>

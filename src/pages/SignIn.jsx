@@ -9,22 +9,34 @@ import Index from './Index'
 import Swal from 'sweetalert2'
 import App from '../App'
 
+import { gapi } from 'gapi-script'
+import GoogleLogin from 'react-google-login'
+import { useEffect } from 'react'
+
 const Signin = (props) => {
   let email = useRef();
   let password = useRef();
 
-  const [redirect, setRedirect] = useState(false);
+  const clientID = '892361509691-n4pmsomkc10vrk2ghsggosstqg5v8pph.apps.googleusercontent.com'
 
-  let navigate = useNavigate()
-
-  function handleForm(e) {
-    e.preventDefault()
-    //usando el .current.value vemos lo que tiene adentro del name
-    let data = {
-      email: email.current.value,
-      password: password.current.value
+  useEffect(() => {
+    const start = () => {
+      gapi.auth2.init({
+        clientId: clientID
+      })
     }
 
+    gapi.load("client:auth2", start)
+  }, [])
+
+  const onSuccess = (response) => {
+    // console.log(response)
+    const { email, googleId } = response.profileObj;
+
+    let data = {
+      email: email,
+      password: googleId,
+    }
     axios.post(VITE_API + "auth/signin", data)
       .then(res => {
         const token = res.data.token;
@@ -71,6 +83,76 @@ const Signin = (props) => {
           title: err.response.data.message,
         })
       })
+
+  }
+  const onFailure = () => {
+    console.log("something went wrong");
+  }
+
+  const [redirect, setRedirect] = useState(localStorage.getItem('redirect') === 'true');
+  let navigate = useNavigate()
+
+
+  function handleForm(e) {
+    e.preventDefault()
+    //usando el .current.value vemos lo que tiene adentro del name
+    let data = {
+      email: email.current.value,
+      password: password.current.value
+    }
+    axios.post(VITE_API + "auth/signin", data)
+      .then(res => {
+        const token = res.data?.token;
+        const role = res.data?.user?.role;
+        const email = res.data?.user?.email;
+        const photo = res.data?.user?.photo;
+
+        console.log(photo);
+
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'center',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        Toast.fire({
+          icon: 'success',
+          title: 'Signed in successfully!',
+        })
+
+
+        localStorage.setItem('token', token);
+        localStorage.setItem('role', role);
+        localStorage.setItem('email', email)
+        localStorage.setItem('photo', photo)
+        localStorage.setItem('redirect', 'true')
+
+        setRedirect(true);
+
+        useEffect(() => {
+          if (redirect) {
+            localStorage.removeItem('redirect'); // Eliminar el estado de localStorage
+          }
+        }, [redirect]);
+
+        useEffect(() => {
+          if (redirect) {
+            navigate('/'); // Redirigir al usuario a la página de inicio
+          }
+        }, [redirect, navigate]);
+
+      })
+      .catch(err => {
+        Swal.fire({
+          icon: 'error',
+          title: err.response.data.message,
+        })
+      })
   }
 
 
@@ -85,7 +167,6 @@ const Signin = (props) => {
         </>
       ) : (
         <>
-          
           <div className='h-screen w-full flex justify-center items-center'>
             <div className='xsm:hidden w-1/2 p-4 flex justify-end h-full bg-center bg-cover bg-[url(/src/assets/image/Rectangle82.png)]'></div >
             <div className="xsm:w-full xsm:flex flex justify-center w-1/2">
@@ -115,9 +196,13 @@ const Signin = (props) => {
                       <input className="mt-4 mb-3 w-full bg-gradient-to-b from-[#F9A8D4] to-[#F472B6] text-white py-2 rounded-xl transition duration-100 shadow-cyan-600 font-bold text-md h-12 cursor-pointer" type='submit' value="Sign in" />
                     </div>
                   </form>
-                  <div className="xsm:w-3/5 flex space-x-2 justify-center items-end border-2 border-gray-300 text-gray-600 py-2 rounded-xl transition duration-100">
-                    <img className=" h-5 cursor-pointer" src="https://i.imgur.com/arC60SB.png" alt="asd" />
-                    <Anchor to="https://www.google.com.ar/"><button>Sign in with google</button></Anchor>
+                  <div>
+                    <GoogleLogin className="flex space-x-2 justify-center items-end w-[100%] border-2 border-gray-300 text-gray-600 py-2 rounded-xl transition duration-100"
+                      clientId={clientID}
+                      onSuccess={onSuccess}
+                      onFailure={onFailure}
+                      cookiePolicy={"single_host_policy"}
+                    />
                   </div>
                   <div className='xsm:w-3/5 xsm:text-center flex flex-col items-center'>
                     {props.setShow ? (
