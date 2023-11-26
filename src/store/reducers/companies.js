@@ -25,10 +25,6 @@ const reducer = createReducer(
         .addCase(
             update_companies.fulfilled,
             (state, action) => {
-<<<<<<< HEAD
-                console.log(state.active)
-=======
->>>>>>> 5c8649f410fc67069315d8fbac99edcfaddad2d6
                 if (action.payload.active) {
                     let newState = {
                         ...state,
