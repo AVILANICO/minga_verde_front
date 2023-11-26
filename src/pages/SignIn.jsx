@@ -107,7 +107,7 @@ const Signin = (props) => {
         const email = res.data?.user?.email;
         const photo = res.data?.user?.photo;
 
-        console.log(photo);
+        console.log(token);
 
         const Toast = Swal.mixin({
           toast: true,
