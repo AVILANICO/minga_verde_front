@@ -10,6 +10,10 @@ const headers = () =>{
 const get_companies = createAsyncThunk('get_companies', async () => {
     try {
         let res = await axios(apiUrl + 'companies/admin', headers())
+<<<<<<< HEAD
+        console.log(res.data.companies)
+=======
+>>>>>>> 5c8649f410fc67069315d8fbac99edcfaddad2d6
         return {
             companies: res.data.companies
         }
@@ -24,6 +28,10 @@ const get_companies = createAsyncThunk('get_companies', async () => {
 const update_companies = createAsyncThunk('update_companies', async ({ id, data }) => {
     try {
         let res = await axios.put(apiUrl + 'auth/role/company/' + id, data, headers())
+<<<<<<< HEAD
+        console.log(res.data.update)
+=======
+>>>>>>> 5c8649f410fc67069315d8fbac99edcfaddad2d6
         return {
             company: res.data.update,
             active: res.data.update.active
